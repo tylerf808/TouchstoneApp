@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, Container, TextField, Typography, InputAdornment, FormControl, InputLabel, OutlinedInput, IconButton } from '@mui/material'
 
 export default function LogIn({logIn, loggedIn}) {
@@ -49,6 +49,9 @@ export default function LogIn({logIn, loggedIn}) {
                     <Button onClick={logIn}>Log In</Button>
                 </FormControl>
 
+            </Container>
+            <Container>
+                <Typography>Don't have an account? <Link to="/signup">Sign up here!</Link></Typography>
             </Container>
         </Container>
     )

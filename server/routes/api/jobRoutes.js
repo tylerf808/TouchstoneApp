@@ -6,9 +6,8 @@ const Job = require('../../models/Job')
 //Query all jobs
 router.get('/', async (req, res) => {
     const jobData = await Job.findAll({where: { user_id: req.query.id}})
-    console.log(jobData)
-    const costs = await Costs.findOne({where: {costs_id: jobData.dataValues.costs_id}})
-    res.status(200).json({jobData, costs});
+    //const costs = await Costs.findOne({where: {costs_id: jobData.dataValues.costs_id}})
+    res.status(200).json(jobData);
 })
 
 //Query a specific job

@@ -15,13 +15,13 @@ export default function ViewJobs({ user }) {
         if (res.length === 0) {
             setJobs(false)
         } else {
-            const jobs = {...res, profit: (res.revenue - res.costs)}
-            setJobs(res)
+            const jobs = res
+            setJobs(jobs)
         }
     }
 
     useEffect(() => {
-        if(jobs)
+        
             getJobs()
     }, [])
 
@@ -40,13 +40,9 @@ export default function ViewJobs({ user }) {
 
     return (
         <Container sx={{ marginTop: 3, height: 500}}>
-            {jobs ?
+            {jobs ? 
                 <DataGrid rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-                :
-                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Typography sx={{ marginTop: '2%' }}>No jobs associated with this account</Typography>
-                </Container>
-            }
+              : null }  
         </Container>
     )
 }
