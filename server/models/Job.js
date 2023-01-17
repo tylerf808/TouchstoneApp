@@ -31,20 +31,40 @@ Job.init(
         distance: {
             type: DataTypes.DECIMAL
         },
+        date: {
+            type: DataTypes.STRING
+        },
+        gasCost: {
+            type: DataTypes.DECIMAL
+        },
+        depreciation: {
+            type: DataTypes.DECIMAL
+        },
+        factor: {
+            type: DataTypes.DECIMAL
+        },
+        gAndA: {
+            type: DataTypes.DECIMAL
+        },
+        loan: {
+            type: DataTypes.DECIMAL
+        },
+        odc: {
+            type: DataTypes.DECIMAL
+        },
+        rental: {
+            type: DataTypes.DECIMAL
+        },
+        repairs: {
+            type: DataTypes.DECIMAL
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'user_id'
             }
-        },
-        costs_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'costs',
-                key: 'costs_id'
-            }
-        }
+        } 
     },
     {
         sequelize,

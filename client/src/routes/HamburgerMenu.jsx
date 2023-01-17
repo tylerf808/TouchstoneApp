@@ -3,10 +3,9 @@ import { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu'
-import { Toolbar, IconButton, Typography } from '@mui/material';
+import { Toolbar, IconButton, Typography, requirePropFactory } from '@mui/material';
 import { Container } from '@mui/system';
 import { Link, Outlet } from 'react-router-dom'
-
 
 export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts }) {
 
@@ -30,7 +29,7 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
   };
 
   return (
-    <Toolbar sx={{ backgroundColor: 'lightblue', display: 'flex', flexDirection: 'row' }}>
+    <Toolbar sx={{ backgroundColor: '#614ECB', display: 'flex', flexDirection: 'row' }}>
       {loggedIn ? <IconButton size="large"
         edge="start"
         aria-label="menu"
@@ -45,8 +44,8 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></MenuItem>
         <MenuItem onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></MenuItem>
       </Menu>
-      <Container sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-        <Typography sx={{fontWeight: 'bold'}}>Touchstone Profitability Calculator</Typography>
+      <Container sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flexStart', alignItems: 'center'}}>
+        <img style={{height: 80}} src={require('../images/logo.jpg')} />
       </Container>
     </Toolbar >
   );

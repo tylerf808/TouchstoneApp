@@ -22,10 +22,31 @@ Costs.init(
         insurance: {
             type: DataTypes.DOUBLE
         },
+        factor: {
+            type: DataTypes.DOUBLE
+        },
+        odc: {
+            type: DataTypes.DOUBLE
+        },
         tractorLease: {
             type: DataTypes.DOUBLE
         },
         trailerLease: {
+            type: DataTypes.DOUBLE
+        },
+        gAndA: {
+            type: DataTypes.DOUBLE
+        },
+        loan: {
+            type: DataTypes.DOUBLE
+        }, 
+        rental: {
+            type: DataTypes.DOUBLE
+        }, 
+        repairs: {
+            type: DataTypes.DOUBLE
+        }, 
+        depreciation: {
             type: DataTypes.DOUBLE
         },
         mpg: {

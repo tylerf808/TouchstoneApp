@@ -21,8 +21,9 @@ export default function ViewJobs({ user }) {
     }
 
     useEffect(() => {
-        
+
             getJobs()
+            console.log(jobs)
     }, [])
 
     const columns = [
@@ -35,14 +36,20 @@ export default function ViewJobs({ user }) {
         { field: 'profit', headerName: 'Profit', width: 120},
         { field: 'distance', headerName: 'Milage', width: 120 },
         { field: 'gasCosts', headerName: 'Gas Cost', width: 120 },
-
+        { field: 'depreciation', headerName: 'Depreciation', width: 120 },
+        { field: 'factor', headerName: 'Factor', width: 120 },
+        { field: 'gAndA', headerName: 'G&A', width: 120 },
+        { field: 'loan', headerName: 'Loan', width: 120 },
+        { field: 'odc', headerName: 'ODC', width: 120 },
+        { field: 'rental', headerName: 'Rental', width: 120 },
+        { field: 'repairs', headerName: 'Repairs', width: 120 },
     ]
 
     return (
         <Container sx={{ marginTop: 3, height: 500}}>
             {jobs ? 
                 <DataGrid rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-              : null }  
+              : <Typography>No previous jobs</Typography>}  
         </Container>
     )
 }

@@ -26,6 +26,13 @@ router.get('/check', async (req, res) => {
     insurance: costs.dataValues.insurance,
     tractorLease: costs.dataValues.tractorLease,
     trailerLease: costs.dataValues.trailerLease,
+    factor: costs.dataValues.factor,
+    odc: costs.dataValues.odc,
+    gAndA: costs.dataValues.gAndA,
+    loan: costs.dataValues.loan,
+    rental: costs.dataValues.rental,
+    repairs: costs.dataValues.repairs,
+    depreciation: costs.dataValues.depreciation,
     costs_id: costs.dataValues.costs_id
   })
 })

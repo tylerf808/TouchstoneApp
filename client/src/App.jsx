@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import LogIn from "./routes/LogIn";
 import SignUp from "./routes/SignUp";
+import { Container } from "@mui/system";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -52,26 +53,26 @@ export default function App() {
   };
 
   return (
-    <Router>
+    <Router >
       <HamburgerMenu
         setLoggedIn={setLoggedIn}
         loggedIn={loggedIn}
         setUser={setUser}
         setCosts={setCosts}
       />
-      <Routes>
-        <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
-        <Route
-          path="addjob"
-          element={<AddJob user={user} loggedIn={loggedIn} />}
-        />
-        <Route
-          path="costs"
-          element={<CostsPage user={user} costs={costs} setCosts={setCosts} />}
-        />
-        <Route path="jobs" element={<ViewJobs user={user} />} />
-        <Route path="signup" element={<SignUp signUp={signUp} />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
+          <Route
+            path="addjob"
+            element={<AddJob user={user} loggedIn={loggedIn} />}
+          />
+          <Route
+            path="costs"
+            element={<CostsPage user={user} costs={costs} setCosts={setCosts} />}
+          />
+          <Route path="jobs" element={<ViewJobs user={user} />} />
+          <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+        </Routes>
     </Router>
   );
 }

@@ -14,7 +14,7 @@ import {
   IconButton,
 } from "@mui/material";
 
-export default function SignUp({signUp}) {
+export default function SignUp({signUp, loggedIn, setLoggedIn}) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -24,6 +24,13 @@ export default function SignUp({signUp}) {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(loggedIn){
+        navigate('/addjob')
+    }
+})
+
   return (
     <Container>
       <Container
