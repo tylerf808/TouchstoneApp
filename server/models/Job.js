@@ -1,78 +1,108 @@
-const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/connection')
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Job extends Model {}
 
 Job.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        start: {
-            type: DataTypes.STRING
-        },
-        pickUp: {
-            type: DataTypes.STRING
-        },
-        dropOff: {
-            type: DataTypes.STRING
-        },
-        revenue: {
-            type: DataTypes.DECIMAL
-        },
-        costs: {
-            type: DataTypes.DECIMAL
-        },
-        profit: {
-            type: DataTypes.DECIMAL
-        },
-        distance: {
-            type: DataTypes.DECIMAL
-        },
-        date: {
-            type: DataTypes.STRING
-        },
-        gasCost: {
-            type: DataTypes.DECIMAL
-        },
-        depreciation: {
-            type: DataTypes.DECIMAL
-        },
-        factor: {
-            type: DataTypes.DECIMAL
-        },
-        gAndA: {
-            type: DataTypes.DECIMAL
-        },
-        loan: {
-            type: DataTypes.DECIMAL
-        },
-        odc: {
-            type: DataTypes.DECIMAL
-        },
-        rental: {
-            type: DataTypes.DECIMAL
-        },
-        repairs: {
-            type: DataTypes.DECIMAL
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'user_id'
-            }
-        } 
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'job'
-    }
-)
+    start: {
+      type: DataTypes.STRING,
+    },
+    pickUp: {
+      type: DataTypes.STRING,
+    },
+    dropOff: {
+      type: DataTypes.STRING,
+    },
+    revenue: {
+      type: DataTypes.STRING,
+    },
+    grossProfitPercentage: {
+      type: DataTypes.STRING,
+    },
+    operatingProfitPercentage: {
+      type: DataTypes.STRING
+    },
+    netProfitPercentage: {
+      type: DataTypes.STRING
+    },
+    distance: {
+      type: DataTypes.DOUBLE,
+    },
+    date: {
+      type: DataTypes.STRING,
+    },
+    gasCost: {
+      type: DataTypes.DOUBLE,
+    },
+    ratePerMile: {
+      type: DataTypes.STRING
+    },
+    depreciation: {
+      type: DataTypes.DOUBLE,
+    },
+    factor: {
+      type: DataTypes.STRING,
+    },
+    gAndA: {
+      type: DataTypes.STRING,
+    },
+    loan: {
+      type: DataTypes.STRING,
+    },
+    odc: {
+      type: DataTypes.STRING,
+    },
+    rental: {
+      type: DataTypes.STRING,
+    },
+    repairs: {
+      type: DataTypes.STRING,
+    },
+    labor: {
+      type: DataTypes.STRING
+    },
+    dispatch: {
+      type: DataTypes.STRING
+    },
+    payrollTax: {
+      type: DataTypes.STRING
+    },
+    netProfit: {
+      type: DataTypes.STRING
+    },
+    laborRatePercent: {
+      type: DataTypes.STRING
+    },
+    insurance: {
+      type: DataTypes.STRING
+    },
+    trailer: {
+      type: DataTypes.STRING
+    },
+    tractor: {
+      type: DataTypes.STRING
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "user_id",
+      },
+    },
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "job",
+  }
+);
 
-module.exports = Job
+module.exports = Job;

@@ -21,9 +21,8 @@ export default function ViewJobs({ user }) {
     }
 
     useEffect(() => {
-
+        if(!jobs)
             getJobs()
-            console.log(jobs)
     }, [])
 
     const columns = [
@@ -31,18 +30,29 @@ export default function ViewJobs({ user }) {
         { field: 'start', headerName: 'Start', width: 200 },
         { field: 'pickUp', headerName: 'Pick Up', width: 200 },
         { field: 'dropOff', headerName: 'Drop Off', width: 200 },
-        { field: 'revenue', headerName: 'Revenue', width: 120 },
-        { field: 'costs', headerName: 'Expenses', width: 120},
-        { field: 'profit', headerName: 'Profit', width: 120},
         { field: 'distance', headerName: 'Milage', width: 120 },
-        { field: 'gasCosts', headerName: 'Gas Cost', width: 120 },
-        { field: 'depreciation', headerName: 'Depreciation', width: 120 },
+        { field: 'revenue', headerName: 'Revenue', width: 120 },
+        { field: 'ratePerMile', headerName: 'Rate Per Mile', width: 120 },
+        { field: 'grossProfitPercentage', headerName: 'Gross Profit %', width: 120},
+        { field: 'operatingProfitPercentage', headerName: 'Operating Profit %', width: 120},
+        { field: 'netProfitPercentage', headerName: 'Net Profit %', width: 120},
+        { field: 'laborRatePercent', headerName: 'Labor %', width: 120},
+        { field: 'labor', headerName: 'Labor', width: 120},
+        { field: 'payrollTax', headerName: 'Payroll', width: 120},
+        { field: 'dispatch', headerName: 'Dispatch', width: 120},
         { field: 'factor', headerName: 'Factor', width: 120 },
-        { field: 'gAndA', headerName: 'G&A', width: 120 },
-        { field: 'loan', headerName: 'Loan', width: 120 },
+        { field: 'gasCost', headerName: 'Fuel', width: 120 },
         { field: 'odc', headerName: 'ODC', width: 120 },
+        { field: 'insurance', headerName: 'Insurance', width: 120 },
+        { field: 'trailer', headerName: 'Lease - Trailer', width: 120 },
+        { field: 'tractor', headerName: 'Lease - Tractor', width: 120 },
+        { field: 'gAndA', headerName: 'G&A', width: 120 },
+        { field: 'operatingProfit', headerName: 'Operating Profit', width: 120 },   
+        { field: 'loan', headerName: 'Loan', width: 120 },
         { field: 'rental', headerName: 'Rental', width: 120 },
         { field: 'repairs', headerName: 'Repairs', width: 120 },
+        { field: 'depreciation', headerName: 'Depreciation', width: 120 },
+        { field: 'netProfit', headerName: 'Net Profit', width: 120 }, 
     ]
 
     return (
