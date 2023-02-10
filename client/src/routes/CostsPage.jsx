@@ -9,17 +9,20 @@ import {
 import { useEffect, useState } from "react";
 
 export default function CostsPage({ user, costs, setCosts }) {
+
+  const [showEditPrompt, setShowEditPrompt] = useState(false)
+
   useEffect(() => {
     fetch("http://localhost:3001/api/costs?id=" + user, {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((data) => setCosts(data[0]));
+      .then((data) => setCosts(data[0]))
+      .catch((err) => setCosts(false))
   }, []);
 
-  const [showEditPrompt, setShowEditPrompt] = useState(false);
-
   const CurrencyFormat = require("react-currency-format");
+
 
   const addCosts = async () => {
     const insuranceValue = document.getElementById("insurance").value;
@@ -69,9 +72,12 @@ export default function CostsPage({ user, costs, setCosts }) {
     })
       .then((res) => res.json())
       .then((data) => setCosts(data[0]));
+
+      setShowEditPrompt(false)
   };
 
   const updateCosts = async () => {
+
     const insuranceValue = document.getElementById("insurance").value;
     const tractorValue = document.getElementById("tractor").value;
     const trailerValue = document.getElementById("trailer").value;
@@ -132,7 +138,7 @@ export default function CostsPage({ user, costs, setCosts }) {
         backgroundColor: "white",
         width: "100%",
       }}
-    >
+    >{costs ?
       <Container
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
@@ -248,8 +254,8 @@ export default function CostsPage({ user, costs, setCosts }) {
             prefix={"$"}
           />
         </Typography>
-        <Button onClick={() => setShowEditPrompt(true)}>Edit Costs</Button>
-      </Container>
+      </Container> : <Typography>No Costs</Typography>}
+      <Button onClick={() => setShowEditPrompt(true)}>Edit Costs</Button>
       {showEditPrompt ? (
         <Container
           sx={{
@@ -298,7 +304,7 @@ export default function CostsPage({ user, costs, setCosts }) {
               className="costsInput"
               id="factor"
               placeholder="Factor"
-              defaultValue={costs.factor}
+              defaultValue={costs?.factor}
               sx={{ margin: 2, width: 300 }}
             ></TextField>
             <FormLabel htmlFor="odc">ODC:</FormLabel>
@@ -373,10 +379,13 @@ export default function CostsPage({ user, costs, setCosts }) {
               placeholder="MPG"
               sx={{ margin: 2, width: 300 }}
             ></TextField>
+            {costs ? 
             <Button onClick={updateCosts}>Update</Button>
+            : <Button onClick={addCosts}>Add Costs</Button> }
           </FormGroup>
         </Container>
       ) : null}
+
     </Container>
   );
 }

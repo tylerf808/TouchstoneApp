@@ -64,7 +64,7 @@ export default function App() {
           <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
           <Route
             path="addjob"
-            element={<AddJob user={user} loggedIn={loggedIn} />}
+            element={<AddJob user={user} loggedIn={loggedIn} costs={costs} />}
           />
           <Route
             path="costs"
