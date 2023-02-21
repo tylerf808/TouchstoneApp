@@ -204,7 +204,7 @@ export default function AddJob({ user, loggedIn, costs }) {
         }}>
           <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid', marginTop: 2,
           borderWidth: 2,
-          borderRadius: 3 }}>
+          borderRadius: 3, backgroundColor: 'white' }}>
             <Typography sx={{marginTop: 3}} variant="h5">Check Job</Typography>
             {showAlert ?
               <Alert sx={{ marginTop: 2 }} severity="error">
@@ -241,7 +241,7 @@ export default function AddJob({ user, loggedIn, costs }) {
               flexDirection: "row",
               justifyContent: "center",
               margin: 2}}>
-                {costs ? <Button onClick={checkJob}>Check Job</Button> : null}
+                {costs ? <Button sx={{color: "orange"}} onClick={checkJob}>Check Job</Button> : null}
           </Box>
           </Container>
         </Container>
@@ -259,7 +259,7 @@ export default function AddJob({ user, loggedIn, costs }) {
           alignItems: "center",
           border: 'solid',
           borderWidth: 2,
-          borderRadius: 3, marginTop: 2
+          borderRadius: 3, marginTop: 2, backgroundColor: 'white'
         }}>
           <Typography sx={{marginTop: 3}} variant="h5">Profitability</Typography>
           {showLoading ? <CircularProgress sx={{marginTop: 5}}/> : null}

@@ -53,13 +53,14 @@ export default function App() {
   };
 
   return (
-    <Router >
-      <HamburgerMenu
-        setLoggedIn={setLoggedIn}
-        loggedIn={loggedIn}
-        setUser={setUser}
-        setCosts={setCosts}
-      />
+    <div style={{backgroundColor: 'orange'}}>
+      <Router >
+        <HamburgerMenu
+          setLoggedIn={setLoggedIn}
+          loggedIn={loggedIn}
+          setUser={setUser}
+          setCosts={setCosts}
+        />
         <Routes>
           <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
           <Route
@@ -73,6 +74,7 @@ export default function App() {
           <Route path="jobs" element={<ViewJobs user={user} />} />
           <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         </Routes>
-    </Router>
+      </Router>
+    </div>
   );
 }
