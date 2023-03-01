@@ -23,15 +23,15 @@ export default function LogIn({logIn, loggedIn}) {
     })
 
     return (
-        <Container sx={{ marginTop: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography sx={{ marginBottom: 2 }} variant='h4'></Typography>
                 <Typography>Email</Typography>
-                <TextField id='email'></TextField>
+                <OutlinedInput sx={{borderRadius: 3, background: 'white', height: '50px', width: '250px'}} id='email'></OutlinedInput>
                 <Typography>Password</Typography>
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                     <OutlinedInput
                         id="password"
+                        sx={{backgroundColor: 'white'}}
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                             <InputAdornment position="end">
@@ -48,9 +48,7 @@ export default function LogIn({logIn, loggedIn}) {
                     />
                     <Button onClick={logIn}>Log In</Button>
                 </FormControl>
-
-            </Container>
-            <Container>
+            <Container sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '1vh'}}>
                 <Typography>Don't have an account? <Link to="/signup">Sign up here!</Link></Typography>
             </Container>
         </Container>

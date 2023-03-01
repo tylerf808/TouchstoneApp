@@ -5,12 +5,15 @@ import {
   FormLabel,
   TextField,
   Typography,
+  Grid,
+  Item
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function CostsPage({ user, costs, setCosts }) {
 
   const [showEditPrompt, setShowEditPrompt] = useState(false)
+  const [insurance, setInsurance] = useState()
 
   useEffect(() => {
     fetch("http://localhost:3001/api/costs?id=" + user, {
@@ -20,6 +23,10 @@ export default function CostsPage({ user, costs, setCosts }) {
       .then((data) => setCosts(data[0]))
       .catch((err) => setCosts(false))
   }, []);
+
+  const handleCostsChange = ((event) => {
+
+  })
 
   const CurrencyFormat = require("react-currency-format");
 
@@ -136,138 +143,138 @@ export default function CostsPage({ user, costs, setCosts }) {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        width: "100%",
+        marginTop: 3,
+        borderRadius: 2,
+        border: 1,
+        width: "30%",
       }}
-    >{costs ?
-      <Container
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
-        <Typography sx={{ marginBottom: 2 }} variant="h5">
-          Current Costs
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Insurance:{" "}
-          <CurrencyFormat
-            value={costs?.insurance}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={"$"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Tractor Lease:{" "}
-          <CurrencyFormat
-            value={costs?.tractorLease}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={"$"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Tailer Lease:{" "}
-          <CurrencyFormat
-            value={costs?.trailerLease}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={"$"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Labor Rate:{" "}
-          <CurrencyFormat
-            value={costs?.laborRate * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Payroll Tax:{" "}
-          <CurrencyFormat
-            value={costs?.payrollTax * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Dispatch:{" "}
-          <CurrencyFormat
-            value={costs?.dispatch * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>MPG: {costs?.mpg}</Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Factor:{" "}
-          <CurrencyFormat
-            value={costs?.factor * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          ODC:{" "}
-          <CurrencyFormat
-            value={costs?.odc * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          G&A:{" "}
-          <CurrencyFormat
-            value={costs?.gAndA * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Loan:{" "}
-          <CurrencyFormat
-            value={costs?.loan * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          rental:{" "}
-          <CurrencyFormat
-            value={costs?.rental * 100}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"%"}
-          />
-        </Typography>
-        <Typography sx={{ marginTop: 1 }}>
-          Depreciation:{" "}
-          <CurrencyFormat
-            value={costs?.depreciation}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={"$"}
-          />
-        </Typography>
-      </Container> : <Typography>No Costs</Typography>}
-      <Button onClick={() => setShowEditPrompt(true)}>Edit Costs</Button>
-      {showEditPrompt ? (
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+    >{showEditPrompt ?
+      null : <Container
+       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+     >
+       <Typography sx={{ margin: 2 }} variant="h5">
+         Current Costs
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Insurance:{" "}
+         <CurrencyFormat
+           value={costs?.insurance}
+           displayType={"text"}
+           thousandSeparator={true}
+           prefix={"$"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Tractor Lease:{" "}
+         <CurrencyFormat
+           value={costs?.tractorLease}
+           displayType={"text"}
+           thousandSeparator={true}
+           prefix={"$"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Tailer Lease:{" "}
+         <CurrencyFormat
+           value={costs?.trailerLease}
+           displayType={"text"}
+           thousandSeparator={true}
+           prefix={"$"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Labor Rate:{" "}
+         <CurrencyFormat
+           value={costs?.laborRate * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Payroll Tax:{" "}
+         <CurrencyFormat
+           value={costs?.payrollTax * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Dispatch:{" "}
+         <CurrencyFormat
+           value={costs?.dispatch * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>MPG: {costs?.mpg}</Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Factor:{" "}
+         <CurrencyFormat
+           value={costs?.factor * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         ODC:{" "}
+         <CurrencyFormat
+           value={costs?.odc * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         G&A:{" "}
+         <CurrencyFormat
+           value={costs?.gAndA * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Loan:{" "}
+         <CurrencyFormat
+           value={costs?.loan * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         rental:{" "}
+         <CurrencyFormat
+           value={costs?.rental * 100}
+           displayType={"text"}
+           thousandSeparator={true}
+           suffix={"%"}
+         />
+       </Typography>
+       <Typography sx={{ marginTop: 1 }}>
+         Depreciation:{" "}
+         <CurrencyFormat
+           value={costs?.depreciation}
+           displayType={"text"}
+           thousandSeparator={true}
+           prefix={"$"}
+         />
+       </Typography>
+     </Container>}
+      {showEditPrompt ? null : <Button sx={{color: 'orange'}} onClick={() => setShowEditPrompt(true)}>Edit Costs</Button>}
+      {showEditPrompt ? (<>
+        <Typography sx={{ margin: 2 }} variant="h5">
+        Change Costs
+      </Typography>
+        <Grid
+        container spacing={2}
         >
-          <Typography sx={{ marginBottom: 2 }} variant="h5">
-            Create/Update Costs
-          </Typography>
-          <FormGroup>
+          
+          <Grid >
             <FormLabel htmlFor="insurance">Insurance:</FormLabel>
             <TextField
               id="insurance"
@@ -380,12 +387,11 @@ export default function CostsPage({ user, costs, setCosts }) {
               sx={{ margin: 2, width: 300 }}
             ></TextField>
             {costs ? 
-            <Button onClick={updateCosts}>Update</Button>
+            <Button sx={{color: 'orange'}} onClick={updateCosts}>Update</Button>
             : <Button onClick={addCosts}>Add Costs</Button> }
-          </FormGroup>
-        </Container>
-      ) : null}
-
+          </Grid>
+        </Grid>
+        </>)  : null}
     </Container>
   );
 }

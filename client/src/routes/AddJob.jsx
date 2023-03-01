@@ -262,7 +262,7 @@ export default function AddJob({ user, loggedIn, costs }) {
           borderRadius: 3, marginTop: 2, backgroundColor: 'white'
         }}>
           <Typography sx={{marginTop: 3}} variant="h5">Profitability</Typography>
-          {showLoading ? <CircularProgress sx={{marginTop: 5}}/> : null}
+          {showLoading ? <CircularProgress sx={{marginTop: 5, color: 'orange'}}/> : null}
           {showProfit ? (
             <Container sx={{
               display: "flex",
@@ -452,8 +452,8 @@ export default function AddJob({ user, loggedIn, costs }) {
                         flexDirection: "row",
                         justifyContent: "center",
                         padding: 2}}>
-                      <Button onClick={addJob}>Add Job</Button>
-                      <Button onClick={clearForm}>Clear</Button>
+                      <Button sx={{color: 'orange'}} onClick={addJob}>Add Job</Button>
+                      <Button sx={{color: 'orange'}} onClick={clearForm}>Clear</Button>
                     </Box>
                   </Box>
                 </Container>

@@ -88,8 +88,8 @@ export default function ViewJobs({ user }) {
     return (
         <Container sx={{ marginTop: 3, height: 500 }}>
             {jobs ? <>
-                <DataGrid rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-                <CSVLink data={jobs} headers={excelHeaders}>Download Excel Sheet</CSVLink>
+                <DataGrid style={{backgroundColor: 'white'}} rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
+                <CSVLink style={{marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center'}} data={jobs} headers={excelHeaders}>Download Excel Sheet</CSVLink>
             </>
                 : <Typography>No previous jobs</Typography>}
         </Container>

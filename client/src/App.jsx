@@ -41,36 +41,36 @@ export default function App() {
     const email = document.getElementById("email-signup").value;
     const password = document.getElementById("password-signup").value;
 
+    if(email || password === ''){
+      return
+    }
+
     const response = await fetch("http://localhost:3001/api/user", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     }).then((res) => res.json());
-    if (response) {
-      setUser(response.user_id);
-      setLoggedIn(true);
-    }
+    setUser(response.user_id);
+    setLoggedIn(true);
+
   };
 
   return (
-    <div style={{backgroundColor: 'orange'}}>
+    <div style={{ backgroundColor: 'orange', height: '100vh' }}>
       <Router >
         <HamburgerMenu
           setLoggedIn={setLoggedIn}
           loggedIn={loggedIn}
           setUser={setUser}
-          setCosts={setCosts}
-        />
+          setCosts={setCosts}/>
         <Routes>
           <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
           <Route
             path="addjob"
-            element={<AddJob user={user} loggedIn={loggedIn} costs={costs} />}
-          />
+            element={<AddJob user={user} loggedIn={loggedIn} costs={costs} />}/>
           <Route
             path="costs"
-            element={<CostsPage user={user} costs={costs} setCosts={setCosts} />}
-          />
+            element={<CostsPage user={user} costs={costs} setCosts={setCosts} />}/>
           <Route path="jobs" element={<ViewJobs user={user} />} />
           <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         </Routes>
