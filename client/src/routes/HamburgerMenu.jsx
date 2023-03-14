@@ -29,7 +29,7 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
   };
 
   return (
-    <Toolbar sx={{ backgroundColor: '#614ECB', display: 'flex', flexDirection: 'row' }}>
+    <Toolbar sx={{ backgroundColor: '#614ECB', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
       {loggedIn ? <IconButton size="large"
         edge="start"
         aria-label="menu"
@@ -44,9 +44,7 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></MenuItem>
         <MenuItem onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></MenuItem>
       </Menu>
-      <Container sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flexStart', alignItems: 'center'}}>
         <img style={{height: 80}} src={require('../images/logo.jpg')} />
-      </Container>
     </Toolbar >
   );
 }

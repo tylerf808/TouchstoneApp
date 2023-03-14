@@ -5,7 +5,7 @@ const {getDirections, getGasPrice} = require('../../utils/helpers')
 router.get('/check', async (req, res) => {
   const directionsRes = await getDirections(req.query.start, req.query.pick_up, req.query.drop_off)
   const gasPrice = await getGasPrice(req.query.state1, req.query.state2, req.query.state3)
-  const totalDistance = (directionsRes.routes[0].legs[0].distance.value + directionsRes.routes[0].legs[1].distance.value) / 1609.34
+  const totalDistance = (directionsRes.routes[0].legs[0].distanceMeters + directionsRes.routes[0].legs[1].distanceMeters) / 1609.34
   const costs = await Costs.findOne({
     where: {
       user_id: req.query.id

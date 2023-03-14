@@ -27,12 +27,20 @@ const getGasPrice = async (state1, state2, state3) => {
 }
 
 const getDirections = async (start, pickUp, dropOff) => {
-  const directionsResObj = await axios.get(
-    'https://maps.googleapis.com/maps/api/directions/json?origin=place_id:' + start
-    + '&destination=place_id:' + dropOff + '&waypoints=place_id:' + pickUp +
-    '&key=AIzaSyDcXIOrxmAOOPEvqjLEXVeZb9mdTyUqS6k')
+  const directionsResObj = await axios.post(
+    ('https://maps.googleapis.com/maps/api/directions/v2:computeRoutes?key=AIzaSyDcXIOrxmAOOPEvqjLEXVeZb9mdTyUqS6k'),
+    {
+      origin: {address: start},
+      destination: {address: dropOff},
+      intermediate: [
+        {
+          address: pickUp
+        }
+      ],
+      extraComputations: ["TOLLS"]
+    })
     .then((response) => { return response.data })
   return directionsResObj
 }
 
-module.exports = {getGasPrice, getDirections}
+module.exports = { getGasPrice, getDirections }

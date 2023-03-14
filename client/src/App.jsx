@@ -40,8 +40,13 @@ export default function App() {
   const signUp = async () => {
     const email = document.getElementById("email-signup").value;
     const password = document.getElementById("password-signup").value;
+    const passwordConf = document.getElementById("password-signup-conf").value;
 
-    if(email || password === ''){
+    if(email || password === '' || passwordConf === ''){
+      return
+    }
+
+    if(password !== passwordConf){
       return
     }
 

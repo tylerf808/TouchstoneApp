@@ -88,6 +88,9 @@ Job.init(
     tractor: {
       type: DataTypes.STRING
     },
+    totalFixedCost: {
+      type: DataTypes.STRING
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {

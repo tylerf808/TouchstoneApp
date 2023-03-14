@@ -12,6 +12,7 @@ import { Container } from "@mui/system";
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import { CurrencyFormat } from "react-currency-format";
+import { useNavigate } from "react-router-dom";
 
 const library = ["places"];
 
@@ -27,6 +28,15 @@ export default function AddJob({ user, loggedIn, costs }) {
   const [job, setJob] = useState({});
   const statesArray = [];
 
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate('/')
+    }
+  }, [])
+
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDcXIOrxmAOOPEvqjLEXVeZb9mdTyUqS6k",
     libraries: library,
@@ -35,6 +45,8 @@ export default function AddJob({ user, loggedIn, costs }) {
   if (!isLoaded) {
     return <CircularProgress />;
   }
+
+
 
   const checkJob = async () => {
     setShowJobBtn(false);
@@ -101,6 +113,7 @@ export default function AddJob({ user, loggedIn, costs }) {
       return;
     }
 
+
     const grossProfit =
       checkRes.odc * pay +
       checkRes.factor * pay +
@@ -125,6 +138,38 @@ export default function AddJob({ user, loggedIn, costs }) {
     console.log(checkRes)
 
     if (totalCost > pay) {
+      setJob({
+        start: start,
+        pickUp: pickUp,
+        dropOff: dropOff,
+        revenue: pay,
+        grossProfitPercentage: ((pay / grossProfit) * 100).toFixed(2) + "%",
+        operatingProfitPercentage: ((pay / operationProfit) * 100).toFixed(2) + "%",
+        netProfitPercentage: ((pay / totalCost) * 100).toFixed(2) + '%',
+        distance: checkRes.distance,
+        date: date,
+        user_id: user,
+        gasCost: checkRes.gasCost,
+        depreciation: checkRes.depreciation,
+        factor: (checkRes.factor * pay).toFixed(2),
+        gAndA: (checkRes.gAndA * pay).toFixed(2),
+        loan: (checkRes.loan * pay).toFixed(2),
+        odc: (checkRes.odc * pay).toFixed(2),
+        rental: (checkRes.rental * pay).toFixed(2),
+        repairs: (checkRes.repairs * pay).toFixed(2),
+        ratePerMile: (pay / checkRes.distance).toFixed(2),
+        labor: (checkRes.laborRate * pay).toFixed(2),
+        payrollTax: (checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(2),
+        netProfit: (pay - totalCost).toFixed(2),
+        insurance: (checkRes.insurance).toFixed(2),
+        dispatch: (pay * checkRes.dispatch).toFixed(2),
+        laborRatePercent: (checkRes.laborRate * 100) + '%',
+        trailer: checkRes.trailerLease,
+        tractor: checkRes.tractorLease,
+        totalFixedCost: (parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease)).toFixed(2),
+        operatingProfit: (checkRes.operatingProfit * pay)
+    
+      });
       setProfitable(false);
       setShowJobBtn(false);
       setShowProfit(true);
@@ -150,14 +195,15 @@ export default function AddJob({ user, loggedIn, costs }) {
         repairs: (checkRes.repairs * pay).toFixed(2),
         ratePerMile: (pay / checkRes.distance).toFixed(2),
         labor: (checkRes.laborRate * pay).toFixed(2),
-        payrollTax: (checkRes.payrollTax * pay).toFixed(2),
+        payrollTax: (checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(2),
         netProfit: (pay - totalCost).toFixed(2),
-        insurance: (checkRes.insurance * pay).toFixed(2),
+        insurance: (checkRes.insurance).toFixed(2),
         dispatch: (pay * checkRes.dispatch).toFixed(2),
         laborRatePercent: (checkRes.laborRate * 100) + '%',
         trailer: checkRes.trailerLease,
         tractor: checkRes.tractorLease,
-        operatingProfit: ((checkRes.operatingProfit * pay))
+        totalFixedCost: (parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease)).toFixed(2),
+        operatingProfit: (checkRes.operatingProfit * pay)
       });
       setShowJobBtn(true);
       setShowProfit(true);
@@ -194,7 +240,7 @@ export default function AddJob({ user, loggedIn, costs }) {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: 'orange', height: '100vh' }}>
       <Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
         <Container sx={{
           display: "flex",
@@ -202,16 +248,18 @@ export default function AddJob({ user, loggedIn, costs }) {
           justifyContent: "space-evenly",
           flexWrap: "wrap",
         }}>
-          <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid', marginTop: 2,
-          borderWidth: 2,
-          borderRadius: 3, backgroundColor: 'white' }}>
-            <Typography sx={{marginTop: 3}} variant="h5">Check Job</Typography>
+          <Container sx={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid', marginTop: 2,
+            borderWidth: 2,
+            borderRadius: 3, backgroundColor: 'white'
+          }}>
+            <Typography sx={{ marginTop: 3 }} variant="h5">Check Job</Typography>
             {showAlert ?
               <Alert sx={{ marginTop: 2 }} severity="error">
                 {alertMsg}
               </Alert> : null}
             <Box sx={{ margin: 5 }}>
-              <InputLabel>Start</InputLabel>
+              <InputLabel sx={{}}>Start</InputLabel>
               <Autocomplete>
                 <TextField id="origin"></TextField>
               </Autocomplete>
@@ -240,9 +288,10 @@ export default function AddJob({ user, loggedIn, costs }) {
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              margin: 2}}>
-                {costs ? <Button sx={{color: "orange"}} onClick={checkJob}>Check Job</Button> : null}
-          </Box>
+              margin: 2
+            }}>
+              {costs ? <Button sx={{ color: "orange" }} onClick={checkJob}>Check Job</Button> : null}
+            </Box>
           </Container>
         </Container>
         <Box sx={{
@@ -251,7 +300,7 @@ export default function AddJob({ user, loggedIn, costs }) {
           flexDirection: "row",
           justifyContent: "center",
         }}>
-          
+
         </Box>
         <Container sx={{
           display: "flex",
@@ -261,209 +310,195 @@ export default function AddJob({ user, loggedIn, costs }) {
           borderWidth: 2,
           borderRadius: 3, marginTop: 2, backgroundColor: 'white'
         }}>
-          <Typography sx={{marginTop: 3}} variant="h5">Profitability</Typography>
-          {showLoading ? <CircularProgress sx={{marginTop: 5, color: 'orange'}}/> : null}
+          <Typography sx={{ marginTop: 3 }} variant="h5">Profitability</Typography>
+          {showLoading ? <CircularProgress sx={{ marginTop: 5, color: 'orange' }} /> : null}
           {showProfit ? (
             <Container sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}>
-              {profitable ? (
                 <Container sx={{
-                    marginTop: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center"}}>
+                  marginTop: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}>
+                  {profitable ? 
+                  <Typography variant="h5" sx={{ marginBottom: 1, color: 'green', alignSelf: 'center' }}>
+                    Job is Profitable
+                  </Typography> : 
+                  <Typography variant="h5" sx={{ marginBottom: 1, color: 'red', alignSelf: 'center' }}>
+                  Job is NOT Profitable
+                </Typography> }
                   <Box sx={{
-                    marginTop: 1,
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end"}}>
-                    <Typography variant="h5" sx={{ marginBottom: 1, color: 'green', alignSelf: 'center' }}>
-                      Job is Profitable
-                    </Typography>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Revenue: </Typography>
-                      <CurrencyFormat
-                        value={job?.revenue}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"} />
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Gas Cost: </Typography>
-                      <CurrencyFormat
-                        value={job?.gasCost}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"}/>
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>
-                        Depreciation:
-                      </Typography>
-                      <CurrencyFormat
-                        value={job?.depreciation}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"} />
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Factor: </Typography>
-                      <CurrencyFormat
-                        value={job?.factor}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"} />
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>G&A: </Typography>
-                      <CurrencyFormat
-                        value={job?.gAndA}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"} />
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Loan: </Typography>
-                      <CurrencyFormat
-                        value={job?.loan}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"} />
-                    </Box>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>ODC: </Typography>
-                      <CurrencyFormat
-                        value={job?.odc}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"}/>
-                    </Box>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Rental: </Typography>
-                      <CurrencyFormat
-                        value={job?.rental}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"}/>
-                    </Box>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center"}}>
-                      <Typography sx={{ marginRight: 4 }}>Repairs: </Typography>
-                      <CurrencyFormat
-                        value={job?.repairs}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"-$"}/>
-                    </Box>
-                    <Typography sx={{ fontWeight: "bold" }}>
-                      ------------
-                    </Typography>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center"}}>
-                      <Typography sx={{ marginRight: 2 }}>Gross Profit Percent:</Typography>
-                      <CurrencyFormat
-                        value={job?.grossProfitPercentage}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        suffix={"%"}/>
-                    </Box>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center"}}>
-                      <Typography sx={{ marginRight: 2 }}>
-                        Operating Profit Percent:
-                      </Typography>
-                      <CurrencyFormat
-                        value={job?.operatingProfitPercentage}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        suffix={"%"}/>
-                    </Box>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",}}>
-                      <Typography sx={{ marginRight: 2 }}>Net Profit Percent:</Typography>
-                      <CurrencyFormat
-                        value={job?.netProfitPercentage}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        suffix={"%"}/>
-                    </Box>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center"}}>
-                      <Typography sx={{ marginRight: 2 }}>Net Profit</Typography>
-                      <CurrencyFormat
-                        value={job?.netProfit}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}/>
-                    </Box>
+                    flexDirection: "row",
+                    justifyContent: "flex-start"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Labor: </Typography>
+                    <CurrencyFormat
+                      value={job?.labor}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
                   </Box>
                   <Box sx={{
-                      marginTop: 3,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center"}}>
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Payroll Tax: </Typography>
+                    <CurrencyFormat
+                      value={job?.payrollTax}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Dispatch: </Typography>
+                    <CurrencyFormat
+                      value={job?.dispatch}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Factor: </Typography>
+                    <CurrencyFormat
+                      value={job?.factor}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Fuel: </Typography>
+                    <CurrencyFormat
+                      value={job?.gasCost}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>ODC: </Typography>
+                    <CurrencyFormat
+                      value={job?.odc}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ alignSelf: 'flex-start' }}>Fixed Costs: </Typography>
+                    <CurrencyFormat
+                      value={parseFloat(job?.totalFixedCost)}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    ------------
+                  </Typography>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ marginRight: 2 }}>Gross Profit Percent:</Typography>
+                    <CurrencyFormat
+                      value={job?.grossProfitPercentage}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"%"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ marginRight: 2 }}>
+                      Operating Profit Percent:
+                    </Typography>
+                    <CurrencyFormat
+                      value={job?.operatingProfitPercentage}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"%"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}>
+                    <Typography sx={{ marginRight: 2 }}>Net Profit Percent:</Typography>
+                    <CurrencyFormat
+                      value={job?.netProfitPercentage}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"%"} />
+                  </Box>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center"
+                  }}>
+                    <Typography sx={{ marginRight: 2 }}>Net Profit</Typography>
+                    <CurrencyFormat
+                      value={job?.netProfit}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"} />
+                  </Box>
+
+                  <Box sx={{
+                    marginTop: 3,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center"
+                  }}>
                     <Typography>Milage: {job?.distance}</Typography>
                     <Typography>Rate Per Mile: {job?.ratePerMile}</Typography>
                   </Box>
                   <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    marginTop: 3
+                  }}>
+                    <Box sx={{
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
-                      marginTop: 3}}>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        padding: 2}}>
-                      <Button sx={{color: 'orange'}} onClick={addJob}>Add Job</Button>
-                      <Button sx={{color: 'orange'}} onClick={clearForm}>Clear</Button>
+                      padding: 2
+                    }}>
+                      {profitable ? <Button sx={{ color: 'orange' }} onClick={addJob}>Add Job</Button> : null }
+                      <Button sx={{ color: 'orange' }} onClick={clearForm}>Clear</Button>
                     </Box>
                   </Box>
                 </Container>
-              ) : (
-                <Typography sx={{ marginTop: 5, color: 'red'}} variant="h5">Job is NOT Profitable</Typography>
-              )}
             </Container>
           ) : null}
         </Container>
       </Container>
-    </>
+    </div>
   );
 }
