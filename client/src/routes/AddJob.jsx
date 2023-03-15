@@ -93,11 +93,11 @@ export default function AddJob({ user, loggedIn, costs }) {
       "http://localhost:3001/api/costs/check?id=" +
       user +
       "&start=" +
-      startPlaceId +
+      start +
       "&pick_up=" +
-      pickUpPlaceId +
+      pickUp +
       "&drop_off=" +
-      dropOffPlaceId +
+      dropOff +
       "&state1=" +
       statesArray[0] +
       "&state2=" +
@@ -135,8 +135,6 @@ export default function AddJob({ user, loggedIn, costs }) {
 
     setShowLoading(false);
 
-    console.log(checkRes)
-
     if (totalCost > pay) {
       setJob({
         start: start,
@@ -173,6 +171,7 @@ export default function AddJob({ user, loggedIn, costs }) {
       setProfitable(false);
       setShowJobBtn(false);
       setShowProfit(true);
+
     } else {
       setJob({
         start: start,
@@ -208,6 +207,8 @@ export default function AddJob({ user, loggedIn, costs }) {
       setShowJobBtn(true);
       setShowProfit(true);
       setProfitable(true);
+
+
     }
   };
 
