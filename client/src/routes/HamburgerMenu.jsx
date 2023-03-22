@@ -3,15 +3,12 @@ import { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu'
-import { Toolbar, IconButton, Typography, requirePropFactory } from '@mui/material';
-import { Container } from '@mui/system';
-import { Link, Outlet } from 'react-router-dom'
-import './HamburgerMenu.css'
+import { IconButton, Drawer } from '@mui/material';
+import { Link } from 'react-router-dom'
 
 export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const toolbarStyle = 'toolbar'
 
   const open = Boolean(anchorEl);
 

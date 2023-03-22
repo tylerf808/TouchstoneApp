@@ -17,7 +17,7 @@ export default function CostsPage({ user, costs, setCosts }) {
   const [insurance, setInsurance] = useState()
 
   const modalStyle = {
-    position: 'absolute',
+    position: 'relative',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -26,6 +26,7 @@ export default function CostsPage({ user, costs, setCosts }) {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    height: '90%',
     backgroundColor: 'white'
   };
 
@@ -41,13 +42,8 @@ export default function CostsPage({ user, costs, setCosts }) {
       .then((data) => setCosts(data[0]))
       .catch((err) => setCosts(false))
   }, []);
-
-  const handleCostsChange = ((event) => {
-
-  })
-
+  
   const CurrencyFormat = require("react-currency-format");
-
 
   const addCosts = async () => {
     const insuranceValue = document.getElementById("insurance").value;
