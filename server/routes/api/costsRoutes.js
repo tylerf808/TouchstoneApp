@@ -5,13 +5,18 @@ const {getDirections, getGasPrice} = require('../../utils/helpers')
 router.get('/check', async (req, res) => {
   const directionsRes = await getDirections(req.query.start, req.query.pick_up, req.query.drop_off)
   const gasPrice = await getGasPrice(req.query.state1, req.query.state2, req.query.state3)
-  const tolls = (directionsRes.routes[0].travelAdvisory.tollInfo.estimatedPrice.units)
+  let tolls = (directionsRes.routes[0]?.travelAdvisory?.tollInfo?.estimatedPrice[0]?.units)
+  const duration = (directionsRes.routes[0].duration)
+  if(tolls === undefined){
+    tolls = 0
+  }
   const totalDistance = (directionsRes.routes[0].distanceMeters) / 1609.34
   const costs = await Costs.findOne({
     where: {
       user_id: req.query.id
     }
   })
+  
   if(costs === null){
     res.status(404).json({message: 'User has no costs'})
     return
@@ -34,7 +39,9 @@ router.get('/check', async (req, res) => {
     rental: costs.dataValues.rental,
     repairs: costs.dataValues.repairs,
     depreciation: costs.dataValues.depreciation,
-    costs_id: costs.dataValues.costs_id
+    costs_id: costs.dataValues.costs_id,
+    tolls: tolls,
+    duration: duration
   })
 })
 
@@ -42,6 +49,7 @@ router.get('/check', async (req, res) => {
 //Query costs associated with a user
 //TODO: make it check the id of the costs obj and bring back the one associated to who signs in
 router.get('/', async (req, res) => {
+
   const costsData = await Costs.findAll({
     where: {
       user_id: req.query.id

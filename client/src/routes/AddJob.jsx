@@ -1,13 +1,4 @@
-import {
-  Button,
-  TextField,
-  Typography,
-  CircularProgress,
-  InputLabel,
-  Box,
-  Alert,
-  Input,
-} from "@mui/material";
+import { CircularProgress, Alert } from "@mui/material";
 import { Container } from "@mui/system";
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
@@ -16,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const library = ["places"];
 
-export default function AddJob({ user, loggedIn, costs }) {
+export default function AddJob({ user, loggedIn, costs, styles }) {
   const CurrencyFormat = require("react-currency-format");
 
   const [showJobBtn, setShowJobBtn] = useState(false);
@@ -57,6 +48,8 @@ export default function AddJob({ user, loggedIn, costs }) {
     const dropOff = document.getElementById("drop-off").value;
     const pay = document.getElementById("revenue").value;
     const date = document.getElementById("date").value;
+    const client = document.getElementById("client").value;
+    const driver = document.getElementById("driver").value;
 
     setAlertMsg("");
     setShowAlert(false);
@@ -84,10 +77,6 @@ export default function AddJob({ user, loggedIn, costs }) {
     statesArray.push(geoStart.results[0].address_components[4].short_name);
     statesArray.push(geoPickUp.results[0].address_components[4].short_name);
     statesArray.push(geoDropOff.results[0].address_components[4].short_name);
-
-    const startPlaceId = geoStart.results[0].place_id;
-    const pickUpPlaceId = geoPickUp.results[0].place_id;
-    const dropOffPlaceId = geoDropOff.results[0].place_id;
 
     const checkRes = await fetch(
       "http://localhost:3001/api/costs/check?id=" +
@@ -165,8 +154,11 @@ export default function AddJob({ user, loggedIn, costs }) {
         trailer: checkRes.trailerLease,
         tractor: checkRes.tractorLease,
         totalFixedCost: (parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease)).toFixed(2),
-        operatingProfit: (checkRes.operatingProfit * pay)
-    
+        operatingProfit: (checkRes.operatingProfit * pay),
+        tolls: (checkRes.tolls),
+        client: client,
+        driver: driver,
+        driveTime: checkRes.duration
       });
       setProfitable(false);
       setShowJobBtn(false);
@@ -183,6 +175,9 @@ export default function AddJob({ user, loggedIn, costs }) {
         netProfitPercentage: ((pay / totalCost) * 100).toFixed(2) + '%',
         distance: checkRes.distance,
         date: date,
+        client: client,
+        driver: driver,
+        driveTime: checkRes.duration.standard,
         user_id: user,
         gasCost: checkRes.gasCost,
         depreciation: checkRes.depreciation,
@@ -202,7 +197,8 @@ export default function AddJob({ user, loggedIn, costs }) {
         trailer: checkRes.trailerLease,
         tractor: checkRes.tractorLease,
         totalFixedCost: (parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease) + parseFloat(checkRes.tractorLease)).toFixed(2),
-        operatingProfit: (checkRes.operatingProfit * pay)
+        operatingProfit: (checkRes.operatingProfit * pay),
+        tolls: (checkRes.tolls)
       });
       setShowJobBtn(true);
       setShowProfit(true);
@@ -241,265 +237,259 @@ export default function AddJob({ user, loggedIn, costs }) {
   };
 
   return (
-    <div style={{ backgroundColor: 'orange', height: '100vh' }}>
-      <Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-        <Container sx={{
-          display: "flex",
-          flexDirection: "rows",
-          justifyContent: "space-evenly",
-          flexWrap: "wrap",
-        }}>
-          <Container sx={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid', marginTop: 2,
-            borderWidth: 2,
-            borderRadius: 3, backgroundColor: 'white'
-          }}>
-            <Typography sx={{ marginTop: 3 }} variant="h5">Check Job</Typography>
+    <div className="test" >
+      <div className="test">
+        <div className="test">
+          <div >
+            <header className="test">Check Job</header>
             {showAlert ?
-              <Alert sx={{ marginTop: 2 }} severity="error">
+              <Alert  severity="error">
                 {alertMsg}
               </Alert> : null}
-            <Box sx={{ margin: 5 }}>
-              <InputLabel sx={{}}>Start</InputLabel>
+            <div >
+              <label style={{}}>Start</label>
               <Autocomplete>
-                <TextField id="origin"></TextField>
+                <input type='text' id="origin"></input>
               </Autocomplete>
-            </Box>
-            <Box sx={{ margin: 5 }}>
-              <InputLabel>Pick Up</InputLabel>
+            </div>
+            <div >
+              <label>Pick Up</label>
               <Autocomplete>
-                <TextField id="pick-up"></TextField>
+                <input id="pick-up"></input>
               </Autocomplete>
-            </Box>
-            <Box sx={{ margin: 5 }}>
-              <InputLabel>Drop Off</InputLabel>
+            </div>
+            <div >
+              <label>Drop Off</label>
               <Autocomplete>
-                <TextField id="drop-off"></TextField>
+                <input id="drop-off"></input>
               </Autocomplete>
-            </Box>
-            <Box sx={{ margin: 5 }}>
-              <InputLabel>Revenue</InputLabel>
-              <TextField placeholder="Enter a dollar amount" id="revenue" />
-            </Box>
-            <Box sx={{ margin: 5 }}>
-              <InputLabel>Date</InputLabel>
-              <Input type="date" id="date"></Input>
-            </Box>
-            <Box sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              margin: 2
-            }}>
-              {costs ? <Button sx={{ color: "orange" }} onClick={checkJob}>Check Job</Button> : null}
-            </Box>
-          </Container>
-        </Container>
-        <Box sx={{
-          marginTop: 2,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}>
+            </div>
+            <div >
+              <label>Revenue</label>
+              <input placeholder="Enter a dollar amount" id="revenue" />
+            </div>
+            <div >
+              <label>Date</label>
+              <input type="date" id="date"></input>
+            </div>
+            <div >
+              <label>Client</label>
+              <input type="text" id="client"></input>
+            </div>
+            <div >
+              <label>Driver</label>
+              <input type="text" id="driver"></input>
+            </div>
+            <div >
+              {costs ? <button onClick={checkJob}>Check Job</button> : null}
+            </div>
+          </div>
+        </div>
+        <div >
 
-        </Box>
-        <Container sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          border: 'solid',
-          borderWidth: 2,
-          borderRadius: 3, marginTop: 2, backgroundColor: 'white'
-        }}>
-          <Typography sx={{ marginTop: 3 }} variant="h5">Profitability</Typography>
-          {showLoading ? <CircularProgress sx={{ marginTop: 5, color: 'orange' }} /> : null}
+        </div>
+        <div >
+          <header style={{ marginTop: 3 }} >Profitability</header>
+          {showLoading ? <CircularProgress sx={{ marginTop: 5, color: 'blue' }} /> : null}
           {showProfit ? (
-            <Container sx={{
+            <div style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}>
-                <Container sx={{
-                  marginTop: 1,
+              <div style={{
+                marginTop: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}>
+                {profitable ?
+                  <header  style={{ marginBottom: 1, color: 'green', alignSelf: 'center' }}>
+                    Job is Profitable
+                  </header> :
+                  <header  style={{ marginBottom: 1, color: 'red', alignSelf: 'center' }}>
+                    Job is NOT Profitable
+                  </header>}
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Labor: </p>
+                  <CurrencyFormat
+                    value={job?.labor}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Payroll Tax: </p>
+                  <CurrencyFormat
+                    value={job?.payrollTax}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Dispatch: </p>
+                  <CurrencyFormat
+                    value={job?.dispatch}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Factor: </p>
+                  <CurrencyFormat
+                    value={job?.factor}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Fuel: </p>
+                  <CurrencyFormat
+                    value={job?.gasCost}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Tolls: </p>
+                  <CurrencyFormat
+                    value={job?.tolls}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>ODC: </p>
+                  <CurrencyFormat
+                    value={job?.odc}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ alignSelf: 'flex-start' }}>Fixed Costs: </p>
+                  <CurrencyFormat
+                    value={parseFloat(job?.totalFixedCost)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+                <p style={{ fontWeight: "bold" }}>
+                  ------------
+                </p>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ marginRight: 2 }}>Gross Profit Percent:</p>
+                  <CurrencyFormat
+                    value={job?.grossProfitPercentage}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"%"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p style={{ marginRight: 2 }}>
+                    Operating Profit Percent:
+                  </p>
+                  <CurrencyFormat
+                    value={job?.operatingProfitPercentage}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"%"} />
+                </div>
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}>
+                  <p style={{ marginRight: 2 }}>Net Profit Percent:</p>
+                  <CurrencyFormat
+                    value={job?.netProfitPercentage}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"%"} />
+                </div>
+                <div sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center"
+                }}>
+                  <p sx={{ marginRight: 2 }}>Net Profit</p>
+                  <CurrencyFormat
+                    value={job?.netProfit}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"} />
+                </div>
+
+                <div sx={{
+                  marginTop: 3,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center"
                 }}>
-                  {profitable ? 
-                  <Typography variant="h5" sx={{ marginBottom: 1, color: 'green', alignSelf: 'center' }}>
-                    Job is Profitable
-                  </Typography> : 
-                  <Typography variant="h5" sx={{ marginBottom: 1, color: 'red', alignSelf: 'center' }}>
-                  Job is NOT Profitable
-                </Typography> }
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Labor: </Typography>
-                    <CurrencyFormat
-                      value={job?.labor}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Payroll Tax: </Typography>
-                    <CurrencyFormat
-                      value={job?.payrollTax}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Dispatch: </Typography>
-                    <CurrencyFormat
-                      value={job?.dispatch}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Factor: </Typography>
-                    <CurrencyFormat
-                      value={job?.factor}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Fuel: </Typography>
-                    <CurrencyFormat
-                      value={job?.gasCost}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>ODC: </Typography>
-                    <CurrencyFormat
-                      value={job?.odc}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ alignSelf: 'flex-start' }}>Fixed Costs: </Typography>
-                    <CurrencyFormat
-                      value={parseFloat(job?.totalFixedCost)}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-                  <Typography sx={{ fontWeight: "bold" }}>
-                    ------------
-                  </Typography>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ marginRight: 2 }}>Gross Profit Percent:</Typography>
-                    <CurrencyFormat
-                      value={job?.grossProfitPercentage}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      suffix={"%"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ marginRight: 2 }}>
-                      Operating Profit Percent:
-                    </Typography>
-                    <CurrencyFormat
-                      value={job?.operatingProfitPercentage}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      suffix={"%"} />
-                  </Box>
-                  <Box sx={{
+                  <p>Milage: {job?.distance}</p>
+                  <p>Rate Per Mile: {job?.ratePerMile}</p>
+                </div>
+                <div sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  marginTop: 3
+                }}>
+                  <div sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
+                    padding: 2
                   }}>
-                    <Typography sx={{ marginRight: 2 }}>Net Profit Percent:</Typography>
-                    <CurrencyFormat
-                      value={job?.netProfitPercentage}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      suffix={"%"} />
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center"
-                  }}>
-                    <Typography sx={{ marginRight: 2 }}>Net Profit</Typography>
-                    <CurrencyFormat
-                      value={job?.netProfit}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"} />
-                  </Box>
-
-                  <Box sx={{
-                    marginTop: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}>
-                    <Typography>Milage: {job?.distance}</Typography>
-                    <Typography>Rate Per Mile: {job?.ratePerMile}</Typography>
-                  </Box>
-                  <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    marginTop: 3
-                  }}>
-                    <Box sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      padding: 2
-                    }}>
-                      {profitable ? <Button sx={{ color: 'orange' }} onClick={addJob}>Add Job</Button> : null }
-                      <Button sx={{ color: 'orange' }} onClick={clearForm}>Clear</Button>
-                    </Box>
-                  </Box>
-                </Container>
-            </Container>
+                    {profitable ? <button onClick={addJob}>Add Job</button> : null}
+                    <button onClick={clearForm}>Clear</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : null}
-        </Container>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 }

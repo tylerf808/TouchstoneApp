@@ -6,10 +6,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { Toolbar, IconButton, Typography, requirePropFactory } from '@mui/material';
 import { Container } from '@mui/system';
 import { Link, Outlet } from 'react-router-dom'
+import './HamburgerMenu.css'
 
 export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const toolbarStyle = 'toolbar'
 
   const open = Boolean(anchorEl);
 
@@ -29,7 +31,7 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
   };
 
   return (
-    <Toolbar sx={{ backgroundColor: '#614ECB', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
+    <div className='toolbar'>
       {loggedIn ? <IconButton size="large"
         edge="start"
         aria-label="menu"
@@ -44,7 +46,6 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></MenuItem>
         <MenuItem onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></MenuItem>
       </Menu>
-        <img style={{height: 80}} src={require('../images/logo.jpg')} />
-    </Toolbar >
+    </div >
   );
 }

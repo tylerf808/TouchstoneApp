@@ -12,6 +12,7 @@ import {
 import LogIn from "./routes/LogIn";
 import SignUp from "./routes/SignUp";
 import { Container } from "@mui/system";
+import styles from './App.css'
 
 export default function App() {
   const [user, setUser] = useState();
@@ -61,7 +62,6 @@ export default function App() {
   };
 
   return (
-    <div style={{ backgroundColor: 'orange', height: '100vh' }}>
       <Router >
         <HamburgerMenu
           setLoggedIn={setLoggedIn}
@@ -72,7 +72,7 @@ export default function App() {
           <Route path="/" element={<LogIn logIn={logIn} loggedIn={loggedIn} />} />
           <Route
             path="addjob"
-            element={<AddJob user={user} loggedIn={loggedIn} costs={costs} />}/>
+            element={<AddJob styles={styles} user={user} loggedIn={loggedIn} costs={costs} />}/>
           <Route
             path="costs"
             element={<CostsPage user={user} costs={costs} setCosts={setCosts} />}/>
@@ -80,6 +80,5 @@ export default function App() {
           <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         </Routes>
       </Router>
-    </div>
   );
 }

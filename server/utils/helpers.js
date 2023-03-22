@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const routeCallConfig = {
   headers: {
-    "X-Goog-FieldMask": "routes.distanceMeters,routes.travelAdvisory",
+    "X-Goog-FieldMask": "routes.distanceMeters,routes.travelAdvisory,routes.duration",
   },
 };
 

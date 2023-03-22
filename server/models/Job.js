@@ -91,6 +91,15 @@ Job.init(
     totalFixedCost: {
       type: DataTypes.STRING
     },
+    driveTime: {
+      type: DataTypes.INTEGER
+    },
+    client: {
+      type: DataTypes.STRING
+    },
+    driver: {
+      type: DataTypes.STRING
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
