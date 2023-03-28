@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, Drawer } from '@mui/material';
 import { Link } from 'react-router-dom'
 
-export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts }) {
+export default function Toolbar({ loggedIn, setLoggedIn, setUser, setCosts }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,20 +29,21 @@ export default function HamburgerMenu({ loggedIn, setLoggedIn, setUser, setCosts
 
   return (
     <div className='toolbar'>
-      {loggedIn ? <IconButton size="large"
+      <IconButton size="large"
         edge="start"
         aria-label="menu"
         onClick={handleClick}
         sx={{ margin: 1 }}
       >
         <MenuIcon />
-      </IconButton> : null}
+      </IconButton>
       <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }} >
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/costs'>Costs</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></MenuItem>
         <MenuItem onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></MenuItem>
       </Menu>
+      <h1 style={{fontSize: '1.5em'}}>Touchstone Route Calculator</h1>
     </div >
   );
 }

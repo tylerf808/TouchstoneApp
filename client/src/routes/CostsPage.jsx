@@ -1,12 +1,9 @@
 import {
   Button,
   Container,
-  FormGroup,
   FormLabel,
   TextField,
   Typography,
-  Grid,
-  Item,
   Modal
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -14,7 +11,6 @@ import { useEffect, useState } from "react";
 export default function CostsPage({ user, costs, setCosts }) {
 
   const [showEditPrompt, setShowEditPrompt] = useState(false)
-  const [insurance, setInsurance] = useState()
 
   const modalStyle = {
     position: 'relative',

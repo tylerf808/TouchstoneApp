@@ -1,0 +1,29 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+
+ h1 {
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+ }
+
+ .backgroundCanvas {
+    background-color: #E9F2FC;
+    height: 100vh;
+ }
+
+ .headerContainer {
+    background-color: #E9F2FC;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+ }
+
+ .toolbar {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+ }

@@ -1,4 +1,4 @@
-import { CircularProgress, Alert } from "@mui/material";
+import { CircularProgress, Alert, Modal, Box } from "@mui/material";
 import { Container } from "@mui/system";
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
@@ -19,13 +19,19 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
   const [job, setJob] = useState({});
   const statesArray = [];
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loggedIn) {
-      navigate("/");
+    if(!loggedIn){
+      
+    } else {
+      navigate('addjob')
     }
-  }, []);
+  })
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDcXIOrxmAOOPEvqjLEXVeZb9mdTyUqS6k",
@@ -37,10 +43,11 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
   }
 
   const checkJob = async () => {
+    handleOpen()
     setShowJobBtn(false);
     setShowLoading(true);
 
-    const start = document.getElementById("origin").value;
+    const start = document.getElementById("start").value;
     const pickUp = document.getElementById("pick-up").value;
     const dropOff = document.getElementById("drop-off").value;
     const pay = document.getElementById("revenue").value;
@@ -246,27 +253,48 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <div style={{width: '50%' , margin: 8}}>
-        <label for='start'>Start</label>
-        <Autocomplete>
-          <input style={{width: '65%'}} name="start" id="start" type="text" />
-        </Autocomplete>
-      </div>
-      <div style={{width: '50%' , margin: 8}}>
-        <label for='pickUp'>Pick Up</label>
-        <Autocomplete>
-          <input style={{width: '65%'}} name="pickUp" id="pickUp" type="text" />
-        </Autocomplete>
-      </div>
-      <div style={{width: '50%' , margin: 8}}>
-        <label for='dropOff'>Drop Off</label>
-        <Autocomplete>
-          <input style={{width: '65%'}}  name="dropOff" id="dropOff" type="text" />
-        </Autocomplete>
-      </div>
-
-    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+      <label htmlFor='start'>Start</label>
+      <Autocomplete>
+        <input style={{ marginTop: 2, height: '2em', borderRadius: 4, }} name="start" id="start" type="text" />
+      </Autocomplete>
+      <label style={{}} htmlFor='pickUp'>Pick Up</label>
+      <Autocomplete>
+        <input style={{ height: '2em', borderRadius: 4, }} name="pickUp" id="pick-up" type="text" />
+      </Autocomplete>
+      <label style={{}} htmlFor='dropOff'>Drop Off</label>
+      <Autocomplete>
+        <input style={{ height: '2em', borderRadius: 4, }} name="dropOff" id="drop-off" type="text" />
+      </Autocomplete>
+      <label style={{}} htmlFor="revenue">Revenue</label>
+      <input type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' style={{ width: '20%', height: '2em', borderRadius: 4, }} />
+      <label htmlFor="date">Date</label>
+      <input type='date' name="date" id='date' style={{ height: '2em', borderRadius: 4 }} />
+      <label htmlFor="client">Client</label>
+      <input id="client" placeholder="Enter Clients Name" name="client" style={{ height: '2em', borderRadius: 4, }}></input>
+      <label htmlFor="driver">Driver</label>
+      <input id="driver" name="driver" placeholder='Enter Drivers Name' style={{ height: '2em', borderRadius: 4, }}></input>
+      <button onClick={checkJob} style={{ alignSelf: 'center', marginTop: '3em' }}>Check Job</button>
+      <Modal open={open} onClose={handleClose} >
+        <Box sx={{
+           position: 'absolute',
+           top: '50%',
+           left: '50%',
+          // transform: 'translate(-50%, -50%)',
+           width: '80%',
+           bgcolor: 'background.paper',
+           border: '2px solid #000',
+           boxShadow: 24,
+           p: 4,
+           borderRadius: 3
+        }}>
+          {profitable ? <h2>Job is Profitable</h2> : <h2>Job is NOT Profitable</h2> }
+          <div>
+            <p>{job?.distance}</p>
+          </div>
+        </Box>
+      </Modal>
+    </div >
     /*
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}

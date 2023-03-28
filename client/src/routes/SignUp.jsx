@@ -4,90 +4,64 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate, Link } from "react-router-dom";
 import {
   Button,
-  Container,
   TextField,
   Typography,
   InputAdornment,
-  FormControl,
-  InputLabel,
   OutlinedInput,
   IconButton,
 } from "@mui/material";
 
 export default function SignUp({ signUp, loggedIn }) {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (loggedIn) {
-      navigate('/addjob')
+      navigate('addjob')
     }
   })
 
+  const togglePassword = () => {
+    let password = document.getElementById('password-signup')
+    let passwordConf = document.getElementById('password-signup-conf')
+    if(password.type === 'password'){
+      password.type = 'text'
+      passwordConf.type = 'text'
+    } else {
+      password.type = 'password'
+      passwordConf.type = 'password'
+    }
+  }
+
   return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-        <Typography variant='h3' sx={{ marginTop: 4, marginBottom: 1 }}>Create an Account</Typography>
+    <div>
+      <div className="headerContainer">
+        <h1>Create an Account</h1>
       </div>
-      <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1vh' }}>
-        <Container
-          sx={{
-            marginTop: '2vh', display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: 'white', width: '400px',
-            borderRadius: 3, border: 1
-          }}>
-          <div style={{ width: '60' }}>
-            <Typography sx={{ alignSelf: 'flex-start', marginTop: 3 }}>Email:</Typography>
-            <TextField sx={{ width: '100%' }} id="email-signup"></TextField>
-            <Typography sx={{ alignSelf: 'flex-start', marginTop: 2 }}>Password:</Typography>
-            <OutlinedInput
-              sx={{ width: '100%' }}
-              id="password-signup"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            <Typography sx={{ alignSelf: 'flex-start', marginTop: 2 }}>Confirm Password:</Typography>
-            <OutlinedInput
-              sx={{ width: '100%' }}
-              id="password-signup-conf"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
+      <div className="formContainer">
+        <div className="form">
+          <div className="formItem">
+            <p className="text1">Email:</p>
+            <input type='email' id="email-signup"></input>
           </div>
-          <Button sx={{ color: '#DAA044', margin: 2 }} onClick={signUp}>Sign Up</Button>
-        </Container>
-        <div>
-          <Typography sx={{ margin: 2 }}>Already have an account? <Link to='/'>Log in here!</Link></Typography>
+          <div className="formItem">
+            <p className="text1">Password:</p>
+            <input type='password' id="password-signup"></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">Confirm Password:</p>
+            <input type='password' id="password-signup-conf"></input>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <p>Show Password</p>
+            <input onClick={togglePassword} style={{ margin: '1.2em' }} type='checkbox'></input>
+          </div>
         </div>
-      </Container>
-    </>
+        <button className="btn1" onClick={signUp}>Sign Up</button>
+      </div>
+      <div>
+        <p className="text1">Already have an account? <Link to='/'>Log in here!</Link></p>
+      </div>
+    </div>
   );
 }
