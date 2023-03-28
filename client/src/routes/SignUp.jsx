@@ -24,7 +24,7 @@ export default function SignUp({ signUp, loggedIn }) {
   const togglePassword = () => {
     let password = document.getElementById('password-signup')
     let passwordConf = document.getElementById('password-signup-conf')
-    if(password.type === 'password'){
+    if (password.type === 'password') {
       password.type = 'text'
       passwordConf.type = 'text'
     } else {
@@ -34,12 +34,12 @@ export default function SignUp({ signUp, loggedIn }) {
   }
 
   return (
-    <div>
+    <>
       <div className="headerContainer">
         <h1>Create an Account</h1>
       </div>
-      <div className="formContainer">
-        <div className="form">
+      <div className="pageContainer">
+        <div className="verticalFormContainer">
           <div className="formItem">
             <p className="text1">Email:</p>
             <input type='email' id="email-signup"></input>
@@ -48,20 +48,41 @@ export default function SignUp({ signUp, loggedIn }) {
             <p className="text1">Password:</p>
             <input type='password' id="password-signup"></input>
           </div>
-          <div className="formItem">
+          <div className="formItem" style={{ alignItems: 'flex-start' }}>
             <p className="text1">Confirm Password:</p>
-            <input type='password' id="password-signup-conf"></input>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <input type='password' id="password-signup-conf"></input>
+              <p className="text1">Show Password</p>
+              <input onClick={togglePassword} type='checkbox'></input>
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <p>Show Password</p>
-            <input onClick={togglePassword} style={{ margin: '1.2em' }} type='checkbox'></input>
+          <div className="formItem">
+            <p className="text1">How often do you pay insurance?</p>
+            <form className="radioMenu">
+              <label htmlFor="monthly">Monthly</label>
+              <input className="radioInput" type='radio' id="monthly"></input>
+              <label htmlFor="bi-monthly">Bi-Monthly</label>
+              <input className="radioInput" type='radio' id="bi-monthly"></input>
+              <label htmlFor="quarterly">Quarterly</label>
+              <input className="radioInput" type='radio' id="quarterly"></input>
+              <label htmlFor="annually">Annually</label>
+              <input className="radioInput" type='radio' id="annually"></input>
+            </form>
           </div>
+          <div className="formItem">
+            <p className="text1">How much do you spend monthly on your tractor lease?</p>
+            <input className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much do you spend monthly on your trailer lease?</p>
+            <input className="textInput" type='text'></input>
+          </div>
+          <button className="btn1" onClick={signUp}>Sign Up</button>
         </div>
-        <button className="btn1" onClick={signUp}>Sign Up</button>
+        <div>
+          <p className="text1">Already have an account? <Link to='/'>Log in here!</Link></p>
+        </div>
       </div>
-      <div>
-        <p className="text1">Already have an account? <Link to='/'>Log in here!</Link></p>
-      </div>
-    </div>
+    </>
   );
 }

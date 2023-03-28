@@ -17,7 +17,6 @@ import ViewJobs from './routes/ViewJobs'
 
 export default function App() {
 
-
   const [user, setUser] = useState();
   const [costs, setCosts] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -62,8 +61,8 @@ export default function App() {
     }).then((res) => res.json());
     setUser(response.user_id);
     setLoggedIn(true);
-
   };
+
   return (
     <Router>
       <div className="backgroundCanvas">
@@ -73,7 +72,7 @@ export default function App() {
           <Route path="/" element={<LogIn user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
           <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} />} />
-          <Route path="costs" element={<CostsPage user={user} costs={costs} setCosts={setCosts} />} />
+          <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
         </Routes>
       </div>
     </Router>

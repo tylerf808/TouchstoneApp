@@ -25,13 +25,11 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if(!loggedIn){
-      
-    } else {
-      navigate('addjob')
-    }
-  })
+  // useEffect(() => {
+  //   if(!loggedIn){
+  //     navigate('/')
+  //   }
+  // }, [])
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDcXIOrxmAOOPEvqjLEXVeZb9mdTyUqS6k",

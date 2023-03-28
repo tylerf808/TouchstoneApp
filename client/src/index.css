@@ -1,6 +1,6 @@
  * {
-     margin: 0;
-     padding: 0;
+    margin: 0;
+    padding: 0;
  }
 
  h1 {
@@ -16,8 +16,9 @@
     background-color: #E9F2FC;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    margin: 2em
  }
 
  .toolbar {
@@ -26,4 +27,45 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+ }
+
+ .btn1 {}
+
+ .verticalFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: white;
+    border-style: solid;
+    border-width: .15em;
+    border-radius: 1.2em;
+    margin: 1.5em;
+    padding: 2em;
+ }
+
+ .textContainer {}
+
+ .pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .formItem {
+    margin: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+ }
+
+ .textInput {
+
+ }
+
+ .radioMenu {
+   display: flex;
+   flex-direction: column;
  }

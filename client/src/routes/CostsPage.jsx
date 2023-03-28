@@ -7,10 +7,13 @@ import {
   Modal
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function CostsPage({ user, costs, setCosts }) {
+export default function CostsPage({ user, costs, setCosts, loggedIn }) {
 
   const [showEditPrompt, setShowEditPrompt] = useState(false)
+
+  const navigate = useNavigate()
 
   const modalStyle = {
     position: 'relative',
@@ -31,6 +34,7 @@ export default function CostsPage({ user, costs, setCosts }) {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
+    
     fetch("http://localhost:3001/api/costs?id=" + user, {
       method: "GET",
     })
