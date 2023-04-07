@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const library = ["places"];
 
-export default function AddJob({ user, loggedIn, costs, styles }) {
+export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg }) {
   const CurrencyFormat = require("react-currency-format");
 
   const [showJobBtn, setShowJobBtn] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
-  const [showProfit, setShowProfit] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMsg, setAlertMsg] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  
   const [profitable, setProfitable] = useState(false);
   const [job, setJob] = useState({});
   const statesArray = [];
@@ -41,9 +40,6 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
   }
 
   const checkJob = async () => {
-    handleOpen()
-    setShowJobBtn(false);
-    setShowLoading(true);
 
     const start = document.getElementById("start").value;
     const pickUp = document.getElementById("pick-up").value;
@@ -55,20 +51,26 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
 
     setAlertMsg("");
     setShowAlert(false);
-    setShowProfit(false);
+    setShowResults(false);
 
     if (
       start === "" ||
       pickUp === "" ||
       dropOff === "" ||
       pay === "" ||
-      date === ""
+      date === "" ||
+      client === '' ||
+      driver === ''
     ) {
       setAlertMsg("Missing an entry");
       setShowAlert(true);
       setShowLoading(false);
       return;
     }
+
+    handleOpen()
+    setShowJobBtn(false);
+    setShowLoading(true);
 
     const geocoder = new window.google.maps.Geocoder();
 
@@ -96,13 +98,6 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
       "&state3=" +
       statesArray[2]
     ).then((data) => data.json());
-
-    if (checkRes.message) {
-      setAlertMsg("Please add costs in the costs page");
-      setShowAlert(true);
-      setShowLoading(false);
-      return;
-    }
 
     const grossProfit =
       checkRes.odc * pay +
@@ -171,7 +166,7 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
       });
       setProfitable(false);
       setShowJobBtn(false);
-      setShowProfit(true);
+      setShowResults(true);
     } else {
       setJob({
         start: start,
@@ -217,14 +212,14 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
         tolls: checkRes.tolls,
       });
       setShowJobBtn(true);
-      setShowProfit(true);
+      setShowResults(true);
       setProfitable(true);
     }
   };
 
   const clearForm = () => {
     setShowJobBtn(false);
-    setShowProfit(false);
+    setShowResults(false);
     document.getElementById("origin").value = "";
     document.getElementById("pick-up").value = "";
     document.getElementById("drop-off").value = "";
@@ -242,7 +237,7 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
       },
     }).then((res) => res.json());
     setShowJobBtn(false);
-    setShowProfit(false);
+    setShowResults(false);
     document.getElementById("origin").value = "";
     document.getElementById("pick-up").value = "";
     document.getElementById("drop-off").value = "";
@@ -252,6 +247,7 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+      
       <label htmlFor='start'>Start</label>
       <Autocomplete>
         <input style={{ marginTop: 2, height: '2em', borderRadius: 4, }} name="start" id="start" type="text" />
@@ -265,7 +261,7 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
         <input style={{ height: '2em', borderRadius: 4, }} name="dropOff" id="drop-off" type="text" />
       </Autocomplete>
       <label style={{}} htmlFor="revenue">Revenue</label>
-      <input type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' style={{ width: '20%', height: '2em', borderRadius: 4, }} />
+      <input type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
       <label htmlFor="date">Date</label>
       <input type='date' name="date" id='date' style={{ height: '2em', borderRadius: 4 }} />
       <label htmlFor="client">Client</label>
@@ -275,21 +271,23 @@ export default function AddJob({ user, loggedIn, costs, styles }) {
       <button onClick={checkJob} style={{ alignSelf: 'center', marginTop: '3em' }}>Check Job</button>
       <Modal open={open} onClose={handleClose} >
         <Box sx={{
-           position: 'absolute',
-           top: '50%',
-           left: '50%',
-          // transform: 'translate(-50%, -50%)',
-           width: '80%',
-           bgcolor: 'background.paper',
-           border: '2px solid #000',
-           boxShadow: 24,
-           p: 4,
-           borderRadius: 3
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '50%',
+          bgcolor: 'background.paper',
+          border: '2px solid #000',
+          boxShadow: 24,
+          p: 4,
+          borderRadius: 3
         }}>
-          {profitable ? <h2>Job is Profitable</h2> : <h2>Job is NOT Profitable</h2> }
+          {showResults ? 
           <div>
+            {profitable ? <h2>Job is Profitable</h2> : <h2>Job is NOT Profitable</h2>}
             <p>{job?.distance}</p>
           </div>
+            : null}
         </Box>
       </Modal>
     </div >

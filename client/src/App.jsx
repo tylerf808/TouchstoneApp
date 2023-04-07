@@ -1,45 +1,28 @@
 import { useState, useEffect } from "react";
 import { Container } from "@mui/system";
-import HamburgerMenu from "./routes/Toolbar";
+import Toolbar from "./routes/Toolbar";
 import {
   BrowserRouter as Router,
   Route,
   Link,
   Routes
 } from "react-router-dom";
-
+import { Alert } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import AddJob from "./routes/AddJob";
 import LogIn from "./routes/LogIn";
 import CostsPage from "./routes/CostsPage";
 import SignUp from "./routes/SignUp";
 import ViewJobs from './routes/ViewJobs'
+import Dashboard from "./routes/Dashboard";
 
 export default function App() {
 
   const [user, setUser] = useState();
   const [costs, setCosts] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
-
-
-  const logIn = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const response = await fetch("http://localhost:3001/api/user/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
-    setUser(response.user_id);
-    setLoggedIn(true);
-
-    await fetch("http://localhost:3001/api/costs?id=" + response.user_id, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => setCosts(data[0]));
-  };
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
 
   const signUp = async () => {
     const email = document.getElementById("email-signup").value;
@@ -60,19 +43,19 @@ export default function App() {
       headers: { "Content-Type": "application/json" },
     }).then((res) => res.json());
     setUser(response.user_id);
-    setLoggedIn(true);
   };
 
   return (
     <Router>
       <div className="backgroundCanvas">
-        <HamburgerMenu loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
+        <Toolbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
         <Routes>
           <Route path="addjob" element={<AddJob />} />
           <Route path="/" element={<LogIn user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
-          <Route path="signup" element={<SignUp signUp={signUp} loggedIn={loggedIn} />} />
+          <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
           <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
+          <Route path="dashboard" element={<Dashboard user={user} />} />
         </Routes>
       </div>
     </Router>

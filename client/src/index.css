@@ -34,7 +34,7 @@
  .verticalFormContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     background-color: white;
     border-style: solid;
@@ -51,6 +51,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #E9F2FC;
  }
 
  .formItem {
@@ -62,10 +63,19 @@
  }
 
  .textInput {
+   margin-left: 1em;
+ }
 
+ .numberInput {
+   
  }
 
  .radioMenu {
    display: flex;
    flex-direction: column;
  }
+
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+}

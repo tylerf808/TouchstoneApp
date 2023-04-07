@@ -1,25 +1,18 @@
 import { useState, useEffect } from "react";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate, Link } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  Typography,
-  InputAdornment,
-  OutlinedInput,
-  IconButton,
-} from "@mui/material";
+import { Alert } from "@mui/material";
 
-export default function SignUp({ signUp, loggedIn }) {
+export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user }) {
+
+  const [insuranceFreq, setInsuranceFreq] = useState()
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loggedIn) {
-      navigate('addjob')
-    }
-  })
+  const changeInsuranceFreq = (e) => {
+    setInsuranceFreq(e.target.value)
+  }
 
   const togglePassword = () => {
     let password = document.getElementById('password-signup')
@@ -33,56 +26,211 @@ export default function SignUp({ signUp, loggedIn }) {
     }
   }
 
+  const createNewCosts = async (newUserId, newCostsObj) => {
+    await fetch("http://localhost:3001/api/costs?id=" + newUserId, {
+      method: "PUT",
+      body: JSON.stringify(newCostsObj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+
+
+    await fetch("http://localhost:3001/api/costs?id=" + newUserId, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => setCosts(data[0]));
+  }
+
+  const createAccount = async (e) => {
+
+    e.preventDefault()
+
+    const inputs = document.getElementsByClassName('textInput')
+
+    const inputsArray = Array.from(inputs)
+
+    inputsArray.forEach((input) => {
+      if (input.value === '') {
+        setAlertMsg('Missing an Entry')
+        setShowAlert(true)
+        return
+      } else {
+        setAlertMsg('')
+        setShowAlert(false)
+      }
+    })
+
+    const email = document.getElementById("email-signup").value;
+    const password = document.getElementById("password-signup").value;
+    const passwordConf = document.getElementById("password-signup-conf").value;
+    const insuranceAmount = document.getElementById('insurance-amount').value
+    const tractorAmount = document.getElementById('tractor-amount').value
+    const trailerAmount = document.getElementById('trailer-amount').value
+    const dispatchAmount = document.getElementById('dispatch-amount').value
+    const factorAmount = document.getElementById('factor-amount').value
+    const odcAmount = document.getElementById('odc-amount').value
+    const loanAmount = document.getElementById('loan-amount').value
+    const rentalAmount = document.getElementById('rental-amount').value
+    const repairsAmount = document.getElementById('repairs-amount').value
+    const depreciationAmount = document.getElementById('depreciation-amount').value
+    const mpgAmount = document.getElementById('mpg-amount').value
+    const laborAmount = document.getElementById('labor-amount').value
+    const payrollAmount = document.getElementById('payroll-amount').value
+    const gandaAmount = document.getElementById('ganda-amount').value
+
+    const response = await fetch("http://localhost:3001/api/user", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => res.json());
+    setUser(response.user_id);
+    const newUserId = response.user_id
+
+    let dailyInsurance
+
+    switch (insuranceFreq) {
+      case 'monthly':
+        dailyInsurance = (insuranceAmount / 30)
+        break;
+      case 'bi-monthly':
+        dailyInsurance = (insuranceAmount / 15)
+        break;
+      case 'quarterly':
+        dailyInsurance = (insuranceAmount / 91.25)
+        break;
+      default:
+        dailyInsurance = (insuranceAmount / 365)
+        break;
+    }
+
+    const newCostsObj = {
+      insurance: dailyInsurance,
+      tractorLease: tractorAmount,
+      trailerLease: trailerAmount,
+      dispatch: dispatchAmount,
+      mpg: mpgAmount,
+      laborRate: laborAmount,
+      payrollTax: payrollAmount,
+      factor: factorAmount,
+      odc: odcAmount,
+      gAndA: gandaAmount,
+      loan: loanAmount,
+      rental: rentalAmount,
+      repairs: repairsAmount,
+      depreciation: depreciationAmount,
+    };
+
+    console.log(newCostsObj)
+
+    createNewCosts(newUserId, newCostsObj)
+
+    setLoggedIn(true)
+    navigate('/dashboard')
+  }
+
   return (
-    <>
+    <div className="backgroundCanvas">
       <div className="headerContainer">
         <h1>Create an Account</h1>
       </div>
       <div className="pageContainer">
-        <div className="verticalFormContainer">
+        {showAlert ? <Alert severity="error">{alertMsg}</Alert> : null}
+        <form className="verticalFormContainer">
           <div className="formItem">
             <p className="text1">Email:</p>
-            <input type='email' id="email-signup"></input>
+            <input className="textInput" type='email' id="email-signup"></input>
           </div>
           <div className="formItem">
             <p className="text1">Password:</p>
-            <input type='password' id="password-signup"></input>
+            <input className="textInput" type='password' id="password-signup"></input>
           </div>
           <div className="formItem" style={{ alignItems: 'flex-start' }}>
             <p className="text1">Confirm Password:</p>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <input type='password' id="password-signup-conf"></input>
+              <input className="textInput" type='password' id="password-signup-conf"></input>
               <p className="text1">Show Password</p>
               <input onClick={togglePassword} type='checkbox'></input>
             </div>
           </div>
           <div className="formItem">
             <p className="text1">How often do you pay insurance?</p>
-            <form className="radioMenu">
+            <div className="radioMenu" style={{ marginLeft: '1em' }}>
               <label htmlFor="monthly">Monthly</label>
-              <input className="radioInput" type='radio' id="monthly"></input>
+              <input name='insuranceRadio' className="radioInput" type='radio' id="monthly" value='monthly' onClick={changeInsuranceFreq}></input>
               <label htmlFor="bi-monthly">Bi-Monthly</label>
-              <input className="radioInput" type='radio' id="bi-monthly"></input>
+              <input name='insuranceRadio' className="radioInput" type='radio' id="bi-monthly" value='bi-monthly' onClick={changeInsuranceFreq}></input>
               <label htmlFor="quarterly">Quarterly</label>
-              <input className="radioInput" type='radio' id="quarterly"></input>
+              <input name='insuranceRadio' className="radioInput" type='radio' id="quarterly" value='quarterly' onClick={changeInsuranceFreq}></input>
               <label htmlFor="annually">Annually</label>
-              <input className="radioInput" type='radio' id="annually"></input>
-            </form>
+              <input name='insuranceRadio' className="radioInput" type='radio' id="annually" value='annually' onClick={changeInsuranceFreq}></input>
+            </div>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much is you insurance payment?</p>
+            <input id="insurance-amount" className="textInput" type='text'></input>
           </div>
           <div className="formItem">
             <p className="text1">How much do you spend monthly on your tractor lease?</p>
-            <input className="textInput" type='text'></input>
+            <input id="tractor-amount" className="textInput" type='text'></input>
           </div>
           <div className="formItem">
             <p className="text1">How much do you spend monthly on your trailer lease?</p>
-            <input className="textInput" type='text'></input>
+            <input id='trailer-amount' className="textInput" type='text'></input>
           </div>
-          <button className="btn1" onClick={signUp}>Sign Up</button>
-        </div>
+          <div className="formItem">
+            <p className="text1">What percent do you pay to dispatch?</p>
+            <input id='dispatch-amount' className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What percent do you pay to factor?</p>
+            <input id="factor-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What is your average ODC?</p>
+            <input id="odc-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What are you loan payments?</p>
+            <input id="loan-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much do you pay in rental costs?</p>
+            <input id="rental-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much do you spend on average for repairs?</p>
+            <input id="repairs-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much do you put aside for depreciation?</p>
+            <input id="depreciation-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What is you MPG?</p>
+            <input id="mpg-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">How much do you spend on average on G&A?</p>
+            <input id="ganda-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What is your labor rate?</p>
+            <input id="labor-amount" className="textInput" type='text'></input>
+          </div>
+          <div className="formItem">
+            <p className="text1">What percentage do you pay in payroll tax?</p>
+            <input id="payroll-amount" className="textInput" type='text'></input>
+          </div>
+          <button className="btn1" onClick={createAccount}>Sign Up</button>
+        </form>
         <div>
           <p className="text1">Already have an account? <Link to='/'>Log in here!</Link></p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
