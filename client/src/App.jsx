@@ -15,6 +15,7 @@ import CostsPage from "./routes/CostsPage";
 import SignUp from "./routes/SignUp";
 import ViewJobs from './routes/ViewJobs'
 import Dashboard from "./routes/Dashboard";
+import CreateCosts from "./routes/CreateCosts";
 
 export default function App() {
 
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
           <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
           <Route path="dashboard" element={<Dashboard user={user} />} />
+          <Route path="createcosts" element={<CreateCosts user={user} setCosts={setCosts} />} />
         </Routes>
       </div>
     </Router>

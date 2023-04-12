@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const User = require('../../models/User')
+const Costs = require('../../models/Costs')
 
 //Create a user
 router.post('/', async (req, res) => {

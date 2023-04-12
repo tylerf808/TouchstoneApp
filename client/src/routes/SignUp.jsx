@@ -26,25 +26,6 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
     }
   }
 
-  const createNewCosts = async (newUserId, newCostsObj) => {
-    await fetch("http://localhost:3001/api/costs?id=" + newUserId, {
-      method: "PUT",
-      body: JSON.stringify(newCostsObj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-
-
-    await fetch("http://localhost:3001/api/costs?id=" + newUserId, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => setCosts(data[0]));
-  }
-
   const createAccount = async (e) => {
 
     e.preventDefault()
@@ -67,69 +48,30 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
     const email = document.getElementById("email-signup").value;
     const password = document.getElementById("password-signup").value;
     const passwordConf = document.getElementById("password-signup-conf").value;
-    const insuranceAmount = document.getElementById('insurance-amount').value
-    const tractorAmount = document.getElementById('tractor-amount').value
-    const trailerAmount = document.getElementById('trailer-amount').value
-    const dispatchAmount = document.getElementById('dispatch-amount').value
-    const factorAmount = document.getElementById('factor-amount').value
-    const odcAmount = document.getElementById('odc-amount').value
-    const loanAmount = document.getElementById('loan-amount').value
-    const rentalAmount = document.getElementById('rental-amount').value
-    const repairsAmount = document.getElementById('repairs-amount').value
-    const depreciationAmount = document.getElementById('depreciation-amount').value
-    const mpgAmount = document.getElementById('mpg-amount').value
-    const laborAmount = document.getElementById('labor-amount').value
-    const payrollAmount = document.getElementById('payroll-amount').value
-    const gandaAmount = document.getElementById('ganda-amount').value
+    // const insuranceAmount = document.getElementById('insurance-amount').value
+    // const tractorAmount = document.getElementById('tractor-amount').value
+    // const trailerAmount = document.getElementById('trailer-amount').value
+    // const dispatchAmount = document.getElementById('dispatch-amount').value
+    // const factorAmount = document.getElementById('factor-amount').value
+    // const odcAmount = document.getElementById('odc-amount').value
+    // const loanAmount = document.getElementById('loan-amount').value
+    // const rentalAmount = document.getElementById('rental-amount').value
+    // const repairsAmount = document.getElementById('repairs-amount').value
+    // const depreciationAmount = document.getElementById('depreciation-amount').value
+    // const mpgAmount = document.getElementById('mpg-amount').value
+    // const laborAmount = document.getElementById('labor-amount').value
+    // const payrollAmount = document.getElementById('payroll-amount').value
+    // const gandaAmount = document.getElementById('ganda-amount').value
 
     const response = await fetch("http://localhost:3001/api/user", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     }).then((res) => res.json());
+    
     setUser(response.user_id);
-    const newUserId = response.user_id
-
-    let dailyInsurance
-
-    switch (insuranceFreq) {
-      case 'monthly':
-        dailyInsurance = (insuranceAmount / 30)
-        break;
-      case 'bi-monthly':
-        dailyInsurance = (insuranceAmount / 15)
-        break;
-      case 'quarterly':
-        dailyInsurance = (insuranceAmount / 91.25)
-        break;
-      default:
-        dailyInsurance = (insuranceAmount / 365)
-        break;
-    }
-
-    const newCostsObj = {
-      insurance: dailyInsurance,
-      tractorLease: tractorAmount,
-      trailerLease: trailerAmount,
-      dispatch: dispatchAmount,
-      mpg: mpgAmount,
-      laborRate: laborAmount,
-      payrollTax: payrollAmount,
-      factor: factorAmount,
-      odc: odcAmount,
-      gAndA: gandaAmount,
-      loan: loanAmount,
-      rental: rentalAmount,
-      repairs: repairsAmount,
-      depreciation: depreciationAmount,
-    };
-
-    console.log(newCostsObj)
-
-    createNewCosts(newUserId, newCostsObj)
-
     setLoggedIn(true)
-    navigate('/dashboard')
+    navigate('/createcosts')
   }
 
   return (
@@ -156,7 +98,7 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
               <input onClick={togglePassword} type='checkbox'></input>
             </div>
           </div>
-          <div className="formItem">
+          {/* <div className="formItem">
             <p className="text1">How often do you pay insurance?</p>
             <div className="radioMenu" style={{ marginLeft: '1em' }}>
               <label htmlFor="monthly">Monthly</label>
@@ -224,7 +166,7 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
           <div className="formItem">
             <p className="text1">What percentage do you pay in payroll tax?</p>
             <input id="payroll-amount" className="textInput" type='text'></input>
-          </div>
+          </div> */}
           <button className="btn1" onClick={createAccount}>Sign Up</button>
         </form>
         <div>
