@@ -55,7 +55,7 @@ export default function CreateCosts({ user, setCosts }) {
             .then((res) => res.json())
             .then((data) => setCosts(data[0]));
 
-        navigate('dashboard')
+        navigate('/dashboard')
     }
 
     return (

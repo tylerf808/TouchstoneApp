@@ -40,30 +40,29 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn }) {
     };
 
     return (
-        <div className='backgroundCanvas'>
+        <div className='pageContainer'>
             <div className='headerContainer'>
-                <h1 >Log In</h1>
+                <h2>Log In</h2>
             </div>
-            <div className='pageContainer'>
-                <div className='verticalFormContainer'>
-                    <div className="formItem">
-                        <p className="text1">Email:</p>
-                        <input type='email' id="email-login"></input>
-                    </div>
-                    <div className="formItem">
-                        <p className="text1">Password:</p>
-                        <input style={{ marginBottom: '0em' }} type='password' id="password-login"></input>
-                        <div style={{ marginTop: '0em', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <p>Show Password</p>
-                            <input onClick={togglePassword} style={{ margin: '1.2em' }} type='checkbox'></input>
-                        </div>
-                    </div>
-                    <button className='btn1' onClick={logIn}>Log In</button>
+            <div className='verticalFormContainer'>
+                <div className="formItem">
+                    <p className="text1">Email:</p>
+                    <input className='textInput' type='email' id="email-login"></input>
                 </div>
-                <div className='textContainer'>
-                    <p style={{ fontSize: '1.2em' }}>Don't have an account? <Link to="/signup">Sign up here!</Link></p>
+                <div className="formItem">
+                    <p className="text1">Password:</p>
+                    <input className='textInput' type='password' id="password-login"></input>
                 </div>
+                <div style={{ position: 'relative', left: '5%' }}>
+                    <p>Show Password</p>
+                    <input onClick={togglePassword} type='checkbox'></input>
+                </div>
+                <button className='btn1' onClick={logIn}>Log In</button>
             </div>
+            <div className='textContainer'>
+                <p style={{ fontSize: '1.2em', marginTop: 10 }}>Don't have an account? <Link to="/signup">Sign up here!</Link></p>
+            </div>
+
         </div>
     )
 }

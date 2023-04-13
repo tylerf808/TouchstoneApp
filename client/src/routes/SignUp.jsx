@@ -80,7 +80,7 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
         <h1>Create an Account</h1>
       </div>
       <div className="pageContainer">
-        {showAlert ? <Alert severity="error">{alertMsg}</Alert> : null}
+        
         <form className="verticalFormContainer">
           <div className="formItem">
             <p className="text1">Email:</p>

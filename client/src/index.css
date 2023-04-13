@@ -3,13 +3,17 @@
     padding: 0;
  }
 
- h1 {
+ h1,
+ h2,
+ h3,
+ p {
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
  }
 
  .backgroundCanvas {
     background-color: #E9F2FC;
     height: 100vh;
+    width: 100vw;
  }
 
  .headerContainer {
@@ -27,11 +31,27 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    height: 60px;
  }
 
  .btn1 {}
 
  .verticalFormContainer {
+    display: grid;
+    grid-template-columns: 400px;
+    background-color: white;
+    border-style: solid;
+    border-width: .15em;
+    border-radius: 1.2em;
+    padding: 2em;
+    margin-bottom: 1em
+ }
+
+ .formItem {
+    margin: 1em;
+ }
+
+ .verticalContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +60,6 @@
     border-style: solid;
     border-width: .15em;
     border-radius: 1.2em;
-    margin: 1.5em;
     padding: 2em;
  }
 
@@ -50,32 +69,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: #E9F2FC;
  }
 
- .formItem {
-    margin: 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
- }
-
  .textInput {
-   margin-left: 1em;
+    margin-left: 1em;
+    width: 300px;
+    height: 30px;
  }
 
- .numberInput {
-   
- }
+ .numberInput {}
 
  .radioMenu {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
+ }
+
+ .inputContainer {
+   margin-top: 8px;
  }
 
  input::-webkit-outer-spin-button,
  input::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-}
+    -webkit-appearance: none;
+ }
+
+ .checkJobBtn {
+   position: relative;
+   color: rgb(15, 44, 83);
+   background-color: #E9F2FC;
+   width: 160px;
+   height: 30px;
+   left: 30%;
+ }
+
+ @media screen and (max-width: 700px) {
+   .verticalFormContainer {
+      display: grid;
+      grid-template-columns: 250px;
+      background-color: white;
+      border-style: solid;
+      border-width: .15em;
+      border-radius: 1.2em;
+      padding: 2em;
+      margin-bottom: 2em;
+   }
+   .textInput {
+      width: 200px
+   }
+ }

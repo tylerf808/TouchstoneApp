@@ -145,122 +145,122 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
   };
 
   return (
-    <div>
-      {showEditPrompt ?
-        null :
-        <div>
-          <h2>Current Costs</h2>
-          <p>
-            Insurance:{" "}
-            <CurrencyFormat
-              value={costs?.insurance}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
-          </p>
-          <p>
-            Tractor Lease:{" "}
-            <CurrencyFormat
-              value={costs?.tractorLease}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
-          </p>
-          <p>
-            Tailer Lease:{" "}
-            <CurrencyFormat
-              value={costs?.trailerLease}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
-          </p>
-          <p>
-            Labor Rate:{" "}
-            <CurrencyFormat
-              value={costs?.laborRate * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            Payroll Tax:{" "}
-            <CurrencyFormat
-              value={costs?.payrollTax * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            Dispatch:{" "}
-            <CurrencyFormat
-              value={costs?.dispatch * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>MPG: {costs?.mpg}</p>
-          <p>
-            Factor:{" "}
-            <CurrencyFormat
-              value={costs?.factor * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            ODC:{" "}
-            <CurrencyFormat
-              value={costs?.odc * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            G&A:{" "}
-            <CurrencyFormat
-              value={costs?.gAndA * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            Loan:{" "}
-            <CurrencyFormat
-              value={costs?.loan * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            rental:{" "}
-            <CurrencyFormat
-              value={costs?.rental * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
-            />
-          </p>
-          <p>
-            Depreciation:{" "}
-            <CurrencyFormat
-              value={costs?.depreciation}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
-          </p>
-        </div>}
-      {showEditPrompt ? null : <button sx={{ color: 'orange' }} onClick={handleOpen}>Edit Costs</button>}
+    <div className="pageContainer">
+      <div className="headerContainer">
+        <h2>Current Costs</h2>
+      </div>
+      <div className="verticalContainer">
+        <p>
+          Insurance:{" "}
+          <CurrencyFormat
+            value={costs?.insurance}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </p>
+        <p>
+          Tractor Lease:{" "}
+          <CurrencyFormat
+            value={costs?.tractorLease}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </p>
+        <p>
+          Tailer Lease:{" "}
+          <CurrencyFormat
+            value={costs?.trailerLease}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </p>
+        <p>
+          Labor Rate:{" "}
+          <CurrencyFormat
+            value={costs?.laborRate * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          Payroll Tax:{" "}
+          <CurrencyFormat
+            value={costs?.payrollTax * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          Dispatch:{" "}
+          <CurrencyFormat
+            value={costs?.dispatch * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>MPG: {costs?.mpg}</p>
+        <p>
+          Factor:{" "}
+          <CurrencyFormat
+            value={costs?.factor * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          ODC:{" "}
+          <CurrencyFormat
+            value={costs?.odc * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          G&A:{" "}
+          <CurrencyFormat
+            value={costs?.gAndA * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          Loan:{" "}
+          <CurrencyFormat
+            value={costs?.loan * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          rental:{" "}
+          <CurrencyFormat
+            value={costs?.rental * 100}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"%"}
+          />
+        </p>
+        <p>
+          Depreciation:{" "}
+          <CurrencyFormat
+            value={costs?.depreciation}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </p>
+        <button onClick={handleOpen}>Edit Costs</button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}

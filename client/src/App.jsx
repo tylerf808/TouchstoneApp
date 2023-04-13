@@ -17,6 +17,8 @@ import ViewJobs from './routes/ViewJobs'
 import Dashboard from "./routes/Dashboard";
 import CreateCosts from "./routes/CreateCosts";
 
+const library = ["places"];
+
 export default function App() {
 
   const [user, setUser] = useState();
@@ -49,9 +51,12 @@ export default function App() {
   return (
     <Router>
       <div className="backgroundCanvas">
-        <Toolbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
+        <Toolbar costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {showAlert ? <Alert  severity="error">{alertMsg}</Alert> : null}
+        </div>
         <Routes>
-          <Route path="addjob" element={<AddJob />} />
+          <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
           <Route path="/" element={<LogIn user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
           <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
