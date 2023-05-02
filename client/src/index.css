@@ -25,6 +25,13 @@
     margin: 2em
  }
 
+ .checkJobDisplay {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    background-color: white;
+    margin-bottom: 1em
+ }
+
  .toolbar {
     background-color: lightblue;
     display: flex;
@@ -33,8 +40,6 @@
     align-items: center;
     height: 60px;
  }
-
- .btn1 {}
 
  .verticalFormContainer {
     display: grid;
@@ -47,8 +52,30 @@
     margin-bottom: 1em
  }
 
+ .newCostInput {
+   width: 100px;
+   height: 25px;
+ }
+
  .formItem {
-    margin: 1em;
+    margin: .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ .dollarInput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+ }
+
+ .dollarSign {
+    position: relative;
+    left: 6px;
+    font-size: 20px;
  }
 
  .verticalContainer {
@@ -63,7 +90,51 @@
     padding: 2em;
  }
 
- .textContainer {}
+ .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100vh;
+    /* Full height */
+    overflow: none;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+ }
+
+ .modalContent {
+    background-color: #fefefe;
+    margin: 8% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 2px solid #888;
+    width: 500px;
+    height: 700px;
+    border-radius: 8px;
+ }
+
+ .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+ }
+
+ .close:hover,
+ .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+ }
 
  .pageContainer {
     display: flex;
@@ -73,20 +144,25 @@
  }
 
  .textInput {
-    margin-left: 1em;
-    width: 300px;
+    margin-left: .5em;
+    width: 250px;
     height: 30px;
  }
 
- .numberInput {}
+ .numberInput {
+    margin-left: .5em;
+    width: 120px;
+    height: 25px;
+ }
 
  .radioMenu {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
  }
 
  .inputContainer {
-   margin-top: 8px;
+    margin-top: 8px;
  }
 
  input::-webkit-outer-spin-button,
@@ -94,27 +170,79 @@
     -webkit-appearance: none;
  }
 
- .checkJobBtn {
+ .btn1 {
+    position: relative;
+    color: rgb(15, 44, 83);
+    background-color: #E9F2FC;
+    width: 160px;
+    height: 30px;
+    margin: 1em;
+ }
+ 
+ .btn2 {
    position: relative;
-   color: rgb(15, 44, 83);
-   background-color: #E9F2FC;
-   width: 160px;
-   height: 30px;
-   left: 30%;
+    color: rgb(97, 17, 17);
+    background-color: #e5d5d5;
+    width: 160px;
+    height: 30px;
+    margin: 1em;
  }
 
+ .btnContainer {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+
+ }
+
+ .radioBtn {
+    margin: .2em;
+ }
+
+ #profit-label,
+ #profit-number {
+   border-top: 2px solid black;
+   border-bottom: 2px solid black;
+   justify-content: center;
+   left: 20px;
+   padding: 6px;
+ }
+
+ #net-profit-label,
+ #net-profit-number {
+   border-top: 2px solid black;
+   justify-content: center;
+   left: 20px;
+   padding: 15px;
+   font-size: 22px;
+ }
+
+ .jobDisplayItem {
+   position: relative;
+   padding: 6px;
+   margin-top: .2em;
+   margin-bottom: .2em;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+
+ }
+
+
  @media screen and (max-width: 700px) {
-   .verticalFormContainer {
-      display: grid;
-      grid-template-columns: 250px;
-      background-color: white;
-      border-style: solid;
-      border-width: .15em;
-      border-radius: 1.2em;
-      padding: 2em;
-      margin-bottom: 2em;
-   }
-   .textInput {
-      width: 200px
-   }
+    .verticalFormContainer {
+       display: grid;
+       grid-template-columns: 250px;
+       background-color: white;
+       border-style: solid;
+       border-width: .15em;
+       border-radius: 1.2em;
+       padding: 2em;
+       margin-bottom: 2em;
+    }
+
+    .textInput {
+       width: 200px
+    }
  }

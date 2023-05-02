@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
-import {CSVLink, CSVDownload} from 'react-csv'
+import { CSVLink, CSVDownload } from 'react-csv'
 
 export default function ViewJobs({ user }) {
 
@@ -16,6 +16,7 @@ export default function ViewJobs({ user }) {
         if (res.length === 0) {
             setJobs(false)
         } else {
+            console.log(res)
             const jobs = res
             setJobs(jobs)
         }
@@ -47,49 +48,55 @@ export default function ViewJobs({ user }) {
         { field: 'trailer', headerName: 'Lease - Trailer', width: 120 },
         { field: 'tractor', headerName: 'Lease - Tractor', width: 120 },
         { field: 'gAndA', headerName: 'G&A', width: 120 },
-        { field: 'operatingProfit', headerName: 'Operating Profit', width: 120 },
+        { field: 'grossProfit', headerName: 'Gross Profit', width: 120 },
         { field: 'loan', headerName: 'Loan', width: 120 },
         { field: 'rental', headerName: 'Rental', width: 120 },
+        { field: 'operatingProfit', headerName: 'Operating Profit', width: 120 },
         { field: 'repairs', headerName: 'Repairs', width: 120 },
         { field: 'depreciation', headerName: 'Depreciation', width: 120 },
         { field: 'netProfit', headerName: 'Net Profit', width: 120 },
+        { field: 'client', headerName: 'Client', width: 120 },
+        { field: 'driver', headerName: 'Driver', width: 120 },
     ]
 
     const excelHeaders = [
-        { key: 'id', label: 'Job ID' },
-        { key: 'start', label: 'Start' },
-        { key: 'pickUp', label: 'Pick Up' },
-        { key: 'dropOff', label: 'Drop Off' },
-        { key: 'distance', label: 'Milage' },
-        { key: 'revenue', label: 'Revenue' },
-        { key: 'ratePerMile', label: 'Rate Per Mile' },
-        { key: 'grossProfitPercentage', label: 'Gross Profit %' },
-        { key: 'operatingProfitPercentage', label: 'Operating Profit %' },
-        { key: 'netProfitPercentage', label: 'Net Profit %' },
-        { key: 'laborRatePercent', label: 'Labor %' },
-        { key: 'labor', label: 'Labor' },
-        { key: 'payrollTax', label: 'Payroll' },
-        { key: 'dispatch', label: 'Dispatch' },
-        { key: 'factor', label: 'Factor' },
-        { key: 'gasCost', label: 'Fuel' },
-        { key: 'odc', label: 'ODC' },
-        { key: 'insurance', label: 'Insurance' },
-        { key: 'trailer', label: 'Lease - Trailer' },
-        { key: 'tractor', label: 'Lease - Tractor' },
-        { key: 'gAndA', label: 'G&A' },
-        { key: 'operatingProfit', label: 'Operating Profit' },
-        { key: 'loan', label: 'Loan' },
-        { key: 'rental', label: 'Rental' },
-        { key: 'repairs', label: 'Repairs' },
-        { key: 'depreciation', label: 'Depreciation' },
-        { key: 'netProfit', label: 'Net Profit' },
+        { label: 'test', field: 'id'  },
+        { label: 'test', field: 'start' },
+        { label: 'test', field: 'pickUp' },
+        { label: 'test', field: 'dropOff' },
+        { label: 'test', field: 'distance'},
+        { label: 'test', field: 'revenue'},
+        { label: 'test', field: 'ratePerMile'},
+        { label: 'test', field: 'grossProfitPercentage'},
+        { label: 'test', field: 'operatingProfitPercentage'},
+        { label: 'test', field: 'netProfitPercentage'},
+        { label: 'test', field: 'laborRatePercent'},
+        { label: 'test', field: 'labor'},
+        { label: 'test', field: 'payrollTax'},
+        { label: 'test', field: 'dispatch' },
+        { label: 'test', field: 'factor'},
+        { label: 'test', field: 'gasCost'},
+        { label: 'test', field: 'odc'},
+        { label: 'test', field: 'insurance' },
+        { label: 'test', field: 'trailer' },
+        { label: 'test', field: 'tractor' },
+        { label: 'test', field: 'gAndA' },
+        { label: 'test', field: 'grossProfit' },
+        { label: 'test', field: 'loan' },
+        { label: 'test', field: 'rental' },
+        { label: 'test', field: 'operatingProfit' },
+        { label: 'test', field: 'repairs' },
+        { label: 'test', field: 'depreciation' },
+        { label: 'test', field: 'netProfit' },
+        { label: 'test', field: 'client' },
+        { label: 'test', field: 'driver' },
     ]
 
     return (
         <Container sx={{ marginTop: 3, height: 500 }}>
             {jobs ? <>
-                <DataGrid style={{backgroundColor: 'white'}} rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-                <CSVLink style={{marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center'}} data={jobs} headers={excelHeaders}>Download Excel Sheet</CSVLink>
+                <DataGrid style={{ backgroundColor: 'white' }} rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
+                <CSVLink style={{ marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center' }} data={jobs} >Download Excel Sheet</CSVLink>
             </>
                 : <Typography>No previous jobs</Typography>}
         </Container>

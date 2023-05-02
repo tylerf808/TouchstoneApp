@@ -88,11 +88,17 @@ Job.init(
     tractor: {
       type: DataTypes.STRING
     },
+    grossProfit: {
+      type: DataTypes.STRING
+    },
+    operatingProfit: {
+      type: DataTypes.STRING
+    },
     totalFixedCost: {
       type: DataTypes.STRING
     },
     driveTime: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     client: {
       type: DataTypes.STRING

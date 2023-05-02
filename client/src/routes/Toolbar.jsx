@@ -38,7 +38,6 @@ export default function Toolbar({ loggedIn, setLoggedIn, setUser, setCosts, cost
         <MenuIcon />
       </IconButton> : null}
       <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }} >
-        <MenuItem onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/dashboard'>Dashboard</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/costs'>Costs</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></MenuItem>
