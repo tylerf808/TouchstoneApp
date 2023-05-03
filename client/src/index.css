@@ -7,17 +7,16 @@
  h2,
  h3,
  p {
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: "Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif";
  }
 
  .backgroundCanvas {
-    background-color: #E9F2FC;
+    background-color: rgb(242, 242, 242);
     height: 100vh;
     width: 100vw;
  }
 
  .headerContainer {
-    background-color: #E9F2FC;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -53,8 +52,13 @@
  }
 
  .newCostInput {
-   width: 100px;
-   height: 25px;
+    width: 100px;
+    height: 25px;
+ }
+
+ .costsInput {
+    width: 50px;
+    height: 20px;
  }
 
  .formItem {
@@ -90,36 +94,94 @@
     padding: 2em;
  }
 
+ .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: lightblue;
+    overflow-x: hidden;
+    transition: 0.2s;
+    padding-top: 60px;
+ }
+
+ .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ccd1ef;
+    display: block;
+    transition: 0.3s;
+ }
+
+ .sidenav a:hover {
+    color: #f1f1f1;
+ }
+
+ .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+ }
+
  .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100vh;
-    /* Full height */
     overflow: none;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
  }
 
  .modalContent {
     background-color: #fefefe;
     margin: 8% auto;
-    /* 15% from the top and centered */
     padding: 20px;
     border: 2px solid #888;
     width: 500px;
     height: 700px;
     border-radius: 8px;
+ }
+
+ .jobModalContent {
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 2px solid #888;
+    width: 500px;
+    height: 700px;
+    border-radius: 8px;
+ }
+
+ .jobModalContent p {
+    font-size: 18px;
+ }
+
+ 
+ .slideItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+ }
+
+.slide:focus {
+    border: none !important;
+    outline: none !important;
+ }
+
+ .slideItem p {
+    font-size: 20px;
+    margin-bottom: 20px;
  }
 
  .close {
@@ -140,7 +202,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #E9F2FC;
+    background-color: rgb(242, 242, 242);
+ }
+
+ .horizontalFormContainer {
+    display: grid;
+    grid-template-columns: 300px 300px;
+
+ }
+
+ .modalContent p {
+    font-size: 20px;
+    margin: 2px
+ }
+
+ .horizontalFormItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    position: relative;
+    left: 40px;
+    top: 12px;
+ }
+
+ .horizontalFormItem p {
+    margin-right: 20px;
+    font-size: 20px;
  }
 
  .textInput {
@@ -178,9 +267,9 @@
     height: 30px;
     margin: 1em;
  }
- 
+
  .btn2 {
-   position: relative;
+    position: relative;
     color: rgb(97, 17, 17);
     background-color: #e5d5d5;
     width: 160px;
@@ -189,9 +278,9 @@
  }
 
  .btnContainer {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
  }
 
@@ -201,31 +290,31 @@
 
  #profit-label,
  #profit-number {
-   border-top: 2px solid black;
-   border-bottom: 2px solid black;
-   justify-content: center;
-   left: 20px;
-   padding: 6px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    justify-content: center;
+    left: 20px;
+    padding: 6px;
  }
 
  #net-profit-label,
  #net-profit-number {
-   border-top: 2px solid black;
-   justify-content: center;
-   left: 20px;
-   padding: 15px;
-   font-size: 22px;
+    border-top: 2px solid black;
+    justify-content: center;
+    left: 20px;
+    padding: 15px;
+    font-size: 22px;
  }
 
  .jobDisplayItem {
-   position: relative;
-   padding: 6px;
-   margin-top: .2em;
-   margin-bottom: .2em;
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-end;
-   align-items: center;
+    position: relative;
+    padding: 6px;
+    margin-top: .2em;
+    margin-bottom: .2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
  }
 
@@ -244,5 +333,15 @@
 
     .textInput {
        width: 200px
+    }
+ }
+
+ @media screen and (max-height: 450px) {
+    .sidenav {
+       padding-top: 15px;
+    }
+
+    .sidenav a {
+       font-size: 18px;
     }
  }

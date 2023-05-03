@@ -12,7 +12,6 @@ import LogIn from "./routes/LogIn";
 import CostsPage from "./routes/CostsPage";
 import SignUp from "./routes/SignUp";
 import ViewJobs from './routes/ViewJobs'
-import CreateCosts from "./routes/CreateCosts";
 
 const library = ["places"];
 
@@ -47,19 +46,19 @@ export default function App() {
 
   return (
     <Router>
-      <div className="backgroundCanvas">
-        <Toolbar costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {showAlert ? <Alert  severity="error">{alertMsg}</Alert> : null}
+        <div className="backgroundCanvas">
+          <Toolbar costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {showAlert ? <Alert severity="error">{alertMsg}</Alert> : null}
+          </div>
+          <Routes>
+            <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
+            <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+            <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
+            <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
+            <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
+          </Routes>
         </div>
-        <Routes>
-          <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
-          <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-          <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
-          <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
-          <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
-        </Routes>
-      </div>
     </Router>
   );
 }

@@ -98,24 +98,26 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       statesArray[2]
     ).then((data) => data.json());
 
-    const grossProfit =
-      checkRes.odc * pay +
-      checkRes.factor * pay +
-      checkRes.laborRate * pay +
-      checkRes.payrollTax * pay +
-      checkRes.dispatch * pay +
-      checkRes.gasCost;
-    const operationProfit =
-      checkRes.insurance +
-      checkRes.tractorLease +
-      checkRes.trailerLease +
-      checkRes.gAndA * pay;
-    const netProfit =
-      checkRes.depreciation +
-      checkRes.repairs * pay +
-      checkRes.rental * pay +
-      checkRes.loan * pay;
-    const totalCost = operationProfit + grossProfit + netProfit;
+    const grossProfitCosts =
+      parseFloat((checkRes.odc +
+        checkRes.factor * pay +
+        checkRes.laborRate * pay +
+        checkRes.payrollTax +
+        checkRes.dispatch * pay +
+        checkRes.gasCost).toFixed(2));
+    const operationProfitCosts =
+      parseFloat((checkRes.insurance +
+        checkRes.tractorLease +
+        checkRes.trailerLease +
+        checkRes.gAndA).toFixed(2));
+    const netProfitCosts =
+      parseFloat((checkRes.depreciation +
+        checkRes.repairs +
+        checkRes.rental +
+        checkRes.loan).toFixed(2));
+    const totalCost = (operationProfitCosts) + (grossProfitCosts) + (netProfitCosts);
+
+    console.log(operationProfitCosts, grossProfitCosts, netProfitCosts)
 
     setShowLoading(false);
 
@@ -124,30 +126,30 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       pickUp: pickUp,
       dropOff: dropOff,
       revenue: pay,
-      grossProfitPercentage: ((pay / grossProfit) * 100).toFixed(2) + "%",
+      grossProfitPercentage: ((pay - grossProfitCosts) / 100).toFixed(2) + "%",
       operatingProfitPercentage:
-        ((pay / operationProfit) * 100).toFixed(2) + "%",
-      netProfitPercentage: ((pay / totalCost) * 100).toFixed(2) + "%",
+        ((pay - (operationProfitCosts + grossProfitCosts)) / 100).toFixed(2) + "%",
+      netProfitPercentage: (( pay - totalCost  ) / 100).toFixed(2) + "%",
       distance: checkRes.distance,
       date: date,
       user_id: user,
       gasCost: checkRes.gasCost,
       depreciation: checkRes.depreciation,
       factor: (checkRes.factor * pay).toFixed(2),
-      gAndA: (checkRes.gAndA * pay).toFixed(2),
-      loan: (checkRes.loan * pay).toFixed(2),
+      gAndA: checkRes.gAndA.toFixed(2),
+      loan: checkRes.loan.toFixed(2),
       odc: (checkRes.odc * pay).toFixed(2),
-      rental: (checkRes.rental * pay).toFixed(2),
-      repairs: (checkRes.repairs * pay).toFixed(2),
+      rental: checkRes.rental.toFixed(2),
+      repairs: checkRes.repairs.toFixed(2),
       ratePerMile: (pay / checkRes.distance).toFixed(2),
       labor: (checkRes.laborRate * pay).toFixed(2),
       payrollTax: (checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(
         2
       ),
       netProfit: (pay - totalCost).toFixed(2),
-      grossProfit: pay - grossProfit.toFixed(2),
-      operatingProfit: pay - operationProfit,
-      insurance: checkRes.insurance.toFixed(2),
+      grossProfit: (pay - grossProfitCosts).toFixed(2),
+      operatingProfit: pay - operationProfitCosts,
+      insurance: checkRes.insurance,
       dispatch: (pay * checkRes.dispatch).toFixed(2),
       laborRatePercent: checkRes.laborRate * 100 + "%",
       trailer: checkRes.trailerLease,
@@ -187,8 +189,14 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     }).then((res) => res.json());
     setShowJobBtn(false);
     setShowResults(false);
-    const modal = document.getElementById('modal')
-    modal.style.display = 'none'
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById("start").value = ''
+    document.getElementById("pick-up").value = ''
+    document.getElementById("drop-off").value = ''
+    document.getElementById("revenue").value = ''
+    document.getElementById("date").value = ''
+    document.getElementById("client").value = ''
+    document.getElementById("driver").value = ''
   };
 
   return (
@@ -245,7 +253,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         </div>
       </form>
       <div className="modal" id="modal" style={{ display: 'none' }}>
-        <div className="modalContent" id="modal-content">
+        <div className="jobModalContent" id="modal-content">
           <span className="close" id="close-modal" onClick={() => {
             const modal = document.getElementById('modal')
             modal.style.display = 'none';
@@ -333,15 +341,24 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>-${(job?.repairs) + (job?.depreciation)}</p>
                   </div>
                   <div id="net-profit-label" className="jobDisplayItem">
-                    <p>Net Profit</p>
+                    <p style={{fontWeight: 'bold'}}>Net Profit</p>
                   </div>
                   <div id="net-profit-number" className="jobDisplayItem">
-                    <p>${job?.netProfit}</p>
+                    <p style={{fontWeight: 'bold'}}>${job?.netProfit}</p>
                   </div>
                 </div>
                 <div className="btnContainer">
                   <button onClick={addJob} className="btn1">Add Job</button>
-                  <button className="btn2">Clear</button>
+                  <button onClick={() => {
+                    document.getElementById('modal').style.display = 'none';
+                    document.getElementById("start").value = ''
+                    document.getElementById("pick-up").value = ''
+                    document.getElementById("drop-off").value = ''
+                    document.getElementById("revenue").value = ''
+                    document.getElementById("date").value = ''
+                    document.getElementById("client").value = ''
+                    document.getElementById("driver").value = ''
+                  }} className="btn2">Clear</button>
                 </div>
               </> : null}
           </div>

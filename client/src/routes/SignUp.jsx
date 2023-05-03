@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Alert } from "@mui/material";
-
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user }) {
 
@@ -86,77 +87,125 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
       <div className="headerContainer">
         <h1>Create an Account</h1>
       </div>
-
-      {/* {secondPage ? <form className="verticalFormContainer" style={{}}>
-          <div className="formItem">
-            <p>How often do you pay insurance?</p>
-            <div className="radioMenu" style={{ marginLeft: '1em' }}>
-              <label htmlFor="monthly">Monthly</label>
-              <input name='insuranceRadio' className="radioInput" type='radio' id="monthly" value='monthly' onClick={changeInsuranceFreq}></input>
-              <label htmlFor="bi-monthly">Bi-Monthly</label>
-              <input name='insuranceRadio' className="radioInput" type='radio' id="bi-monthly" value='bi-monthly' onClick={changeInsuranceFreq}></input>
-              <label htmlFor="quarterly">Quarterly</label>
-              <input name='insuranceRadio' className="radioInput" type='radio' id="quarterly" value='quarterly' onClick={changeInsuranceFreq}></input>
-              <label htmlFor="annually">Annually</label>
-              <input name='insuranceRadio' className="radioInput" type='radio' id="annually" value='annually' onClick={changeInsuranceFreq}></input>
+      <CarouselProvider
+        id='carousel'
+        naturalSlideWidth={100}
+        naturalSlideHeight={125}
+        totalSlides={11}
+        dragEnabled={false}
+        touchEnabled={false}
+        
+      >
+        <Slider style={{ height: 300, width: 400}}>
+          <Slide className="slide" index={0}>
+            <div className="slideItem">
+              <p>How often do you pay insurance?</p>
+              <div className="radioMenu" style={{ marginLeft: '1em' }}>
+                <label htmlFor="monthly">Monthly</label>
+                <input name='insuranceRadio' className="radioInput" type='radio' id="monthly" value='monthly' onClick={changeInsuranceFreq}></input>
+                <label htmlFor="bi-monthly">Bi-Monthly</label>
+                <input name='insuranceRadio' className="radioInput" type='radio' id="bi-monthly" value='bi-monthly' onClick={changeInsuranceFreq}></input>
+                <label htmlFor="quarterly">Quarterly</label>
+                <input name='insuranceRadio' className="radioInput" type='radio' id="quarterly" value='quarterly' onClick={changeInsuranceFreq}></input>
+                <label htmlFor="annually">Annually</label>
+                <input name='insuranceRadio' className="radioInput" type='radio' id="annually" value='annually' onClick={changeInsuranceFreq}></input>
+              </div>
             </div>
+            <div className="slideItem">
+              <p>How much is you insurance payment?</p>
+              <input id="insurance-amount" type='text'></input>
+            </div>
+          </Slide>
+          <Slide className="slide" index={1}>
+            <div className="slideItem">
+              <p>What is your monthly tractor lease payment?</p>
+              <input id="tractor-amount" className="newCostInput" type='number'></input>
+            </div>
+          </Slide>
+          <Slide className="slide" index={2}>
+          <div className="slideItem">
+            <p>What is your monthly trailer lease payment?</p>
+            <input id='trailer-amount' className="newCostInput" type='number'></input>
           </div>
-          <div className="formItem">
-            <p>How much is you insurance payment?</p>
-            <input id="insurance-amount" className="newCostInput" type='text'></input>
-          </div>
-          <div className="formItem">
-            <p>How much do you spend monthly on your tractor lease?</p>
-            <input id="tractor-amount" className="newCostInput" type='text'></input>
-          </div>
-          <div className="formItem">
-            <p>How much do you spend monthly on your trailer lease?</p>
-            <input id='trailer-amount' className="newCostInput" type='text'></input>
-          </div>
-          <div className="formItem">
-            <p>What percent do you pay to dispatch?</p>
+          </Slide>
+          <Slide className="slide" index={3}>
+          <div className="slideItem">
+            <p>Enter dispatch fee as percentage of revenue.</p>
             <input id='dispatch-amount' className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
-            <p>What percent do you pay to factor?</p>
+          </Slide>
+          <Slide className="slide" index={4}>
+          <div className="slideItem">
+            <p>Enter factor fee as percentage of revenue.</p>
             <input id="factor-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
-            <p>What is your average ODC?</p>
+          </Slide>
+          <Slide className="slide" index={5}>
+          <div className="slideItem">
+            <p>Enter other direct costs (ODC) as a percentage to cover incidental costs.</p>
             <input id="odc-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
-            <p>What are you loan payments?</p>
+          </Slide>
+          <Slide className="slide" index={6}>
+          <div className="slideItem">
+            <p>Enter monthly loan payments if any.</p>
             <input id="loan-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
-            <p>How much do you pay in rental costs?</p>
-            <input id="rental-amount" className="newCostInput" type='text'></input>
-          </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={7}>
+          <div className="slideItem">
             <p>How much do you spend on average for repairs?</p>
             <input id="repairs-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={8}>
+          <div className="slideItem">
             <p>How much do you put aside for depreciation?</p>
             <input id="depreciation-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={9}>
+          <div className="slideItem">
             <p>What is you MPG?</p>
             <input id="mpg-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={10}>
+          <div className="slideItem">
             <p>How much do you spend on average on G&A?</p>
             <input id="ganda-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={11}>
+          <div className="slideItem">
             <p>What is your labor rate?</p>
             <input id="labor-amount" className="newCostInput" type='text'></input>
           </div>
-          <div className="formItem">
+          </Slide>
+          <Slide className="slide" index={12}>
+          <div className="slideItem">
             <p>What percentage do you pay in payroll tax?</p>
             <input id="payroll-amount" className="newCostInput" type='text'></input>
           </div>
+          </Slide>
+        </Slider>
+        <div className="btnContainer">
+          <ButtonBack className="btn1" style={{ margin: 10, height: 30, width: 50 }}>Back</ButtonBack>
+          <ButtonNext className="btn1" style={{ margin: 10, height: 30, width: 50 }}>Next</ButtonNext>
+        </div>
+      </CarouselProvider>
+      {/* 
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           <div className="btnContainer">
             <button className="btn1" onClick={createAccount}>Create Account</button>
           </div>
@@ -183,7 +232,7 @@ export default function SignUp({ loggedIn, setLoggedIn, setUser, setCosts, user 
             </div>
           </form>} */}
       <div>
-        <p>Already have an account? <Link to='/'>Log in here!</Link></p>
+        <p style={{marginTop: 150}}>Already have an account? <Link to='/'>Log in here!</Link></p>
       </div>
     </div>
   );

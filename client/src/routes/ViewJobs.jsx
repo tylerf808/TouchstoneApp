@@ -16,7 +16,6 @@ export default function ViewJobs({ user }) {
         if (res.length === 0) {
             setJobs(false)
         } else {
-            console.log(res)
             const jobs = res
             setJobs(jobs)
         }
@@ -60,23 +59,23 @@ export default function ViewJobs({ user }) {
     ]
 
     const excelHeaders = [
-        { label: 'test', field: 'id'  },
+        { label: 'test', field: 'id' },
         { label: 'test', field: 'start' },
         { label: 'test', field: 'pickUp' },
         { label: 'test', field: 'dropOff' },
-        { label: 'test', field: 'distance'},
-        { label: 'test', field: 'revenue'},
-        { label: 'test', field: 'ratePerMile'},
-        { label: 'test', field: 'grossProfitPercentage'},
-        { label: 'test', field: 'operatingProfitPercentage'},
-        { label: 'test', field: 'netProfitPercentage'},
-        { label: 'test', field: 'laborRatePercent'},
-        { label: 'test', field: 'labor'},
-        { label: 'test', field: 'payrollTax'},
+        { label: 'test', field: 'distance' },
+        { label: 'test', field: 'revenue' },
+        { label: 'test', field: 'ratePerMile' },
+        { label: 'test', field: 'grossProfitPercentage' },
+        { label: 'test', field: 'operatingProfitPercentage' },
+        { label: 'test', field: 'netProfitPercentage' },
+        { label: 'test', field: 'laborRatePercent' },
+        { label: 'test', field: 'labor' },
+        { label: 'test', field: 'payrollTax' },
         { label: 'test', field: 'dispatch' },
-        { label: 'test', field: 'factor'},
-        { label: 'test', field: 'gasCost'},
-        { label: 'test', field: 'odc'},
+        { label: 'test', field: 'factor' },
+        { label: 'test', field: 'gasCost' },
+        { label: 'test', field: 'odc' },
         { label: 'test', field: 'insurance' },
         { label: 'test', field: 'trailer' },
         { label: 'test', field: 'tractor' },
@@ -93,12 +92,14 @@ export default function ViewJobs({ user }) {
     ]
 
     return (
-        <Container sx={{ marginTop: 3, height: 500 }}>
-            {jobs ? <>
-                <DataGrid style={{ backgroundColor: 'white' }} rows={jobs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
-                <CSVLink style={{ marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center' }} data={jobs} >Download Excel Sheet</CSVLink>
-            </>
-                : <Typography>No previous jobs</Typography>}
-        </Container>
+        <div className="pageContainer">
+            <div style={{ marginTop: 20, height: '60vh', width: '80vw' }}>
+                {jobs ? <>
+                    <DataGrid style={{ backgroundColor: 'white' }} rows={jobs} columns={columns} pageSize={30} rowsPerPageOptions={[10]} />
+                    <CSVLink style={{ marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center' }} data={jobs} >Download Excel Sheet</CSVLink>
+                </>
+                    : <p>No previous jobs</p>}
+            </div>
+        </div>
     )
 }
