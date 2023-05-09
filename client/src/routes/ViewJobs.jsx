@@ -95,7 +95,7 @@ export default function ViewJobs({ user }) {
         <div className="pageContainer">
             <div style={{ marginTop: 20, height: '60vh', width: '80vw' }}>
                 {jobs ? <>
-                    <DataGrid style={{ backgroundColor: 'white' }} rows={jobs} columns={columns} pageSize={30} rowsPerPageOptions={[10]} />
+                    <DataGrid style={{ backgroundColor: 'white' }} rows={jobs} columns={columns} pageSize={30} rowsPerPageOptions={[30]} />
                     <CSVLink style={{ marginTop: 2, display: 'flex', flexDirection: 'row', justifyContent: 'center' }} data={jobs} >Download Excel Sheet</CSVLink>
                 </>
                     : <p>No previous jobs</p>}

@@ -4,23 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function CostsPage({ user, costs, setCosts, loggedIn }) {
 
-  const [showEditPrompt, setShowEditPrompt] = useState(false)
-
-  const navigate = useNavigate()
-
-  const modalStyle = {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    height: '90%',
-    backgroundColor: 'white'
-  };
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -59,7 +42,6 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
     const odcValue = document.getElementById("odc").value;
     const gAndAValue = document.getElementById("g-and-a").value;
     const loanValue = document.getElementById("loan").value;
-    const rentalValue = document.getElementById("rental").value;
     const repairsValue = document.getElementById("repairs").value;
     const depreciationValue = document.getElementById("depreciation").value;
 
@@ -75,8 +57,6 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
       odc: odcValue,
       gAndA: gAndAValue,
       loan: loanValue,
-      rental: rentalValue,
-      repairs: repairsValue,
       depreciation: depreciationValue,
     };
 
@@ -106,7 +86,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
       </div>
       <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid',
-        borderWidth: 3,
+        borderWidth: 2,
         borderRadius: 8, backgroundColor: 'white'
       }}>
         <div className="horizontalFormContainer">
@@ -214,20 +194,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <p className="text">
               Loan: </p>
             <CurrencyFormat
-              value={costs?.loan * 100}
+              value={costs?.loan}
               displayType={"text"}
               thousandSeparator={true}
-              suffix={"%"}
-              style={{ fontSize: 20 }}
-            />
-          </div>
-          <div className="horizontalFormItem">
-            <p>Rental:</p>
-            <CurrencyFormat
-              value={costs?.rental * 100}
-              displayType={"text"}
-              thousandSeparator={true}
-              suffix={"%"}
+              prefix={"$"}
               style={{ fontSize: 20 }}
             />
           </div>
@@ -343,15 +313,6 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               id="loan"
               defaultValue={costs?.loan}
               placeholder="Loan"
-            ></input>
-          </div>
-          <div className='formItem'>
-            <p >Rental:</p>
-            <input
-              className="costsInput"
-              id="rental"
-              defaultValue={costs?.rental}
-              placeholder="Rental"
             ></input>
           </div>
           <div className='formItem'>

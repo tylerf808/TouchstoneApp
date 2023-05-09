@@ -113,11 +113,8 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     const netProfitCosts =
       parseFloat((checkRes.depreciation +
         checkRes.repairs +
-        checkRes.rental +
         checkRes.loan).toFixed(2));
     const totalCost = (operationProfitCosts) + (grossProfitCosts) + (netProfitCosts);
-
-    console.log(operationProfitCosts, grossProfitCosts, netProfitCosts)
 
     setShowLoading(false);
 
@@ -125,48 +122,46 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       start: start,
       pickUp: pickUp,
       dropOff: dropOff,
-      revenue: pay,
+      revenue: parseFloat(pay),
       grossProfitPercentage: ((pay - grossProfitCosts) / 100).toFixed(2) + "%",
       operatingProfitPercentage:
         ((pay - (operationProfitCosts + grossProfitCosts)) / 100).toFixed(2) + "%",
-      netProfitPercentage: (( pay - totalCost  ) / 100).toFixed(2) + "%",
+      netProfitPercentage: ((pay - totalCost) / 100).toFixed(2) + "%",
       distance: checkRes.distance,
       date: date,
       user_id: user,
       gasCost: checkRes.gasCost,
-      depreciation: checkRes.depreciation,
-      factor: (checkRes.factor * pay).toFixed(2),
-      gAndA: checkRes.gAndA.toFixed(2),
-      loan: checkRes.loan.toFixed(2),
-      odc: (checkRes.odc * pay).toFixed(2),
-      rental: checkRes.rental.toFixed(2),
-      repairs: checkRes.repairs.toFixed(2),
-      ratePerMile: (pay / checkRes.distance).toFixed(2),
-      labor: (checkRes.laborRate * pay).toFixed(2),
-      payrollTax: (checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(
-        2
-      ),
-      netProfit: (pay - totalCost).toFixed(2),
-      grossProfit: (pay - grossProfitCosts).toFixed(2),
-      operatingProfit: pay - operationProfitCosts,
-      insurance: checkRes.insurance,
-      dispatch: (pay * checkRes.dispatch).toFixed(2),
+      depreciation: parseFloat((checkRes.depreciation).toFixed(2)),
+      factor: parseFloat((checkRes.factor * pay).toFixed(2)),
+      gAndA: parseFloat(checkRes.gAndA.toFixed(2)),
+      loan: parseFloat(checkRes.loan.toFixed(2)),
+      odc: parseFloat((checkRes.odc * pay).toFixed(2)),
+      repairs: parseFloat(checkRes.repairs.toFixed(2)),
+      ratePerMile: parseFloat((pay / checkRes.distance).toFixed(2)),
+      labor: parseFloat((checkRes.laborRate * pay).toFixed(2)),
+      payrollTax: parseFloat((checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(2)),
+      netProfit: parseFloat((pay - totalCost).toFixed(2)),
+      grossProfit: parseFloat((pay - grossProfitCosts).toFixed(2)),
+      operatingProfit: parseFloat((pay - operationProfitCosts).toFixed(2)),
+      insurance: parseFloat((checkRes.insurance).toFixed(2)),
+      dispatch: parseFloat((pay * checkRes.dispatch).toFixed(2)),
       laborRatePercent: checkRes.laborRate * 100 + "%",
-      trailer: checkRes.trailerLease,
-      tractor: checkRes.tractorLease,
-      totalFixedCost: (
-        parseFloat(checkRes.tractorLease) +
-        parseFloat(checkRes.trailerLease) +
-        parseFloat(checkRes.insurance) +
-        parseFloat(checkRes.gAndA)
-      ).toFixed(2),
-      tolls: checkRes.tolls,
+      trailer: parseFloat((checkRes.trailerLease).toFixed(2)),
+      tractor: parseFloat((checkRes.tractorLease).toFixed(2)),
+      totalFixedCost: parseFloat((
+        checkRes.tractorLease +
+        checkRes.trailerLease +
+        checkRes.insurance +
+        checkRes.gAndA
+      ).toFixed(2)),
+      tolls: parseFloat(checkRes.tolls),
       client: client,
       driver: driver,
       driveTime: checkRes.duration
     }
 
     setJob(newJob)
+    console.log(newJob)
 
     if (totalCost > pay) {
       setProfitable(false);
@@ -341,10 +336,10 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>-${(job?.repairs) + (job?.depreciation)}</p>
                   </div>
                   <div id="net-profit-label" className="jobDisplayItem">
-                    <p style={{fontWeight: 'bold'}}>Net Profit</p>
+                    <p style={{ fontWeight: 'bold' }}>Net Profit</p>
                   </div>
                   <div id="net-profit-number" className="jobDisplayItem">
-                    <p style={{fontWeight: 'bold'}}>${job?.netProfit}</p>
+                    <p style={{ fontWeight: 'bold' }}>${job?.netProfit}</p>
                   </div>
                 </div>
                 <div className="btnContainer">

@@ -40,9 +40,6 @@ Costs.init(
         loan: {
             type: DataTypes.DOUBLE
         }, 
-        rental: {
-            type: DataTypes.DOUBLE
-        }, 
         repairs: {
             type: DataTypes.DOUBLE
         }, 
