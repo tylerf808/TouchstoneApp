@@ -20,7 +20,7 @@ Job.init(
       type: DataTypes.STRING,
     },
     revenue: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     grossProfitPercentage: {
       type: DataTypes.STRING,
@@ -41,61 +41,61 @@ Job.init(
       type: DataTypes.DOUBLE,
     },
     ratePerMile: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     depreciation: {
       type: DataTypes.DOUBLE,
     },
     factor: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     gAndA: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     loan: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     odc: {
-      type: DataTypes.STRING,
-    },
-    rental: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     repairs: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
     },
     labor: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     dispatch: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     payrollTax: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     netProfit: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     laborRatePercent: {
       type: DataTypes.STRING
     },
     insurance: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     trailer: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     tractor: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
+    },
+    tolls: {
+      type: DataTypes.DOUBLE
     },
     grossProfit: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     operatingProfit: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     totalFixedCost: {
-      type: DataTypes.STRING
+      type: DataTypes.DOUBLE
     },
     driveTime: {
       type: DataTypes.STRING

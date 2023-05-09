@@ -23,14 +23,19 @@ export default function ViewJobs({ user }) {
 
     useEffect(() => {
         getJobs()
+        console.log(jobs)
     }, [])
 
     const columns = [
         { field: 'id', headerName: 'Job ID', width: 80 },
+        { field: 'date', headerName: 'Date', width: 120 },
+        { field: 'client', headerName: 'Client', width: 120 },
+        { field: 'driver', headerName: 'Driver', width: 120 },
         { field: 'start', headerName: 'Start', width: 200 },
         { field: 'pickUp', headerName: 'Pick Up', width: 200 },
         { field: 'dropOff', headerName: 'Drop Off', width: 200 },
         { field: 'distance', headerName: 'Milage', width: 120 },
+        { field: 'driveTime', headerName: 'Drive Time', width: 120 },
         { field: 'revenue', headerName: 'Revenue', width: 120 },
         { field: 'ratePerMile', headerName: 'Rate Per Mile', width: 120 },
         { field: 'grossProfitPercentage', headerName: 'Gross Profit %', width: 120 },
@@ -42,53 +47,17 @@ export default function ViewJobs({ user }) {
         { field: 'dispatch', headerName: 'Dispatch', width: 120 },
         { field: 'factor', headerName: 'Factor', width: 120 },
         { field: 'gasCost', headerName: 'Fuel', width: 120 },
+        { field: 'tolls', headerName: 'Tolls', width: 100 },
         { field: 'odc', headerName: 'ODC', width: 120 },
         { field: 'insurance', headerName: 'Insurance', width: 120 },
         { field: 'trailer', headerName: 'Lease - Trailer', width: 120 },
         { field: 'tractor', headerName: 'Lease - Tractor', width: 120 },
         { field: 'gAndA', headerName: 'G&A', width: 120 },
-        { field: 'grossProfit', headerName: 'Gross Profit', width: 120 },
-        { field: 'loan', headerName: 'Loan', width: 120 },
-        { field: 'rental', headerName: 'Rental', width: 120 },
         { field: 'operatingProfit', headerName: 'Operating Profit', width: 120 },
+        { field: 'loan', headerName: 'Loan', width: 120 },
         { field: 'repairs', headerName: 'Repairs', width: 120 },
-        { field: 'depreciation', headerName: 'Depreciation', width: 120 },
+        { field: 'depreciation', headerName: 'Depreciation', width: 120 },        
         { field: 'netProfit', headerName: 'Net Profit', width: 120 },
-        { field: 'client', headerName: 'Client', width: 120 },
-        { field: 'driver', headerName: 'Driver', width: 120 },
-    ]
-
-    const excelHeaders = [
-        { label: 'test', field: 'id' },
-        { label: 'test', field: 'start' },
-        { label: 'test', field: 'pickUp' },
-        { label: 'test', field: 'dropOff' },
-        { label: 'test', field: 'distance' },
-        { label: 'test', field: 'revenue' },
-        { label: 'test', field: 'ratePerMile' },
-        { label: 'test', field: 'grossProfitPercentage' },
-        { label: 'test', field: 'operatingProfitPercentage' },
-        { label: 'test', field: 'netProfitPercentage' },
-        { label: 'test', field: 'laborRatePercent' },
-        { label: 'test', field: 'labor' },
-        { label: 'test', field: 'payrollTax' },
-        { label: 'test', field: 'dispatch' },
-        { label: 'test', field: 'factor' },
-        { label: 'test', field: 'gasCost' },
-        { label: 'test', field: 'odc' },
-        { label: 'test', field: 'insurance' },
-        { label: 'test', field: 'trailer' },
-        { label: 'test', field: 'tractor' },
-        { label: 'test', field: 'gAndA' },
-        { label: 'test', field: 'grossProfit' },
-        { label: 'test', field: 'loan' },
-        { label: 'test', field: 'rental' },
-        { label: 'test', field: 'operatingProfit' },
-        { label: 'test', field: 'repairs' },
-        { label: 'test', field: 'depreciation' },
-        { label: 'test', field: 'netProfit' },
-        { label: 'test', field: 'client' },
-        { label: 'test', field: 'driver' },
     ]
 
     return (
