@@ -47,15 +47,15 @@ export default function App() {
   return (
     <Router>
         <div className="backgroundCanvas">
-          <Toolbar costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {showAlert ? <Alert severity="error">{alertMsg}</Alert> : null}
+          <Toolbar user={user} costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
+          <div style={{ }}>
+            {showAlert ? <Alert className="alertMsg" severity="error">{alertMsg}</Alert> : null}
           </div>
           <Routes>
             <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
             <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
             <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
-            <Route path="signup" user={user} element={<SignUp setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
+            <Route path="signup" user={user} element={<SignUp showAlert={showAlert} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
             <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
           </Routes>
         </div>

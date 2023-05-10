@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-export default function Toolbar({ loggedIn, setLoggedIn, setUser, setCosts, costs }) {
+export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts, costs }) {
 
   const handleLogOut = () => {
     setLoggedIn(false)
@@ -23,7 +23,7 @@ export default function Toolbar({ loggedIn, setLoggedIn, setUser, setCosts, cost
 
   return (
     <div className='toolbar'>
-      {costs ? <span style={{fontSize: 30, cursor: 'pointer', marginLeft: 30}} onClick={openNav}>&#9776;</span> : null}
+      {user ? <span style={{fontSize: 30, cursor: 'pointer', marginLeft: 30}} onClick={openNav}>&#9776;</span> : null}
       <div id="mySidenav" className='sidenav' >
         <span style={{position: 'relative', left: 200, top: -50, fontSize: 40, cursor: 'pointer'}} onClick={closeNav}>&times;</span>
         <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></div>

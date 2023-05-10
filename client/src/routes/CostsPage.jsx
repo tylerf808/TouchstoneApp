@@ -82,7 +82,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
   return (
     <div className="pageContainer">
       <div className="headerContainer">
-        <h1>Current Costs</h1>
+        <h2>Current Costs Per Job</h2>
       </div>
       <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid',
@@ -183,10 +183,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <p>
               G&A:</p>
             <CurrencyFormat
-              value={costs?.gAndA * 100}
+              value={costs?.gAndA}
               displayType={"text"}
               thousandSeparator={true}
-              suffix={"%"}
+              prefix={"$"}
               style={{ fontSize: 20 }}
             />
           </div>
