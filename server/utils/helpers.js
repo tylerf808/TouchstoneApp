@@ -38,9 +38,9 @@ const getGasPrice = async (state1, state2, state3) => {
       return response.data;
     });
   const aveGasPrice =
-    parseFloat(state1Res.result.state.diesel) +
+    (parseFloat(state1Res.result.state.diesel) +
     parseFloat(state2Res.result.state.diesel) +
-    parseFloat(state3Res.result.state.diesel);
+    parseFloat(state3Res.result.state.diesel))/3;
   return aveGasPrice;
 };
 

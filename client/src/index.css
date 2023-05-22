@@ -58,7 +58,8 @@
 
  .costsInput {
     width: 50px;
-    height: 20px;
+    height: 25px;
+    margin: 2px
  }
 
  .formItem {
@@ -119,7 +120,7 @@
 
  .MuiAlert-message {
    position: relative;
-   left: 420px;
+   left: 45%;
    font-size: 18px;
  }
 
@@ -350,9 +351,9 @@
     margin-bottom: .2em;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
-
+   left: 30px
  }
 
 

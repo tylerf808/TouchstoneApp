@@ -28,7 +28,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
     }
   }
 
-  const createAccount = async (e) => {
+  const createAccount = async () => {
 
     setShowAlert(false)
 
@@ -46,19 +46,25 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
     const email = document.getElementById("email-signup").value;
     const password = document.getElementById("password-signup").value;
     const passwordConf = document.getElementById("password-signup-conf").value;
-    const insuranceAmount = document.getElementById('insurance-amount').value.toFixed(2)
-    const tractorAmount = document.getElementById('tractor-amount').value.toFixed(2)
-    const trailerAmount = document.getElementById('trailer-amount').value.toFixed(2)
-    const dispatchAmount = (document.getElementById('dispatch-amount').value / 100).toFixed(2)
-    const factorAmount = (document.getElementById('factor-amount').value / 100).toFixed(2)
-    const odcAmount = (document.getElementById('odc-amount').value / 100).toFixed(2)
-    const loanAmount = document.getElementById('loan-amount').value.toFixed(2)
-    const repairsAmount = document.getElementById('repairs-amount').value.toFixed(2)
-    const depreciationAmount = document.getElementById('depreciation-amount').value.toFixed(2)
-    const mpgAmount = document.getElementById('mpg-amount').value.toFixed(2)
-    const laborAmount = (document.getElementById('labor-amount').value / 100).toFixed(2)
-    const payrollAmount = (document.getElementById('payroll-amount').value / 100).toFixed(2)
-    const gandaAmount = document.getElementById('ganda-amount').value.toFixed(2)
+    const insuranceAmount = document.getElementById('insurance-amount').value
+    const tractorAmount = document.getElementById('tractor-amount').value
+    const trailerAmount = document.getElementById('trailer-amount').value
+    const dispatchAmount = (document.getElementById('dispatch-amount').value / 100)
+    const factorAmount = (document.getElementById('factor-amount').value / 100)
+    const odcAmount = (document.getElementById('odc-amount').value / 100)
+    const loanAmount = document.getElementById('loan-amount').value
+    const repairsAmount = document.getElementById('repairs-amount').value
+    const depreciationAmount = document.getElementById('depreciation-amount').value
+    const mpgAmount = document.getElementById('mpg-amount').value
+    const laborAmount = (document.getElementById('labor-amount').value / 100)
+    const payrollAmount = (document.getElementById('payroll-amount').value / 100)
+    const gandaAmount = document.getElementById('ganda-amount').value
+
+    if (password !== passwordConf) {
+      setAlertMsg('Password do not match')
+      setShowAlert(true)
+      return
+    }
 
     let insurance
 
@@ -86,16 +92,16 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           insurance: insurance.toFixed(2),
           tractorLease: (tractorAmount / 30).toFixed(2),
           trailerLease: (trailerAmount / 30).toFixed(2),
-          dispatch: dispatchAmount,
+          dispatch: dispatchAmount.toFixed(2),
           mpg: mpgAmount,
-          laborRate: laborAmount,
-          payrollTax: payrollAmount,
-          factor: factorAmount,
-          odc: odcAmount,
-          gAndA: gandaAmount / 30,
-          loan: (loanAmount / 30),
-          repairs: repairsAmount / 30,
-          depreciation: depreciationAmount / 30,
+          laborRate: laborAmount.toFixed(2),
+          payrollTax: payrollAmount.toFixed(2),
+          factor: factorAmount.toFixed(2),
+          odc: odcAmount.toFixed(2),
+          gAndA: (gandaAmount / 30).toFixed(2),
+          loan: (loanAmount / 30).toFixed(2),
+          repairs: (repairsAmount / 30).toFixed(2),
+          depreciation: (depreciationAmount / 30).toFixed(2),
         }),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json())
@@ -140,6 +146,16 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           </Slide>
           <Slide className="slide" index={1}>
             <div className="slideItem">
+              <p style={{ margin: 8, fontSize: 20}}>On the next several pages you'll be asked to input your costs for your operation.</p>
+              <p style={{ margin: 8, fontSize: 20}}>Some will be percentages
+                and some will be fixed costs. These costs will be used to calculate profitability on your new jobs.</p>
+              <p style={{ margin: 8, fontSize: 20}}> Fuel costs and
+                tolls are calculated by the system based on the route.
+              </p>
+            </div>
+          </Slide>
+          <Slide className="slide" index={2}>
+            <div className="slideItem">
               <p className="slideLabel">How often do you pay insurance?</p>
               <div className="radioMenu" style={{ marginLeft: '1em' }}>
                 <div className="radioItem">
@@ -165,7 +181,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <input id="insurance-amount" type='number'></input>
             </div>
           </Slide>
-          <Slide className="slide" index={2}>
+          <Slide className="slide" index={3}>
             <div className="slideItem">
               <p className="slideLabel">Enter your monthly tractor lease payment.</p>
               <input id="tractor-amount" className="newCostInput" type='number'></input>
@@ -179,7 +195,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <input id='dispatch-amount' className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
           </Slide>
-          <Slide className="slide" index={3}>
+          <Slide className="slide" index={4}>
             <div className="slideItem">
               <p className="slideLabel">Enter factor fee as percentage of revenue.</p>
               <input id="factor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
@@ -193,7 +209,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <input id="loan-amount" className="newCostInput" type='number'></input>
             </div>
           </Slide>
-          <Slide className="slide" index={4}>
+          <Slide className="slide" index={5}>
             <div className="slideItem">
               <p className="slideLabel">How much do you spend on average for repairs each month?</p>
               <input id="repairs-amount" className="newCostInput" type='number'></input>
@@ -207,7 +223,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <input id="mpg-amount" className="newCostInput" type='number'></input>
             </div>
           </Slide>
-          <Slide className="slide" index={5}>
+          <Slide className="slide" index={6}>
             <div className="slideItem">
               <p className="slideLabel">How much do you spend on average on G&A each month?</p>
               <input id="ganda-amount" className="newCostInput" type='number'></input>

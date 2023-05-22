@@ -99,22 +99,24 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     ).then((data) => data.json());
 
     const grossProfitCosts =
-      parseFloat((checkRes.odc +
-        checkRes.factor * pay +
-        checkRes.laborRate * pay +
-        checkRes.payrollTax +
-        checkRes.dispatch * pay +
-        checkRes.gasCost).toFixed(2));
+      parseFloat((checkRes.odc * pay) +
+        (checkRes.factor * pay) +
+        (checkRes.laborRate * pay) +
+        (checkRes.payrollTax * (checkRes.laborRate * pay)) +
+        (checkRes.dispatch * pay) +
+        checkRes.gasCost);
     const operationProfitCosts =
-      parseFloat((checkRes.insurance +
+      parseFloat(checkRes.insurance +
         checkRes.tractorLease +
         checkRes.trailerLease +
-        checkRes.gAndA).toFixed(2));
+        checkRes.gAndA);
     const netProfitCosts =
-      parseFloat((checkRes.depreciation +
+      parseFloat(checkRes.depreciation +
         checkRes.repairs +
-        checkRes.loan).toFixed(2));
+        checkRes.loan);
     const totalCost = (operationProfitCosts) + (grossProfitCosts) + (netProfitCosts);
+
+    console.log(grossProfitCosts, operationProfitCosts, netProfitCosts, pay)
 
     setShowLoading(false);
 
@@ -123,10 +125,10 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       pickUp: pickUp,
       dropOff: dropOff,
       revenue: parseFloat(pay),
-      grossProfitPercentage: ((pay - grossProfitCosts) / 100).toFixed(2) + "%",
+      grossProfitPercentage: (((pay - grossProfitCosts) / pay) * 100).toFixed(2) + "%",
       operatingProfitPercentage:
-        ((pay - (operationProfitCosts + grossProfitCosts)) / 100).toFixed(2) + "%",
-      netProfitPercentage: ((pay - totalCost) / 100).toFixed(2) + "%",
+        (((pay - (operationProfitCosts + grossProfitCosts)) / pay) * 100).toFixed(2) + "%",
+      netProfitPercentage: (((pay - totalCost) / pay) * 100).toFixed(2) + "%",
       distance: checkRes.distance,
       date: date,
       user_id: user,
@@ -142,7 +144,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       payrollTax: parseFloat((checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(2)),
       netProfit: parseFloat((pay - totalCost).toFixed(2)),
       grossProfit: parseFloat((pay - grossProfitCosts).toFixed(2)),
-      operatingProfit: parseFloat((pay - operationProfitCosts).toFixed(2)),
+      operatingProfit: parseFloat((pay - (operationProfitCosts + grossProfitCosts)).toFixed(2)),
       insurance: parseFloat((checkRes.insurance).toFixed(2)),
       dispatch: parseFloat((pay * checkRes.dispatch).toFixed(2)),
       laborRatePercent: checkRes.laborRate * 100 + "%",
@@ -161,7 +163,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     }
 
     setJob(newJob)
-    console.log(newJob)
+    console.log(grossProfitCosts)
 
     if (totalCost > pay) {
       setProfitable(false);
@@ -273,43 +275,43 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>Labor</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.labor}</p>
+                    <p>[${job?.labor}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>Payroll Tax</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.payrollTax}</p>
+                    <p>[${job?.payrollTax}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>Dispatch</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.dispatch}</p>
+                    <p>[${job?.dispatch}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>Factor</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.factor}</p>
+                    <p>[${job?.factor}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>Fuel</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.gasCost}</p>
+                    <p>[${job?.gasCost}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>Tolls</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.tolls}</p>
+                    <p>[${job?.tolls}]</p>
                   </div>
                   <div className="jobDisplayItem">
                     <p>ODC</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.odc}</p>
+                    <p>[${job?.odc}]</p>
                   </div>
                   <div id="profit-label" className="jobDisplayItem" >
                     <p>Gross Profit</p>
@@ -321,7 +323,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>Fixed Costs</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${job?.totalFixedCost}</p>
+                    <p>[${job?.totalFixedCost}]</p>
                   </div>
                   <div id="profit-label" className="jobDisplayItem">
                     <p>Operating Profit</p>
@@ -333,7 +335,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>Repairs and Dep.</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>-${(job?.repairs) + (job?.depreciation)}</p>
+                    <p>[${(job?.repairs) + (job?.depreciation)}]</p>
                   </div>
                   <div id="net-profit-label" className="jobDisplayItem">
                     <p style={{ fontWeight: 'bold' }}>Net Profit</p>

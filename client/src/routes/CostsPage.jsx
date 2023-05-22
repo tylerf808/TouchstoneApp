@@ -45,18 +45,28 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
     const repairsValue = document.getElementById("repairs").value;
     const depreciationValue = document.getElementById("depreciation").value;
 
+    const insurance = insuranceValue / 30
+    const odc = odcValue / 100
+    const payrollTax = payrollValue / 100
+    const laborRate = laborValue / 100
+    const dispatch = dispatchValue / 100
+    const factor = factorValue / 100
+    const loan = loanValue / 100
+    const depreciation = depreciationValue / 100
+
     const newCostsObj = {
-      insurance: insuranceValue,
+      insurance: insurance,
       tractorLease: tractorValue,
       trailerLease: trailerValue,
-      dispatch: dispatchValue,
+      dispatch: dispatch,
       mpg: mpgValue,
-      laborRate: laborValue,
-      payrollTax: payrollValue,
-      factor: factorValue,
-      odc: odcValue,
+      laborRate: laborRate,
+      payrollTax: payrollTax,
+      factor: factor,
+      odc: odc,
       gAndA: gAndAValue,
-      loan: loanValue,
+      loan: loan,
+      repairs: repairsValue,
       depreciation: depreciationValue,
     };
 
@@ -136,7 +146,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <p>
               Payroll Tax: </p>
             <CurrencyFormat
-              value={costs?.payrollTax * 100}
+              value={(costs?.payrollTax * 100).toFixed(2)}
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
@@ -217,7 +227,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
         </div>
       </div>
       <div className="modal" id="modal" style={{ display: 'none' }}>
-        <div className="modalContent" id='modal-content' style={{ height: 650, width: 270 }}>
+        <div className="modalContent" id='modal-content' style={{ height: 700, width: 300 }}>
           <span className="close" id="close-modal" onClick={() => {
             const modal = document.getElementById('modal')
             modal.style.display = 'none';
@@ -226,7 +236,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <h2 >Edit Costs</h2>
           </div>
           <div className="formItem">
-            <p htmlFor="insurance">Insurance:</p>
+            <p htmlFor="insurance">Insurance payment amount:</p>
             <input
               id="insurance"
               className="costsInput"
@@ -235,7 +245,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             ></input>
           </div>
           <div className='formItem'>
-            <p>Labor Rate:</p>
+            <p>Labor Rate as %</p>
             <input
               className="costsInput"
               id="labor"
@@ -244,7 +254,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             ></input>
           </div>
           <div className='formItem'>
-            <p >Payroll Tax:</p>
+            <p >Payroll Tax as %</p>
             <input
               className="costsInput"
               id="payroll"
@@ -253,7 +263,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             ></input>
           </div>
           <div className='formItem'>
-            <p >Dispatch:</p>
+            <p >Dispatch as %</p>
             <input
               className="costsInput"
               id="dispatch"
@@ -262,7 +272,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             ></input>
           </div>
           <div className='formItem'>
-            <p >Factor:</p>
+            <p >Factor as %</p>
             <input
               className="costsInput"
               id="factor"
@@ -307,7 +317,7 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             ></input>
           </div>
           <div className='formItem'>
-            <p >Loan:</p>
+            <p >Monthly Loan Payment:</p>
             <input
               className="costsInput"
               id="loan"
