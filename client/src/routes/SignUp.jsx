@@ -1,20 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Alert } from "@mui/material";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setCosts, user, setAlertMsg, setShowAlert }) {
 
-  const [insuranceFreq, setInsuranceFreq] = useState()
+  const [insuranceFreq, setInsuranceFreq] = useState('')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [lastSlide, setLastSlide] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [insuranceAmount, setInsuranceAmount] = useState('')
+  const [tractorAmount, setTractorAmount] = useState('')
+  const [trailerAmount, setTrailerAmount] = useState('')
+  const [dispatchAmount, setDispatchAmount] = useState('')
+  const [factorAmount, setFactorAmount] = useState('')
+  const [odcAmount, setOdcAmount] = useState('')
+  const [loanAmount, setLoanAmount] = useState('')
+  const [repairsAmount, setRepairsAmount] = useState('')
+  const [depreciationAmount, setDepreciationAmount] = useState('')
+  const [mpgAmount, setMpgAmount] = useState('')
+  const [laborAmount, setLaborAmount] = useState('')
+  const [payrollAmount, setPayrollAmount] = useState('')
+  const [gandaAmount, setGandaAmount] = useState('')
 
   const navigate = useNavigate();
-
-  const changeInsuranceFreq = (e) => {
-    setInsuranceFreq(e.target.value)
-  }
 
   const togglePassword = () => {
     let password = document.getElementById('password-signup')
@@ -32,33 +42,24 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
 
     setShowAlert(false)
 
-    const inputs = document.getElementsByTagName('input')
-    const inputsArray = Array.from(inputs)
+    let passwordConf = document.getElementById('password-signup-conf').value
 
-    await inputsArray.forEach((input) => {
-      if (input.value === "") {
-        setAlertMsg('Missing an Entry')
-        setShowAlert(true)
-        return
-      }
-    })
-
-    const email = document.getElementById("email-signup").value;
-    const password = document.getElementById("password-signup").value;
-    const passwordConf = document.getElementById("password-signup-conf").value;
-    const insuranceAmount = document.getElementById('insurance-amount').value
-    const tractorAmount = document.getElementById('tractor-amount').value
-    const trailerAmount = document.getElementById('trailer-amount').value
-    const dispatchAmount = (document.getElementById('dispatch-amount').value / 100)
-    const factorAmount = (document.getElementById('factor-amount').value / 100)
-    const odcAmount = (document.getElementById('odc-amount').value / 100)
-    const loanAmount = document.getElementById('loan-amount').value
-    const repairsAmount = document.getElementById('repairs-amount').value
-    const depreciationAmount = document.getElementById('depreciation-amount').value
-    const mpgAmount = document.getElementById('mpg-amount').value
-    const laborAmount = (document.getElementById('labor-amount').value / 100)
-    const payrollAmount = (document.getElementById('payroll-amount').value / 100)
-    const gandaAmount = document.getElementById('ganda-amount').value
+    // const email = document.getElementById("email-signup").value;
+    // const password = document.getElementById("password-signup").value;
+    // const passwordConf = document.getElementById("password-signup-conf").value;
+    // const insuranceAmount = document.getElementById('insurance-amount').value
+    // const tractorAmount = document.getElementById('tractor-amount').value
+    // const trailerAmount = document.getElementById('trailer-amount').value
+    // const dispatchAmount = (document.getElementById('dispatch-amount').value / 100)
+    // const factorAmount = (document.getElementById('factor-amount').value / 100)
+    // const odcAmount = (document.getElementById('odc-amount').value / 100)
+    // const loanAmount = document.getElementById('loan-amount').value
+    // const repairsAmount = document.getElementById('repairs-amount').value
+    // const depreciationAmount = document.getElementById('depreciation-amount').value
+    // const mpgAmount = document.getElementById('mpg-amount').value
+    // const laborAmount = (document.getElementById('labor-amount').value / 100)
+    // const payrollAmount = (document.getElementById('payroll-amount').value / 100)
+    // const gandaAmount = document.getElementById('ganda-amount').value
 
     if (password !== passwordConf) {
       setAlertMsg('Password do not match')
@@ -92,12 +93,12 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           insurance: insurance.toFixed(2),
           tractorLease: (tractorAmount / 30).toFixed(2),
           trailerLease: (trailerAmount / 30).toFixed(2),
-          dispatch: dispatchAmount.toFixed(2),
+          dispatch: (dispatchAmount / 100).toFixed(2),
           mpg: mpgAmount,
-          laborRate: laborAmount.toFixed(2),
-          payrollTax: payrollAmount.toFixed(2),
-          factor: factorAmount.toFixed(2),
-          odc: odcAmount.toFixed(2),
+          laborRate: (laborAmount / 100).toFixed(2),
+          payrollTax: (payrollAmount / 100).toFixed(2),
+          factor: (factorAmount / 100).toFixed(2),
+          odc: (odcAmount / 100).toFixed(2),
           gAndA: (gandaAmount / 30).toFixed(2),
           loan: (loanAmount / 30).toFixed(2),
           repairs: (repairsAmount / 30).toFixed(2),
@@ -108,6 +109,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
       setUser(response[0].user_id);
       setCosts(response[1])
       setLoggedIn(true)
+      console.log(response[1])
       navigate('/addjob')
     } else {
       return
@@ -133,9 +135,9 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           <Slide className="slide" index={0}>
             <div className="slideItem">
               <p className="slideLabel">Email:</p>
-              <input id="email-signup" className="textInput" type="email" />
+              <input onChange={(e) => setEmail(e.target.value)} value={email} id="email-signup" className="textInput" type="email" />
               <p className="slideLabel">Password:</p>
-              <input id="password-signup" className="textInput" type="password" />
+              <input onChange={(e) => setPassword(e.target.value)} value={password} id="password-signup" className="textInput" type="password" />
               <p className="slideLabel">Confirm Password:</p>
               <input id="password-signup-conf" className="textInput" type="password" />
               <div style={{ position: 'relative', left: 80 }}>
@@ -157,84 +159,72 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           <Slide className="slide" index={2}>
             <div className="slideItem">
               <p className="slideLabel">How often do you pay insurance?</p>
-              <div className="radioMenu" style={{ marginLeft: '1em' }}>
-                <div className="radioItem">
-                  <label htmlFor="monthly">Monthly</label>
-                  <input name='insuranceRadio' className="radioInput" type='radio' id="monthly" value='monthly' onClick={changeInsuranceFreq}></input>
-                </div>
-                <div className="radioItem">
-                  <label htmlFor="bi-monthly">Bi-Monthly</label>
-                  <input name='insuranceRadio' className="radioInput" type='radio' id="bi-monthly" value='bi-monthly' onClick={changeInsuranceFreq}></input>
-                </div>
-                <div className="radioItem">
-                  <label htmlFor="quarterly">Quarterly</label>
-                  <input name='insuranceRadio' className="radioInput" type='radio' id="quarterly" value='quarterly' onClick={changeInsuranceFreq}></input>
-                </div>
-                <div className="radioItem">
-                  <label htmlFor="annually">Annually</label>
-                  <input name='insuranceRadio' className="radioInput" type='radio' id="annually" value='annually' onClick={changeInsuranceFreq}></input>
-                </div>
-              </div>
+              <select value={insuranceFreq} onChange={(e) => setInsuranceFreq(e.target.value)}>
+                <option value='monthly'>Monthly</option>
+                <option value='bi-monthly'>Bi-Monthly</option>
+                <option value='quarterly'>Quarterly</option>
+                <option value='annually'>Annually</option>
+              </select>
             </div>
             <div className="slideItem">
               <p className="slideLabel">How much is you insurance payment?</p>
-              <input id="insurance-amount" type='number'></input>
+              <input onChange={(e) => setInsuranceAmount(e.target.value)} value={insuranceAmount} id="insurance-amount" type='number'></input>
             </div>
           </Slide>
           <Slide className="slide" index={3}>
             <div className="slideItem">
               <p className="slideLabel">Enter your monthly tractor lease payment.</p>
-              <input id="tractor-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setTractorAmount(e.target.value)} value={tractorAmount} id="tractor-amount" className="newCostInput" type='number'></input>
             </div>
             <div className="slideItem">
               <p className="slideLabel">Enter your monthly trailer lease payment.</p>
-              <input id='trailer-amount' className="newCostInput" type='number'></input>
+              <input onChange={(e) => setTrailerAmount(e.target.value)} value={trailerAmount} id='trailer-amount' className="newCostInput" type='number'></input>
             </div>
             <div className="slideItem">
               <p className="slideLabel">Enter dispatch fee as percentage of revenue.</p>
-              <input id='dispatch-amount' className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setDispatchAmount(e.target.value)} value={dispatchAmount} id='dispatch-amount' className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
           </Slide>
           <Slide className="slide" index={4}>
             <div className="slideItem">
               <p className="slideLabel">Enter factor fee as percentage of revenue.</p>
-              <input id="factor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setFactorAmount(e.target.value)} value={factorAmount} id="factor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
             <div className="slideItem">
               <p className="slideLabel">Enter other direct costs (ODC) as a percentage to cover incidental costs.</p>
-              <input id="odc-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setOdcAmount(e.target.value)} value={odcAmount} id="odc-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
             <div className="slideItem">
               <p className="slideLabel">Enter monthly loan payments if any.</p>
-              <input id="loan-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setLoanAmount(e.target.value)} value={loanAmount} id="loan-amount" className="newCostInput" type='number'></input>
             </div>
           </Slide>
           <Slide className="slide" index={5}>
             <div className="slideItem">
               <p className="slideLabel">How much do you spend on average for repairs each month?</p>
-              <input id="repairs-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setRepairsAmount(e.target.value)} value={repairsAmount} id="repairs-amount" className="newCostInput" type='number'></input>
             </div>
             <div className="slideItem">
               <p className="slideLabel">How much do you put aside for depreciation each month?</p>
-              <input id="depreciation-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setDepreciationAmount(e.target.value)} value={depreciationAmount} id="depreciation-amount" className="newCostInput" type='number'></input>
             </div>
             <div className="slideItem">
               <p className="slideLabel">What is your MPG?</p>
-              <input id="mpg-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setMpgAmount(e.target.value)} value={mpgAmount} id="mpg-amount" className="newCostInput" type='number'></input>
             </div>
           </Slide>
           <Slide className="slide" index={6}>
             <div className="slideItem">
               <p className="slideLabel">How much do you spend on average on G&A each month?</p>
-              <input id="ganda-amount" className="newCostInput" type='number'></input>
+              <input onChange={(e) => setGandaAmount(e.target.value)} value={gandaAmount} id="ganda-amount" className="newCostInput" type='number'></input>
             </div>
             <div className="slideItem">
               <p className="slideLabel">What is your labor rate?</p>
-              <input id="labor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setLaborAmount(e.target.value)} value={laborAmount} id="labor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
             <div className="slideItem">
               <p className="slideLabel">What percentage do you pay in payroll tax?</p>
-              <input id="payroll-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setPayrollAmount(e.target.value)} value={payrollAmount} id="payroll-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
           </Slide>
         </Slider>
