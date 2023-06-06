@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -121,15 +121,14 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
       <div className="headerContainer">
         <h1>Create an Account</h1>
       </div>
-      <CarouselProvider
+      {/* <CarouselProvider
         className="carousel"
         id='carousel'
         naturalSlideWidth={100}
         naturalSlideHeight={125}
-        totalSlides={6}
+        totalSlides={4}
         dragEnabled={false}
         touchEnabled={false}
-        style={{ border: 'solid', borderWidth: 2, borderRadius: 6, padding: 20, backgroundColor: 'white' }}
       >
         <Slider className="slider">
           <Slide className="slide" index={0}>
@@ -148,10 +147,10 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           </Slide>
           <Slide className="slide" index={1}>
             <div className="slideItem">
-              <p style={{ margin: 8, fontSize: 20}}>On the next several pages you'll be asked to input your costs for your operation.</p>
-              <p style={{ margin: 8, fontSize: 20}}>Some will be percentages
+              <p style={{ margin: 8, fontSize: 20 }}>On the next several pages you'll be asked to input your costs for your operation.</p>
+              <p style={{ margin: 8, fontSize: 20 }}>Some will be percentages
                 and some will be fixed costs. These costs will be used to calculate profitability on your new jobs.</p>
-              <p style={{ margin: 8, fontSize: 20}}> Fuel costs and
+              <p style={{ margin: 8, fontSize: 20 }}> Fuel costs and
                 tolls are calculated by the system based on the route.
               </p>
             </div>
@@ -170,8 +169,6 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <p className="slideLabel">How much is you insurance payment?</p>
               <input onChange={(e) => setInsuranceAmount(e.target.value)} value={insuranceAmount} id="insurance-amount" type='number'></input>
             </div>
-          </Slide>
-          <Slide className="slide" index={3}>
             <div className="slideItem">
               <p className="slideLabel">Enter your monthly tractor lease payment.</p>
               <input onChange={(e) => setTractorAmount(e.target.value)} value={tractorAmount} id="tractor-amount" className="newCostInput" type='number'></input>
@@ -182,9 +179,26 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
             </div>
             <div className="slideItem">
               <p className="slideLabel">Enter dispatch fee as percentage of revenue.</p>
-              <input onChange={(e) => setDispatchAmount(e.target.value)} value={dispatchAmount} id='dispatch-amount' className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+              <input onChange={(e) => setDispatchAmount(e.target.value)} value={dispatchAmount} id='dispatch-amount' className="newCostInput percentageInput" type='number'></input>
+              <p className="percentageSign">%</p>
+            </div>
+            <div className="slideItem">
+              <p className="slideLabel">Enter factor fee as percentage of revenue.</p>
+              <input onChange={(e) => setFactorAmount(e.target.value)} value={factorAmount} id="factor-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+            </div>
+            <div className="slideItem">
+              <p className="slideLabel">Enter other direct costs (ODC) as a percentage to cover incidental costs.</p>
+              <input onChange={(e) => setOdcAmount(e.target.value)} value={odcAmount} id="odc-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
+            </div>
+            <div className="slideItem">
+              <p className="slideLabel">Enter monthly loan payments if any.</p>
+              <input onChange={(e) => setLoanAmount(e.target.value)} value={loanAmount} id="loan-amount" className="newCostInput" type='number'></input>
             </div>
           </Slide>
+           <Slide className="slide" index={3}>
+            
+          </Slide>
+          
           <Slide className="slide" index={4}>
             <div className="slideItem">
               <p className="slideLabel">Enter factor fee as percentage of revenue.</p>
@@ -226,7 +240,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               <p className="slideLabel">What percentage do you pay in payroll tax?</p>
               <input onChange={(e) => setPayrollAmount(e.target.value)} value={payrollAmount} id="payroll-amount" className="newCostInput percentageInput" type='number'></input><p className="percentageSign">%</p>
             </div>
-          </Slide>
+          </Slide> 
         </Slider>
         <div className="btnContainer">
           <ButtonBack className="btn1" onClick={() => {
@@ -245,7 +259,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
               }
             }} style={{ margin: 10, height: 30, width: 50 }}>Next</ButtonNext>}
         </div>
-      </CarouselProvider>
+      </CarouselProvider> */}
       <div>
         <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
       </div>

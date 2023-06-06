@@ -10,12 +10,7 @@
     font-family: "Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif";
  }
 
- .backgroundCanvas {
-    background-color: rgb(242, 242, 242);
-    height: 100vh;
-    width: 100vw;
- }
-
+ /* Containers */
  .headerContainer {
     display: flex;
     flex-direction: row;
@@ -24,13 +19,56 @@
     margin: 2em
  }
 
- .checkJobDisplay {
-    display: grid;
-    grid-template-columns: 200px 200px;
-    background-color: white;
-    margin-bottom: 1em
+ .pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(242, 242, 242);
  }
 
+ .horizontalFormContainer {
+    display: grid;
+    grid-template-columns: 300px 300px;
+
+ }
+
+ /* Side Menu */
+ .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: lightblue;
+    overflow-x: hidden;
+    transition: 0.2s;
+    padding-top: 60px;
+ }
+
+
+ .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 32px;
+    color: #ccd1ef;
+    display: block;
+    transition: 0.3s;
+ }
+
+ .sidenav a:hover {
+    color: #f1f1f1;
+ }
+
+ .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+ }
+
+ /* Toolbar */
  .toolbar {
     background-color: lightblue;
     display: flex;
@@ -38,6 +76,57 @@
     justify-content: flex-start;
     align-items: center;
     height: 60px;
+ }
+
+ /* SignUp carousel*/
+ .slideItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+   flex-wrap: wrap;
+ }
+
+ .slide {
+    border: none !important;
+    
+ }
+
+ .slider {
+    height: 600px;
+    width: 900px;
+ }
+
+ .carousel {
+    border: none !important;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .slideLabel {
+    font-size: 20px;
+    margin-bottom: 5px;
+ }
+
+ .focusRing___1airF.carousel__slide-focus-ring {
+    outline: none !important;
+ }
+
+ .focusRing___1airF.carousel__slide-focus-ring {
+    outline: none !important;
+ }
+
+ .backgroundCanvas {
+    background-color: rgb(242, 242, 242);
+    height: 100vh;
+    width: 100vw;
+ }
+
+ .checkJobDisplay {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    background-color: white;
+    margin-bottom: 1em
  }
 
  .verticalFormContainer {
@@ -96,54 +185,16 @@
  }
 
  .percentageInput {
-   width: 30px;
+    width: 30px;
  }
 
  .percentageSign {
-   position: relative;
-   left: 35px;
-   bottom: 26px;
+    position: relative;
+    left: 35px;
+    bottom: 26px;
  }
 
- .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: lightblue;
-    overflow-x: hidden;
-    transition: 0.2s;
-    padding-top: 60px;
- }
 
- .MuiAlert-message {
-   position: relative;
-   left: 45%;
-   font-size: 18px;
- }
-
- .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 32px;
-    color: #ccd1ef;
-    display: block;
-    transition: 0.3s;
- }
-
- .sidenav a:hover {
-    color: #f1f1f1;
- }
-
- .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
- }
 
  .modal {
     display: none;
@@ -183,36 +234,7 @@
  }
 
 
- .slideItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 15px;
- }
 
- .slider {
-   height: 325px;
-   width: 400px;
- }
-
- .carousel .slide {
-    background: white !important;
-    border: none !important
- }
-
- .slideLabel {
-    font-size: 20px;
-    margin-bottom: 5px;
- }
-
- .focusRing___1airF.carousel__slide-focus-ring {
-    outline: none !important;
- }
-
- .focusRing___1airF.carousel__slide-focus-ring {
-    outline: none !important;
- }
 
  .close {
     color: #aaa;
@@ -228,18 +250,7 @@
     cursor: pointer;
  }
 
- .pageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(242, 242, 242);
- }
 
- .horizontalFormContainer {
-    display: grid;
-    grid-template-columns: 300px 300px;
-
- }
 
  .modalContent p {
     font-size: 20px;
@@ -353,7 +364,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-   left: 30px
+    left: 30px
  }
 
 
