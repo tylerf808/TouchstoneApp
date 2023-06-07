@@ -80,20 +80,23 @@
 
  /* SignUp carousel*/
  .slideItem {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-   flex-wrap: wrap;
+    
  }
 
  .slide {
     border: none !important;
-    
+    display: grid;
+    grid-template-columns: 400px 400px;
+ }
+
+ .slideInput {
+
  }
 
  .slider {
-    height: 600px;
-    width: 900px;
+    height: 500px;
+    width: 75%;
+    
  }
 
  .carousel {
