@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import FirstPage from "./signup_pages/FirstPage";
+import SecondPage from "./signup_pages/SecondPage";
+import ThirdPage from "./signup_pages/ThirdPage";
+import FourthPage from "./signup_pages/FourthPage";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
@@ -117,44 +121,30 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   }
 
 
-  switch(currentSlide){
+  switch (currentSlide) {
     case 0:
       return (
-        <div>
-          <div className="headerContainer">
-            <h1>Create an Account</h1>
-          </div>
-          <p>slide 1</p>
-          <div className="btnContainer">
+        
+          <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
           
-          <button onClick={() => {
-            if(currentSlide !== 0)
-              setCurrentSlide(currentSlide -1)
-          }}>Back</button>
-          <button onClick={() => {
-            setCurrentSlide(currentSlide + 1)
-          }}>Next</button>
-          </div>
-          <div className="headerContainer">
-            <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
-          </div>
-        </div>)
-      break;
-      case 1:
-        return(
-          <div>
-          <div className="headerContainer">
-            <h1>Create an Account</h1>
-          </div>
-          <p>slide 2</p>
-
-          <div className="headerContainer">
-            <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
-          </div>
-        </div>
         )
       break;
-      default:
+    case 1:
+      return (
+        <SecondPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+      )
+      break;
+    case 2:
+      return (
+        <ThirdPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+      )
+      break;
+    case 3:
+      return (
+        <FourthPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+      )
+      break;
+    default:
 
   }
 
