@@ -1,21 +1,55 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function FirstPage({currentSlide, setCurrentSlide}) {
 
-    return (
-        <div>
-            <div className="headerContainer">
-                <h1>Create an Account</h1>
-            </div>
-            <div className="slideItem">
-                <p>slide 1</p>
-            </div>
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confPassword, setConfPassword] = useState('')
 
-            <div className="btnContainerSignUp">
+    const createUser = async () => {
+
+        if(confPassword !== password){
+            console.log('passwords dont match')
+            return
+        }
+
+        const newUser = {
+            email: email,
+            password: password
+        }
+        console.log(newUser)
+        setCurrentSlide(currentSlide + 1)
+    }
+
+    return (
+        <div className="pageContainer">
+            <div className="slider">
+                <div className="slide">
+                    <div className="slideTitle">
+                        <h3>Create an Account</h3>
+                    </div>
+                    <div className="slideInputs">
+                        <div className="slideItem">
+                            <p>Email</p>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email"/>
+                        </div>
+                        <div className="slideItem">
+                            <p>Password</p>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password"/>
+                        </div>
+                        <div className="slideItem">
+                            <p>Confirm Password</p>
+                            <input onChange={(e) => setConfPassword(e.target.value)}type="password"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="btnContainer">
                 <button disabled>Back</button>
                 <button onClick={() => {
-                    if (currentSlide !== 4)
-                        setCurrentSlide(currentSlide + 1)
+                    createUser()
+                    
                 }}>Next</button>
             </div>
             <div className="headerContainer">

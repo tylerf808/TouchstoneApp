@@ -10,6 +10,36 @@
     font-family: "Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif";
  }
 
+ /* Text */
+ .paragraph {
+    font-size: 1.5em;
+    margin: 1em;
+ }
+
+ .dollarSign {
+    position: relative;
+    left: 6px;
+    font-size: 20px;
+ }
+
+ #profit-label,
+ #profit-number {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    justify-content: center;
+    left: 20px;
+    padding: 6px;
+ }
+
+ #net-profit-label,
+ #net-profit-number {
+    border-top: 2px solid black;
+    justify-content: center;
+    left: 20px;
+    padding: 15px;
+    font-size: 22px;
+ }
+
  /* Containers */
  .headerContainer {
     display: flex;
@@ -29,7 +59,21 @@
  .horizontalFormContainer {
     display: grid;
     grid-template-columns: 300px 300px;
+ }
 
+ .btnContainerSignUp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+ }
+
+ .textContainer {
+    height: 500px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
  }
 
  /* Side Menu */
@@ -80,44 +124,45 @@
 
  /* SignUp carousel*/
  .slideItem {
-   display: grid;
-   grid-template-columns: 400px 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
  }
 
  .slide {
     border: none !important;
+    height: 100vh;
     display: grid;
     grid-template-columns: 400px 400px;
  }
 
- .slideInput {
-
+ .slideInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
  }
 
  .slider {
     height: 500px;
     width: 75%;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
  }
 
- .carousel {
-    border: none !important;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+ .slideTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
  }
 
  .slideLabel {
     font-size: 20px;
     margin-bottom: 5px;
- }
-
- .focusRing___1airF.carousel__slide-focus-ring {
-    outline: none !important;
- }
-
- .focusRing___1airF.carousel__slide-focus-ring {
-    outline: none !important;
  }
 
  .backgroundCanvas {
@@ -170,11 +215,7 @@
     justify-content: flex-end;
  }
 
- .dollarSign {
-    position: relative;
-    left: 6px;
-    font-size: 20px;
- }
+
 
  .verticalContainer {
     display: flex;
@@ -334,7 +375,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+    width: 100%;
  }
 
  .radioBtn {

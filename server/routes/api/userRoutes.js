@@ -29,6 +29,14 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.post('/create', async (req, res) => {
+  try {
+    const userData = await User.create({email: req.body.email, password: req.body.password})
+  } catch (err) {
+    res.status(400).json(err)
+  }
+})
+
 //Login
 router.post('/login', async (req, res) => {
   try {

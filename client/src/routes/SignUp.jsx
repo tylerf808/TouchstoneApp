@@ -11,7 +11,6 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
 
   const [insuranceFreq, setInsuranceFreq] = useState('')
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [lastSlide, setLastSlide] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [insuranceAmount, setInsuranceAmount] = useState('')
@@ -124,26 +123,20 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   switch (currentSlide) {
     case 0:
       return (
-        
-          <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
-          
-        )
-      break;
+        <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+      )
     case 1:
       return (
         <SecondPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
       )
-      break;
     case 2:
       return (
         <ThirdPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
       )
-      break;
     case 3:
       return (
         <FourthPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
       )
-      break;
     default:
 
   }

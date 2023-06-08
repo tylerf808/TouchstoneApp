@@ -48,9 +48,9 @@ export default function App() {
     <Router>
         <div className="backgroundCanvas">
           <Toolbar user={user} costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
-          <div style={{ }}>
+
             {showAlert ? <Alert className="alertMsg" severity="error">{alertMsg}</Alert> : null}
-          </div>
+
           <Routes>
             <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
             <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
