@@ -23,7 +23,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
 
   return (
     <div className='toolbar'>
-      {user ? <span style={{fontSize: 30, cursor: 'pointer', marginLeft: 30}} onClick={openNav}>&#9776;</span> : null}
+      {loggedIn ? <span style={{fontSize: 30, cursor: 'pointer', marginLeft: 30}} onClick={openNav}>&#9776;</span> : null}
       <div id="mySidenav" className='sidenav' >
         <span style={{position: 'relative', left: 200, top: -50, fontSize: 40, cursor: 'pointer'}} onClick={closeNav}>&times;</span>
         <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></div>
@@ -31,7 +31,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
         <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></div>
         <div onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></div>
       </div>
-      <h1 id='toolbar-header' style={{ fontSize: '1.3em', position: 'relative', left: 10 }}>Touchstone Route Calculator</h1>
+      <h1 className='toolbarHeader' id='toolbar-header' style={{ fontSize: '1.3em', position: 'relative', left: 10 }}>Touchstone Route Calculator</h1>
     </div >
   );
 }

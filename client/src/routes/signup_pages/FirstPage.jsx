@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-export default function FirstPage({currentSlide, setCurrentSlide}) {
+export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setAlertMsg, setShowAlert }) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -9,8 +9,17 @@ export default function FirstPage({currentSlide, setCurrentSlide}) {
 
     const createUser = async () => {
 
-        if(confPassword !== password){
-            console.log('passwords dont match')
+        setShowAlert(false)
+
+        if (email === '' || password === '' || confPassword === '') {
+            setAlertMsg('Missing an Entry')
+            setShowAlert(true)
+            return
+        }
+
+        if (confPassword !== password) {
+            setAlertMsg("Passwords do not match")
+            setShowAlert(true)
             return
         }
 
@@ -19,7 +28,26 @@ export default function FirstPage({currentSlide, setCurrentSlide}) {
             password: password
         }
         console.log(newUser)
-        setCurrentSlide(currentSlide + 1)
+
+        const response = await fetch('http://localhost:3001/api/user/create',
+            {
+                method: 'POST',
+                body: JSON.stringify(newUser),
+                headers: { "Content-Type": "application/json" }
+            }).then((res) => res.json())
+
+        console.log(response)
+
+        if (response.user_id) {
+            setUser(response.user_id)
+            setCurrentSlide(currentSlide + 1)
+            setShowAlert(false)
+            return
+        } else {
+            setAlertMsg('User with that email already exists')
+            setShowAlert(true)
+            return
+        }
     }
 
     return (
@@ -32,24 +60,24 @@ export default function FirstPage({currentSlide, setCurrentSlide}) {
                     <div className="slideInputs">
                         <div className="slideItem">
                             <p>Email</p>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email"/>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" />
                         </div>
                         <div className="slideItem">
                             <p>Password</p>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password"/>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" />
                         </div>
                         <div className="slideItem">
                             <p>Confirm Password</p>
-                            <input onChange={(e) => setConfPassword(e.target.value)}type="password"/>
+                            <input onChange={(e) => setConfPassword(e.target.value)} type="password" />
                         </div>
                     </div>
                 </div>
             </div>
             <div className="btnContainer">
-                <button disabled>Back</button>
-                <button onClick={() => {
+                <button className="btnSignUp" disabled>Back</button>
+                <button className="btnSignUp" onClick={() => {
                     createUser()
-                    
+
                 }}>Next</button>
             </div>
             <div className="headerContainer">

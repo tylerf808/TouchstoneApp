@@ -123,7 +123,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   switch (currentSlide) {
     case 0:
       return (
-        <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+        <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} setUser={setUser} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />
       )
     case 1:
       return (

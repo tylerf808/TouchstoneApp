@@ -73,7 +73,7 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, set
                     <button className='btn1' onClick={logIn}>Log In</button>
                 </div>
             </div>
-            <div className='textContainer'>
+            <div className='headerContainer'>
                 <p style={{ fontSize: '1.2em', marginTop: 10 }}>Don't have an account? <Link to="/signup">Sign up here!</Link></p>
             </div>
 
