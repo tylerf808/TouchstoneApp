@@ -27,19 +27,18 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
             email: email,
             password: password
         }
-        console.log(newUser)
 
-        const response = await fetch('http://localhost:3001/api/user/create',
+        console.log(email)
+
+        const response = await fetch('http://localhost:3001/api/user/' + email,
             {
-                method: 'POST',
-                body: JSON.stringify(newUser),
-                headers: { "Content-Type": "application/json" }
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
             }).then((res) => res.json())
 
         console.log(response)
 
-        if (response.user_id) {
-            setUser(response.user_id)
+        if (response === null) {
             setCurrentSlide(currentSlide + 1)
             setShowAlert(false)
             return
@@ -77,7 +76,6 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
                 <button className="btnSignUp" disabled>Back</button>
                 <button className="btnSignUp" onClick={() => {
                     createUser()
-
                 }}>Next</button>
             </div>
             <div className="headerContainer">

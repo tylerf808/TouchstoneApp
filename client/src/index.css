@@ -77,9 +77,47 @@
  }
 
  .alertContainer {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ }
+
+ .btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+ }
+
+ /* Buttons */
+ .btn1 {
+    position: relative;
+    color: rgb(15, 44, 83);
+    background-color: #E9F2FC;
+    width: 160px;
+    height: 30px;
+    margin: 1em;
+ }
+
+ .btn2 {
+    position: relative;
+    color: rgb(97, 17, 17);
+    background-color: #e5d5d5;
+    width: 160px;
+    height: 30px;
+    margin: 1em;
+ }
+
+ .btnSignUp {
+    margin: 2em;
+    width: 8em;
+    height: 3em;
+    background-color: rgb(208, 201, 193);
+ }
+
+ .radioBtn {
+    margin: .2em;
  }
 
  /* Side Menu */
@@ -90,7 +128,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: lightblue;
+    background-color: rgb(82, 81, 80);
     overflow-x: hidden;
     transition: 0.2s;
     padding-top: 60px;
@@ -129,23 +167,25 @@
  }
 
  .toolbarHeader {
-   color: rgb(242, 242, 242);
-   font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-weight: 300;
  }
 
  /* Alert Msg */
  .alertMsg {
-   position: fixed;
-   z-index: 1;
+    position: fixed;
+    z-index: 1;
  }
 
  /* SignUp carousel*/
  .slideItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
+    display: grid;
+    grid-template-columns: 200px 200px;
+    margin: 1em;
+ }
+
+ .slideItemText {
+
  }
 
  .slide {
@@ -175,6 +215,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: 2em;
  }
 
  .slideLabel {
@@ -367,41 +408,7 @@
     -webkit-appearance: none;
  }
 
- .btn1 {
-    position: relative;
-    color: rgb(15, 44, 83);
-    background-color: #E9F2FC;
-    width: 160px;
-    height: 30px;
-    margin: 1em;
- }
 
- .btn2 {
-    position: relative;
-    color: rgb(97, 17, 17);
-    background-color: #e5d5d5;
-    width: 160px;
-    height: 30px;
-    margin: 1em;
- }
-
- .btnContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
- }
-
- .btnSignUp {
-   margin: 40px;
-   width: 150px;
-   height: 60px;
- }
-
- .radioBtn {
-    margin: .2em;
- }
 
  #profit-label,
  #profit-number {

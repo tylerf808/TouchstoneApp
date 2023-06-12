@@ -11,36 +11,37 @@ export default function ThirdPage({currentSlide, setCurrentSlide}){
                     </div>
                     <div className="slideInputs">
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <p className="slideItemText">Enter your labor rate as a percentage of revenue.</p>
+                            <input type="number" />
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <p className="slideItemText">Enter your payroll tax rate as a percentage of revenue.</p>
+                            <input type="number" />
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <p className="slideItemText">Enter your dispatch fee as a percentage of revenue.</p>
+                            <input type='number'/>
                         </div>
                         <div className="slideItem">
-                            <input />
+                            <p className="slideItemText">Enter your factor fee as a percentage of revenue.</p>
+                            <input type='number'/>
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <p className="slideItemText">Enter your MPG.</p>
+                            <input type="number"/>
                         </div>
                         <div className="slideItem">
-                            <p></p>
+                            <p className="slideItemText">Enter your other direct costs (ODC) as a monthly expense.</p>
                             <input />
                         </div>
                     </div>
                 </div>
             </div>
             <div className="btnContainerSignUp">
-                <button onClick={() => {
+                <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide - 1)
                 }}>Back</button>
-                <button onClick={() => {
+                <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide + 1)
                 }}>Next</button>
             </div>

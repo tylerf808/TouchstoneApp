@@ -14,10 +14,10 @@ export default function SecondPage({ currentSlide, setCurrentSlide }) {
                 <p className="paragraph">Press <span style={{fontWeight: 'bold'}} >next</span> to continue.</p>
             </div>
             <div className="btnContainerSignUp">
-                <button onClick={() => {
+                <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide - 1)
                 }}>Back</button>
-                <button onClick={() => {
+                <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide + 1)
                 }}>Next</button>
             </div>
