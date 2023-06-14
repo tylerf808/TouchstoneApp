@@ -46,7 +46,6 @@ export default function App() {
 
   return (
     <Router>
-        <div className="backgroundCanvas">
           <Toolbar user={user} costs={costs} loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser} setCosts={setCosts} />
           <div className="alertContainer"> {showAlert ? <Alert className="alertMsg" severity="error">{alertMsg}</Alert> : null} </div> 
           <Routes>
@@ -56,7 +55,6 @@ export default function App() {
             <Route path="signup" user={user} element={<SignUp showAlert={showAlert} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
             <Route path="costs" element={<CostsPage loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
           </Routes>
-        </div>
     </Router>
   );
 }

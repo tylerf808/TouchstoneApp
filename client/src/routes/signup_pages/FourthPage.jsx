@@ -11,39 +11,66 @@ export default function FourthPage({ currentSlide, setCurrentSlide }) {
                     </div>
                     <div className="slideInputs">
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Select your Insurance payment frequency</p>
+                            </div>
+                            <div className="radioMenu">
+                                <div className="radioItem">
+                                    <p className="radioLabel">Monthly</p>
+                                    <input value='monthly' className="radioInput" type="radio" name="insuranceType" />
+                                </div>
+                                <div className="radioItem">
+                                    <p className="radioLabel">Bi-Monthly</p>
+                                    <input value='bi-monthly' className="radioInput" type="radio" name="insuranceType" />
+                                </div>
+                                <div className="radioItem">
+                                    <p className="radioLabel">Quarterly</p>
+                                    <input value='quarterly' className="radioInput" type="radio" name="insuranceType" />
+                                </div>
+                                <div className="radioItem">
+                                    <p className="radioLabel">Annually</p>
+                                    <input value='annually' className="radioInput" type="radio" name="insuranceType" />
+                                </div>
+                            </div>
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Enter your Insurance payment amount</p>
+                            </div>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Enter your trailer lease monthly payment</p>
+                            </div>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Enter your tractor lease monthly payment</p>
+                            </div>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Enter your monthly parking cost</p>
+                            </div>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <p></p>
-                            <input />
+                            <div className="slideLabelContainer">
+                                <p className="slideLabel">Enter your monthly G&A cost</p>
+                            </div>
+                            <input className="newCostInput" type="number" />
                         </div>
                     </div>
                 </div>
             </div>
             <div className="btnContainerSignUp">
-                <button onClick={() => {
+                <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide - 1)
                 }}>Back</button>
-                <button >Submit</button>
-            </div>
-            <div className="headerContainer">
-                <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
+                <button className="btnSignUp" >Submit</button>
             </div>
         </div>
     )

@@ -58,16 +58,22 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
                     </div>
                     <div className="slideInputs">
                         <div className="slideItem">
-                            <p>Email</p>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email" />
+                            <div className="slideLabelContainerCreateAcct">
+                                <p className="slideLabel">Email</p>
+                            </div>
+                            <input className="emailInputSignUp" onChange={(e) => setEmail(e.target.value)} type="email" />
                         </div>
                         <div className="slideItem">
-                            <p>Password</p>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password" />
+                            <div className="slideLabelContainerCreateAcct">
+                                <p className="slideLabel">Password</p>
+                            </div>
+                            <input className="passwordInputSignUp" onChange={(e) => setPassword(e.target.value)} type="password" />
                         </div>
                         <div className="slideItem">
-                            <p>Confirm Password</p>
-                            <input onChange={(e) => setConfPassword(e.target.value)} type="password" />
+                            <div className="slideLabelContainerCreateAcct">
+                                <p className="slideLabel">Confirm Password</p>
+                            </div>
+                            <input className="passwordInputSignUp" onChange={(e) => setConfPassword(e.target.value)} type="password" />
                         </div>
                     </div>
                 </div>
@@ -75,11 +81,23 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
             <div className="btnContainer">
                 <button className="btnSignUp" disabled>Back</button>
                 <button className="btnSignUp" onClick={() => {
-                    createUser()
+                    //createUser()
+                    setShowAlert(false)
+                    if (email === '' || password === '' || confPassword === '') {
+                        setAlertMsg('Missing an Entry')
+                        setShowAlert(true)
+                        return
+                    }
+                    if (confPassword !== password) {
+                        setAlertMsg("Passwords do not match")
+                        setShowAlert(true)
+                        return
+                    }
+                    setCurrentSlide(currentSlide + 1)
                 }}>Next</button>
             </div>
             <div className="headerContainer">
-                <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
+                <p style={{ marginTop: 50 }}>Already have an account? <Link style={{ color: 'orange' }} to='/'>Log in here!</Link></p>
             </div>
         </div>
     )

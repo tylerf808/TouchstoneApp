@@ -23,7 +23,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
 
   return (
     <div className='toolbar'>
-      {loggedIn ? <span style={{fontSize: 30, cursor: 'pointer', marginLeft: 30}} onClick={openNav}>&#9776;</span> : null}
+      {loggedIn ? <span style={{fontSize: '2em', position: 'relative', right: '40%'}} onClick={openNav}>&#9776;</span> : null}
       <div id="mySidenav" className='sidenav' >
         <span style={{position: 'relative', left: 200, top: -50, fontSize: 40, cursor: 'pointer'}} onClick={closeNav}>&times;</span>
         <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></div>

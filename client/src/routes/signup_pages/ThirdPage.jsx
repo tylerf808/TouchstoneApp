@@ -11,28 +11,28 @@ export default function ThirdPage({currentSlide, setCurrentSlide}){
                     </div>
                     <div className="slideInputs">
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your labor rate as a percentage of revenue.</p>
-                            <input type="number" />
+                            <p className="slideLabel">Enter your labor rate as a percentage of revenue.</p>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your payroll tax rate as a percentage of revenue.</p>
-                            <input type="number" />
+                            <p className="slideLabel">Enter your payroll tax rate as a percentage of revenue.</p>
+                            <input className="newCostInput" type="number" />
                         </div>
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your dispatch fee as a percentage of revenue.</p>
-                            <input type='number'/>
+                            <p className="slideLabel">Enter your dispatch fee as a percentage of revenue.</p>
+                            <input className="newCostInput" type='number'/>
                         </div>
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your factor fee as a percentage of revenue.</p>
-                            <input type='number'/>
+                            <p className="slideLabel">Enter your factor fee as a percentage of revenue.</p>
+                            <input className="newCostInput" type='number'/>
                         </div>
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your MPG.</p>
-                            <input type="number"/>
+                            <p className="slideLabel">Enter your MPG.</p>
+                            <input className="newCostInput" type="number"/>
                         </div>
                         <div className="slideItem">
-                            <p className="slideItemText">Enter your other direct costs (ODC) as a monthly expense.</p>
-                            <input />
+                            <p className="slideLabel">Enter your other direct costs (ODC) as a monthly expense.</p>
+                            <input className="newCostInput" type="number"/>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,6 @@ export default function ThirdPage({currentSlide, setCurrentSlide}){
                 <button className="btnSignUp" onClick={() => {
                     setCurrentSlide(currentSlide + 1)
                 }}>Next</button>
-            </div>
-            <div className="headerContainer">
-                <p style={{ marginTop: 50 }}>Already have an account? <Link to='/'>Log in here!</Link></p>
             </div>
         </div>
     )
