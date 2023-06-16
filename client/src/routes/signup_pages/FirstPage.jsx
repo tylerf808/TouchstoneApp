@@ -97,7 +97,7 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
                 }}>Next</button>
             </div>
             <div className="headerContainer">
-                <p style={{ marginTop: 50 }}>Already have an account? <Link style={{ color: 'orange' }} to='/'>Log in here!</Link></p>
+                <p style={{ marginTop: 50 }}>Already have an account? <Link id="sign-up-link" to='/'>Log in here!</Link></p>
             </div>
         </div>
     )

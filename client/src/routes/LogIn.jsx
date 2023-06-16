@@ -54,27 +54,27 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, set
     return (
         <div className='pageContainer'>
             <div className='headerContainer'>
-                <h2>Log In</h2>
+                <h1>Log In</h1>
             </div>
-            <div className='verticalFormContainer'>
-                <div className="formItem">
-                    <p className="text1">Email:</p>
+            <div className='logInContainer'>
+                <div className="logInFormItem">
+                    <p>Email:</p>
                     <input className='textInput' type='email' id="email-login"></input>
                 </div>
-                <div className="formItem">
-                    <p className="text1">Password:</p>
+                <div className="logInFormItem">
+                    <p>Password:</p>
                     <input className='textInput' type='password' id="password-login"></input>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', position: 'relative', right: 20 }}>
-                    <p style={{ marginRight: 5 }}>Show Password</p>
-                    <input onClick={togglePassword} type='checkbox'></input>
+                <div className='showPasswordContainer'>
+                    <p>Show Password</p>
+                    <input className='showPasswordInput' onClick={togglePassword} type='checkbox'></input>
                 </div>
                 <div className='btnContainer'>
-                    <button className='btn1' onClick={logIn}>Log In</button>
+                    <button className='logInBtn' onClick={logIn}>Log In</button>
                 </div>
             </div>
-            <div className='headerContainer'>
-                <p style={{ fontSize: '1.2em', marginTop: 10 }}>Don't have an account? <Link to="/signup">Sign up here!</Link></p>
+            <div className='signUpLinkContainer'>
+                <p >Don't have an account? <Link id='sign-up-link' to="/signup">Sign up here!</Link></p>
             </div>
 
         </div>

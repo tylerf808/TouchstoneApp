@@ -199,54 +199,54 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
   return (
     <div className="pageContainer">
       <div className="headerContainer">
-        <h2>Check Job</h2>
+        <h1>Check Job</h1>
       </div>
       <form className="verticalFormContainer" id="check-job-form">
         <div className="formItem">
-          <label htmlFor='start'>Start</label>
+          <p >Start</p>
           <Autocomplete className="inputContainer">
             <input className="textInput" name="start" id="start" type="text" />
           </Autocomplete>
         </div>
         <div className="formItem">
-          <label htmlFor='pickUp'>Pick Up</label>
+          <p >Pick Up</p>
           <Autocomplete className="inputContainer">
             <input className="textInput" name="pickUp" id="pick-up" type="text" />
           </Autocomplete>
         </div>
         <div className="formItem">
-          <label htmlFor='dropOff'>Drop Off</label>
+          <p >Drop Off</p>
           <Autocomplete className="inputContainer" id='drop-off-auto'>
             <input className="textInput" name="dropOff" id="drop-off" type="text" />
           </Autocomplete>
         </div>
         <div className="formItem">
-          <label htmlFor="revenue">Revenue</label>
+          <p >Revenue</p>
           <div className="inputContainer" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
             <p style={{ fontSize: 20 }}>$</p>
             <input className="textInput" style={{ width: 150, marginLeft: 0 }} type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
           </div>
         </div>
         <div className="formItem">
-          <label htmlFor="date">Date</label>
+          <p >Date</p>
           <div className="inputContainer">
             <input className="textInput" style={{ width: 120 }} type='date' name="date" id='date' />
           </div>
         </div>
         <div className="formItem">
-          <label htmlFor="client">Client</label>
+          <p >Client</p>
           <div className="inputContainer">
             <input className="textInput" id="client" placeholder="Enter Clients Name" name="client" ></input>
           </div>
         </div>
         <div className="formItem">
-          <label htmlFor="driver">Driver</label>
+          <p >Driver</p>
           <div className="inputContainer">
             <input className="textInput" id="driver" name="driver" placeholder='Enter Drivers Name' ></input>
           </div>
         </div>
         <div className="btnContainer">
-          <button className="btn1" onClick={checkJob} >Check Job</button>
+          <button className="checkJobBtn" onClick={checkJob} >Check Job</button>
         </div>
       </form>
       <div className="modal" id="modal" style={{ display: 'none' }}>

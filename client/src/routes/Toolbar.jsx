@@ -23,15 +23,15 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
 
   return (
     <div className='toolbar'>
-      {loggedIn ? <span style={{fontSize: '2em', position: 'relative', right: '40%'}} onClick={openNav}>&#9776;</span> : null}
+      {loggedIn ? <span id='menu-icon' onClick={openNav}>&#9776;</span> : null}
       <div id="mySidenav" className='sidenav' >
-        <span style={{position: 'relative', left: 200, top: -50, fontSize: 40, cursor: 'pointer'}} onClick={closeNav}>&times;</span>
-        <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/addjob'>Add Job</Link></div>
-        <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/costs'>Costs</Link></div>
-        <div onClick={closeNav}><Link style={{ textDecoration: 'none', color: 'black' }} to='/jobs'>Previous Jobs</Link></div>
-        <div onClick={handleLogOut}><Link style={{ textDecoration: 'none', color: 'black' }} to='/'>Log Out</Link></div>
+        <span className='closebtn' onClick={closeNav}>&times;</span>
+        <div className='sideNavLink' onClick={closeNav}><Link to='/addjob'>Add Job</Link></div>
+        <div className='sideNavLink' onClick={closeNav}><Link to='/costs'>Costs</Link></div>
+        <div className='sideNavLink' onClick={closeNav}><Link to='/jobs'>Previous Jobs</Link></div>
+        <div className='sideNavLink' onClick={handleLogOut}><Link to='/'>Log Out</Link></div>
       </div>
-      <h1 className='toolbarHeader' id='toolbar-header' style={{ fontSize: '1.3em', position: 'relative', left: 10 }}>Touchstone Route Calculator</h1>
+      <h1 className='toolbarHeader' id='toolbar-header' style={{ fontSize: '1.3em', position: 'relative', left: 10 }}>TOUCHSTONE LOGISTICS</h1>
     </div >
   );
 }
