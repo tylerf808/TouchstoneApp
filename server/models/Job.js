@@ -106,12 +106,12 @@ Job.init(
     driver: {
       type: DataTypes.STRING
     },
-    user_id: {
+    manager: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
-        key: "user_id",
-      },
+        model: "manager",
+        key: "user_id"
+      }
     },
   },
   {

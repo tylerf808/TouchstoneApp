@@ -1,18 +1,25 @@
-const User = require('./User')
 const Costs = require('./Costs')
 const Job = require('./Job')
+const Manager = require('./Manager')
+const Driver = require('./Driver')
 
-User.hasMany(Job, {
+Manager.hasMany(Job, {
     foreignKey: 'job_id',
-    onDelete: 'CASCADE'
 })
 
-User.hasOne(Costs, {
+Manager.hasMany(Driver, {
+    foreignKey: 'user_id',
+})
+
+Manager.hasOne(Costs, {
     foreignKey: 'costs_id',
-    onDelete: 'CASCADE'
 })
 
-Job.belongsTo(User, {
+Job.belongsTo(Manager, {
+    foreignKey: 'user_id'
+})
+
+Job.belongsTo(Driver, {
     foreignKey: 'user_id'
 })
 
@@ -20,7 +27,7 @@ Job.hasOne(Costs, {
     foreignKey: 'costs_id'
 })
 
-Costs.belongsTo(User, {
+Costs.belongsTo(Driver, {
     foreignKey: 'user_id'
 })
 
@@ -28,4 +35,4 @@ Costs.belongsTo(Job, {
     foreignKey: 'job_id'
 })
 
-module.exports = { User, Job, Costs }
+module.exports = { Driver, Manager, Job, Costs }

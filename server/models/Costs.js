@@ -52,7 +52,7 @@ Costs.init(
         user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: 'driver',
                 key: 'user_id'
             }
         }

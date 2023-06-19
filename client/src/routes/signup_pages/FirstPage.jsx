@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setAlertMsg, setShowAlert }) {
 
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confPassword, setConfPassword] = useState('')
 
@@ -23,30 +24,37 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
             return
         }
 
-        const newUser = {
+        const newManager = {
             email: email,
+            username: username,
             password: password
         }
 
-        console.log(email)
-
-        const response = await fetch('http://localhost:3001/api/user/' + email,
-            {
-                method: 'GET',
-                headers: { "Content-Type": "application/json" },
-            }).then((res) => res.json())
+        
+        const response = await fetch('http://localhost:3001/api/user/manager', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newManager)
+        })
 
         console.log(response)
 
-        if (response === null) {
-            setCurrentSlide(currentSlide + 1)
-            setShowAlert(false)
-            return
-        } else {
-            setAlertMsg('User with that email already exists')
-            setShowAlert(true)
-            return
-        }
+        // const response = await fetch('http://localhost:3001/api/user/' + email,
+        //     {
+        //         method: 'GET',
+        //         headers: { "Content-Type": "application/json" },
+        //     }).then((res) => res.json())
+
+
+        // if (response === null) {
+        //     setCurrentSlide(currentSlide + 1)
+        //     setShowAlert(false)
+        //     return
+        // } else {
+        //     setAlertMsg('User with that email already exists')
+        //     setShowAlert(true)
+        //     return
+        // }
     }
 
     return (
@@ -62,6 +70,12 @@ export default function FirstPage({ currentSlide, setCurrentSlide, setUser, setA
                                 <p className="slideLabel">Email</p>
                             </div>
                             <input className="emailInputSignUp" onChange={(e) => setEmail(e.target.value)} type="email" />
+                        </div>
+                        <div className="slideItem">
+                            <div className="slideLabelContainerCreateAcct">
+                                <p className="slideLabel">Username</p>
+                            </div>
+                            <input className="emailInputSignUp" onChange={(e) => setUsername(e.target.value)} type="text" />
                         </div>
                         <div className="slideItem">
                             <div className="slideLabelContainerCreateAcct">

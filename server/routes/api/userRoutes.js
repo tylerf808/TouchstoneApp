@@ -1,12 +1,13 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const User = require('../../models/User')
+const Manager = require('../../models/Manager')
+const Driver = require('../../models/Driver')
 const Costs = require('../../models/Costs')
 
-//Check if user with an email already exists during sign up.
+//Check if driver with an email already exists during sign up.
 router.get('/:email', async (req, res) => {
   try{
-    const userData = await User.findOne({
+    const userData = await Driver.findOne({
       where: {
         email: req.params.email 
       }
@@ -17,46 +18,65 @@ router.get('/:email', async (req, res) => {
   }
 })
 
-//Create a user
-router.post('/', async (req, res) => {
+//Create a Driver
+router.post('/driver', async (req, res) => {
   try {
-    const userData = await User.create({email: req.body.email, password: req.body.password})
-    const costsData = await Costs.create({
-      user_id: userData.user_id,
-      insurance: req.body.insurance,
-      tractorLease: req.body.tractorLease,
-      trailerLease: req.body.trailerLease,
-      dispatch: req.body.dispatch,
-      mpg: req.body.mpg,
-      laborRate: req.body.laborRate,
-      payrollTax: req.body.payrollTax,
-      factor: req.body.factor,
-      odc: req.body.odc,
-      gAndA: req.body.gAndA,
-      loan: req.body.loan,
-      repairs: req.body.repairs,
-      depreciation: req.body.depreciation
-    })
-    res.status(200).json([userData, costsData])
-  } catch (err) {
-    res.status(400).json(err)
-  }
-})
-
-router.post('/create', async (req, res) => {
-  try {
-    const userData = await User.create({email: req.body.email, password: req.body.password})
+    const userData = await Driver.create({email: req.body.email, username: req.body.username, password: req.body.password})
+    // const costsData = await Costs.create({
+    //   user_id: userData.user_id,
+    //   insurance: req.body.insurance,
+    //   tractorLease: req.body.tractorLease,
+    //   trailerLease: req.body.trailerLease,
+    //   dispatch: req.body.dispatch,
+    //   mpg: req.body.mpg,
+    //   laborRate: req.body.laborRate,
+    //   payrollTax: req.body.payrollTax,
+    //   factor: req.body.factor,
+    //   odc: req.body.odc,
+    //   gAndA: req.body.gAndA,
+    //   loan: req.body.loan,
+    //   repairs: req.body.repairs,
+    //   depreciation: req.body.depreciation
+    // })
     res.status(200).json(userData)
   } catch (err) {
     res.status(400).json(err)
   }
 })
 
+//Create a Dispatcher
+router.post('/manager', async (req, res) => {
+  try {
+    const userData = await Manager.create({email: req.body.email, username: req.body.username, password: req.body.password})
+    // const costsData = await Costs.create({
+    //   user_id: userData.user_id,
+    //   insurance: req.body.insurance,
+    //   tractorLease: req.body.tractorLease,
+    //   trailerLease: req.body.trailerLease,
+    //   dispatch: req.body.dispatch,
+    //   mpg: req.body.mpg,
+    //   laborRate: req.body.laborRate,
+    //   payrollTax: req.body.payrollTax,
+    //   factor: req.body.factor,
+    //   odc: req.body.odc,
+    //   gAndA: req.body.gAndA,
+    //   loan: req.body.loan,
+    //   repairs: req.body.repairs,
+    //   depreciation: req.body.depreciation,
+    //   drivers: req.body.drivers
+    // })
+    res.status(200).json(userData)
+  } catch (err) {
+    res.status(400).json(err)
+  }
+})
+
+
 //Login
 router.post('/login', async (req, res) => {
   try {
 
-    const userData = await User.findOne({ where: { email: req.body.email } })
+    const userData = await Driver.findOne({ where: { email: req.body.email } })
     if (!userData) {
       res.status(404).json({ message: 'Login failed. Please try again!' })
       return
