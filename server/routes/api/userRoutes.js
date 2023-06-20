@@ -3,25 +3,41 @@ const bcrypt = require('bcrypt')
 const Manager = require('../../models/Manager')
 const Driver = require('../../models/Driver')
 const Costs = require('../../models/Costs')
+const { Op } = require('sequelize')
 
 //Check if driver with an email already exists during sign up.
-router.get('/:email', async (req, res) => {
-  try{
-    const userData = await Driver.findOne({
-      where: {
-        email: req.params.email 
-      }
-    })
-    res.status(200).json(userData)
+router.get('/check', async (req, res) => {
+  try {
+    if (req.query.accountType === 'manager') {
+      const checkEmail = await Manager.findOne({
+        where: {
+          [Op.or]: [
+            { email: req.query.email },
+            { username: req.query.username }
+          ]
+        }
+      })
+      res.status(200).json(checkEmail)
+    } else {
+      const checkEmail = await Driver.findOne({
+        where: {
+          [Op.or]: [
+            { email: req.query.email },
+            { username: req.query.username }
+          ]
+        }
+      })
+      res.status(200).json(checkEmail)
+    }
   } catch (err) {
-    res.status(400).json(err)
+    res.status(500).json(err)
   }
 })
 
 //Create a Driver
 router.post('/driver', async (req, res) => {
   try {
-    const userData = await Driver.create({email: req.body.email, username: req.body.username, password: req.body.password})
+    const userData = await Driver.create({ email: req.body.email, username: req.body.username, password: req.body.password })
     // const costsData = await Costs.create({
     //   user_id: userData.user_id,
     //   insurance: req.body.insurance,
@@ -47,7 +63,7 @@ router.post('/driver', async (req, res) => {
 //Create a Dispatcher
 router.post('/manager', async (req, res) => {
   try {
-    const userData = await Manager.create({email: req.body.email, username: req.body.username, password: req.body.password})
+    const userData = await Manager.create({ email: req.body.email, username: req.body.username, password: req.body.password })
     // const costsData = await Costs.create({
     //   user_id: userData.user_id,
     //   insurance: req.body.insurance,

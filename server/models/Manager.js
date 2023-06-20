@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+const { Model, DataTypes, Sequelize } = require('sequelize')
 const sequelize = require('../config/connection')
 const bcrypt = require('bcrypt')
 
@@ -35,10 +35,6 @@ Manager.init(
                 len: [8],
             },
         },
-        drivers: {
-            type: DataTypes.ARRAY(DataTypes.INTEGER),
-            defaultValue: []
-        }
     },
     {
         hooks: {

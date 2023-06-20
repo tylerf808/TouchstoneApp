@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom"
+import { useState} from 'react'
 
 export default function ThirdPage({currentSlide, setCurrentSlide}){
+
+    const [laborRate, setLaborRate] = useState()
+    const [payrollTax, setPayrollTax] = useState()
+    const [dispatch, setDispatch] = useState()
+    const [factor, setFactor] = useState()
+    const [mpg, setMpg] = useState()
+    const [odc, setOdc] = useState()
 
     return(
         <div className="pageContainer">

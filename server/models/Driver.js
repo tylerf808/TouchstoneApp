@@ -35,6 +35,13 @@ Driver.init(
                 len: [8],
             },
         },
+        manager: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'manager',
+                key: 'user_id'
+            }
+        }
     },
     {
         hooks: {
