@@ -1,68 +1,38 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate} from "react-router-dom";
 import FirstPage from "./signup_pages/FirstPage";
 import SecondPage from "./signup_pages/SecondPage";
 import ThirdPage from "./signup_pages/ThirdPage";
 import FourthPage from "./signup_pages/FourthPage";
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 
 export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setCosts, user, setAlertMsg, setShowAlert }) {
 
-  const [insuranceFreq, setInsuranceFreq] = useState('')
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [accountType, setAccountType] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [insuranceAmount, setInsuranceAmount] = useState('')
-  const [tractorAmount, setTractorAmount] = useState('')
-  const [trailerAmount, setTrailerAmount] = useState('')
-  const [dispatchAmount, setDispatchAmount] = useState('')
-  const [factorAmount, setFactorAmount] = useState('')
-  const [odcAmount, setOdcAmount] = useState('')
-  const [loanAmount, setLoanAmount] = useState('')
-  const [repairsAmount, setRepairsAmount] = useState('')
-  const [depreciationAmount, setDepreciationAmount] = useState('')
-  const [mpgAmount, setMpgAmount] = useState('')
-  const [laborAmount, setLaborAmount] = useState('')
-  const [payrollAmount, setPayrollAmount] = useState('')
-  const [gandaAmount, setGandaAmount] = useState('')
+  const [passwordConf, setPasswordConf] = useState('')
+  const [insuranceType, setInsuranceType] = useState(0)
+  const [insuranceAmount, setInsuranceAmount] = useState(0)
+  const [tractorAmount, setTractorAmount] = useState(0)
+  const [trailerAmount, setTrailerAmount] = useState(0)
+  const [dispatchAmount, setDispatchAmount] = useState(0)
+  const [factorAmount, setFactorAmount] = useState(0)
+  const [odcAmount, setOdcAmount] = useState(0)
+  const [loanAmount, setLoanAmount] = useState(0)
+  const [repairsAmount, setRepairsAmount] = useState(0)
+  const [mpgAmount, setMpgAmount] = useState(0)
+  const [laborAmount, setLaborAmount] = useState(0)
+  const [payrollAmount, setPayrollAmount] = useState(0)
+  const [gandaAmount, setGandaAmount] = useState(0)
+  const [parkingAmount, setParkingAmount] = useState(0)
 
   const navigate = useNavigate();
-
-  const togglePassword = () => {
-    let password = document.getElementById('password-signup')
-    let passwordConf = document.getElementById('password-signup-conf')
-    if (password.type === 'password') {
-      password.type = 'text'
-      passwordConf.type = 'text'
-    } else {
-      password.type = 'password'
-      passwordConf.type = 'password'
-    }
-  }
 
   const createAccount = async () => {
 
     setShowAlert(false)
-
-    let passwordConf = document.getElementById('password-signup-conf').value
-
-    // const email = document.getElementById("email-signup").value;
-    // const password = document.getElementById("password-signup").value;
-    // const passwordConf = document.getElementById("password-signup-conf").value;
-    // const insuranceAmount = document.getElementById('insurance-amount').value
-    // const tractorAmount = document.getElementById('tractor-amount').value
-    // const trailerAmount = document.getElementById('trailer-amount').value
-    // const dispatchAmount = (document.getElementById('dispatch-amount').value / 100)
-    // const factorAmount = (document.getElementById('factor-amount').value / 100)
-    // const odcAmount = (document.getElementById('odc-amount').value / 100)
-    // const loanAmount = document.getElementById('loan-amount').value
-    // const repairsAmount = document.getElementById('repairs-amount').value
-    // const depreciationAmount = document.getElementById('depreciation-amount').value
-    // const mpgAmount = document.getElementById('mpg-amount').value
-    // const laborAmount = (document.getElementById('labor-amount').value / 100)
-    // const payrollAmount = (document.getElementById('payroll-amount').value / 100)
-    // const gandaAmount = document.getElementById('ganda-amount').value
 
     if (password !== passwordConf) {
       setAlertMsg('Password do not match')
@@ -72,7 +42,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
 
     let insurance
 
-    switch (insuranceFreq) {
+    switch (insuranceType) {
       case 'monthly':
         insurance = insuranceAmount / 30
         break;
@@ -105,7 +75,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
           gAndA: (gandaAmount / 30).toFixed(2),
           loan: (loanAmount / 30).toFixed(2),
           repairs: (repairsAmount / 30).toFixed(2),
-          depreciation: (depreciationAmount / 30).toFixed(2),
+          parking: (parkingAmount / 30).toFixed(2)
         }),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json())
@@ -123,19 +93,35 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   switch (currentSlide) {
     case 0:
       return (
-        <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} setUser={setUser} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />
+        <FirstPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} password={password}
+        setUser={setUser} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert}
+        setPassword={setPassword} passwordConf={passwordConf} setPasswordConf={setPasswordConf}
+        email={email} setEmail={setEmail} accountType={accountType} setAccountType={setAccountType}
+        username={username} setUsername={setUsername}
+        />
       )
     case 1:
       return (
-        <SecondPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+        <SecondPage  currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
       )
     case 2:
       return (
-        <ThirdPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+        <ThirdPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} 
+        laborAmount={laborAmount} payrollAmount={payrollAmount} dispatchAmount={dispatchAmount}
+        factorAmount={factorAmount} mpgAmount={mpgAmount} odcAmount={odcAmount}
+        setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} setAccountType={setAccountType}
+        setLaborAmount={setLaborAmount} setPayrollAmount={setPayrollAmount} setDispatchAmount={setDispatchAmount}
+        setFactorAmount={setFactorAmount} setMpgAmount={setMpgAmount} setOdcAmount={setOdcAmount}
+        />
       )
     case 3:
       return (
-        <FourthPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
+        <FourthPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}
+        insuranceType={insuranceType} setInsuranceType={setInsuranceType} insuranceAmount={insuranceAmount}
+        setInsuranceAmount={setInsuranceAmount} trailerAmount={trailerAmount} setTrailerAmount={setTrailerAmount}
+        tractorAmount={tractorAmount} setTractorAmount={setTractorAmount} parkingAmount={parkingAmount}
+        setParkingAmount={setParkingAmount} gandaAmount={gandaAmount} setGandaAmount={setGandaAmount}
+        />
       )
     default:
 
