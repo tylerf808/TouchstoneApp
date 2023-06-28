@@ -43,10 +43,10 @@ Costs.init(
         repairs: {
             type: DataTypes.DOUBLE
         }, 
-        depreciation: {
+        mpg: {
             type: DataTypes.DOUBLE
         },
-        mpg: {
+        parking: {
             type: DataTypes.DOUBLE
         },
         user_id: {

@@ -18,7 +18,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
   
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0px";
-    document.getElementById('toolbar-header').innerHTML = 'Touchstone Route Calculator';
+    document.getElementById('toolbar-header').innerHTML = 'TOUCHSTONE LOGISTICS';
   }
 
   return (
@@ -31,7 +31,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
         <div className='sideNavLink' onClick={closeNav}><Link to='/jobs'>Previous Jobs</Link></div>
         <div className='sideNavLink' onClick={handleLogOut}><Link to='/'>Log Out</Link></div>
       </div>
-      <h1 className='toolbarHeader' id='toolbar-header' style={{ fontSize: '1.3em', position: 'relative', left: 10 }}>TOUCHSTONE LOGISTICS</h1>
+      <h1 className='toolbarHeader' id='toolbar-header'>TOUCHSTONE LOGISTICS</h1>
     </div >
   );
 }

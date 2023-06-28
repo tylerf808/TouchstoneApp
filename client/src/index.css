@@ -146,6 +146,34 @@
     grid-template-columns: 300px 300px;
  }
 
+ .costsContainer {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-wrap: wrap;
+   width: 50%;
+ }
+
+ .costsItem {
+   margin: 3em;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+ }
+
+ .costsItem p{
+   margin-right: .5em;
+   color: rgb(236, 223, 213);
+   font-size: 1.5em;
+ }
+
+ .costsNum {
+   color: rgb(236, 223, 213);
+   font-size: 1.5em;
+ }
+
  .btnContainerSignUp {
     display: flex;
     flex-direction: row;
@@ -247,7 +275,7 @@
 
  .checkJobBtn {
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(233, 220, 208);
     width: 160px;
     height: 30px;
     margin: 1em;
@@ -314,6 +342,9 @@
  .toolbarHeader {
     color: rgb(242, 242, 242);
     font-weight: 300;
+    font-size: 1.3em;
+    position: relative;
+    left: 10px;
  }
 
  /* Alert Msg */

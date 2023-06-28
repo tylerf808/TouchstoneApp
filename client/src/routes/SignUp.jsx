@@ -4,6 +4,7 @@ import FirstPage from "./signup_pages/FirstPage";
 import SecondPage from "./signup_pages/SecondPage";
 import ThirdPage from "./signup_pages/ThirdPage";
 import FourthPage from "./signup_pages/FourthPage";
+import FifthPage from "./signup_pages/FifthPage";
 
 export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setCosts, user, setAlertMsg, setShowAlert }) {
 
@@ -30,7 +31,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
 
   const navigate = useNavigate();
 
-  const createAccount = async () => {
+  const createAccount = async (account) => {
 
     setShowAlert(false)
 
@@ -58,11 +59,41 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
     }
 
     if (showAlert === false) {
-      const response = await fetch("http://localhost:3001/api/user", {
+      if(account === 'driver'){
+        const response = await fetch("http://localhost:3001/api/user/driver", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            username: username,
+            insurance: insurance.toFixed(2),
+            tractorLease: (tractorAmount / 30).toFixed(2),
+            trailerLease: (trailerAmount / 30).toFixed(2),
+            dispatch: (dispatchAmount / 100).toFixed(2),
+            mpg: mpgAmount,
+            laborRate: (laborAmount / 100).toFixed(2),
+            payrollTax: (payrollAmount / 100).toFixed(2),
+            factor: (factorAmount / 100).toFixed(2),
+            odc: (odcAmount / 100).toFixed(2),
+            gAndA: (gandaAmount / 30).toFixed(2),
+            loan: (loanAmount / 30).toFixed(2),
+            repairs: (repairsAmount / 30).toFixed(2),
+            parking: (parkingAmount / 30).toFixed(2)
+          }),
+          headers: { "Content-Type": "application/json" },
+        }).then((res) => res.json())
+        setUser(response[0].user_id);
+        setCosts(response[1])
+        setLoggedIn(true)
+        console.log(response[1])
+        navigate('/addjob')
+      } else {
+        const response = await fetch("http://localhost:3001/api/user/manager", {
         method: "POST",
         body: JSON.stringify({
           email: email,
           password: password,
+          username: username,
           insurance: insurance.toFixed(2),
           tractorLease: (tractorAmount / 30).toFixed(2),
           trailerLease: (trailerAmount / 30).toFixed(2),
@@ -84,6 +115,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
       setLoggedIn(true)
       console.log(response[1])
       navigate('/addjob')
+      }
     } else {
       return
     }
@@ -121,10 +153,14 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
         setInsuranceAmount={setInsuranceAmount} trailerAmount={trailerAmount} setTrailerAmount={setTrailerAmount}
         tractorAmount={tractorAmount} setTractorAmount={setTractorAmount} parkingAmount={parkingAmount}
         setParkingAmount={setParkingAmount} gandaAmount={gandaAmount} setGandaAmount={setGandaAmount}
+        createAccount={createAccount} accountType={accountType} setShowAlert={setShowAlert}
         />
       )
-    default:
-
+      case 4:
+        return (
+          <FifthPage currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}
+          createAccount={createAccount} />
+        )
   }
 
 }

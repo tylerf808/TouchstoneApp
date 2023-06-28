@@ -94,33 +94,29 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
       <div className="headerContainer">
         <h2>Current Costs Per Job</h2>
       </div>
-      <div style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'solid',
-        borderWidth: 2,
-        borderRadius: 8, backgroundColor: 'white'
-      }}>
-        <div className="horizontalFormContainer">
-          <div className="horizontalFormItem">
+
+        <div className="costsContainer">
+          <div className="costsItem">
             <p>Insurance:</p>
             <CurrencyFormat
               value={costs?.insurance}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>Tractor Lease:</p>
             <CurrencyFormat
               value={costs?.tractorLease}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               Tailer Lease:</p>
             <CurrencyFormat
@@ -128,10 +124,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               Labor Rate:</p>
             <CurrencyFormat
@@ -139,10 +135,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               Payroll Tax: </p>
             <CurrencyFormat
@@ -150,10 +146,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               Dispatch:</p>
             <CurrencyFormat
@@ -161,13 +157,13 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>MPG: {costs?.mpg}</p>
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               Factor:</p>
             <CurrencyFormat
@@ -175,10 +171,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               ODC:</p>
             <CurrencyFormat
@@ -186,10 +182,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               suffix={"%"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p>
               G&A:</p>
             <CurrencyFormat
@@ -197,10 +193,10 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p className="text">
               Loan: </p>
             <CurrencyFormat
@@ -208,22 +204,21 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-          <div className="horizontalFormItem">
+          <div className="costsItem">
             <p> Depreciation:</p>
             <CurrencyFormat
               value={costs?.depreciation}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-              style={{ fontSize: 20 }}
+              className='costsNum'
             />
           </div>
-        </div>
         <div className="btnContainer">
-          <button className="btn1" onClick={openModal}>Edit Costs</button>
+          <button className="checkJobBtn" onClick={openModal}>Edit Costs</button>
         </div>
       </div>
       <div className="modal" id="modal" style={{ display: 'none' }}>
