@@ -58,11 +58,15 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, set
             </div>
             <div className='logInContainer'>
                 <div className="logInFormItem">
-                    <p>Email:</p>
+                    <div className='logInLabelContainer'>
+                        <p>Email or Username</p>
+                    </div>
                     <input className='textInput' type='email' id="email-login"></input>
                 </div>
                 <div className="logInFormItem">
-                    <p>Password:</p>
+                <div className='logInLabelContainer'>
+                        <p>Password</p>
+                    </div>
                     <input className='textInput' type='password' id="password-login"></input>
                 </div>
                 <div className='showPasswordContainer'>

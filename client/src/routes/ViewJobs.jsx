@@ -9,21 +9,19 @@ export default function ViewJobs({ user }) {
     let [jobs, setJobs] = useState()
 
     const getJobs = async () => {
-        const res = await fetch('http://localhost:3001/api/jobs?id=' + user,
+        const response = await fetch('http://localhost:3001/api/jobs?id=' + user,
             {
                 method: 'GET',
             }).then((res) => res.json())
-        if (res.length === 0) {
-            setJobs(false)
+        if(response !== null){
+            setJobs(response)
         } else {
-            const jobs = res
-            setJobs(jobs)
+            return
         }
     }
 
     useEffect(() => {
         getJobs()
-        console.log(jobs)
     }, [])
 
     const columns = [
