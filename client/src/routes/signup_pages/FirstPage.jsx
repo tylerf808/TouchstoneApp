@@ -88,7 +88,7 @@ export default function FirstPage(props) {
                     checkUser()
                 }}>Next</button>
             </div>
-            <div className="headerContainer">
+            <div className="signUpLinkContainer">
                 <p>Already have an account? <Link id="sign-up-link" to='/'>Log in here!</Link></p>
             </div>
         </div>

@@ -1,10 +1,13 @@
 import { useState } from "react"
-
+import AddDriver from "../../components/AddDrivers"
 
 export default function FifthPage(props) {
 
-    const [enterDrivers, setEnterDrivers] = useState(false)
-    const [numDrivers, setNumDrivers] = useState(0)
+    const [drivers, setDrivers] = useState([])
+
+    const createManager = () => {
+
+    }
 
     return (
         <div className="pageContainer">
@@ -13,26 +16,19 @@ export default function FifthPage(props) {
                     <div className="slideTitle">
                         <h1>Drivers</h1>
                     </div>
-                    {enterDrivers ?
-                        <div>
-                            {}
-                        </div>
-                        :
-                        <div>
-                            <p>How many drivers do you have?</p>
-                            <input type="number" onChange={(e) => setNumDrivers(e.target.value)}></input>
-                            <button onClick={() => {setEnterDrivers(true)}}>Enter</button>
-                        </div>
-                    }
+                    <div className="slideItem">
+                        <AddDriver />
+                    </div>
+                    <div className="slideItem">
+                        <button >Add Driver</button>
+                    </div>
                 </div>
             </div>
             <div className="btnContainerSignUp">
                 <button className="btnSignUp" onClick={() => {
                     props.setCurrentSlide(props.currentSlide - 1)
-                }}>back</button>
-                <button className="btnSignUp" onClick={() => {
-                    props.createAccount(props.accountType)
-                }}>Submit</button>
+                }}>Back</button>
+                <button className="btnSignUp">Submit</button>
             </div>
         </div>
     )

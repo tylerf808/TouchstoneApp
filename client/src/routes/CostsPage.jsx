@@ -87,37 +87,39 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <p className="costsLabel">Insurance:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setInsuranceValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.insurance).toFixed(2)} type="number" className="costsInput" onChange={(e) => setInsuranceValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}
+              <p className='costsNum'>$ {(costs?.insurance).toFixed(2)}</p>}
           </div>
           <div className="costsItem">
             <p className="costsLabel">Tractor Lease:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input value={costs?.tractorLease} type="number" className="costsInput" onChange={(e) => setTractorValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.tractorLease).toFixed(2)} type="number" className="costsInput" onChange={(e) => setTractorValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>
+              <p className='costsNum'>$ {(costs?.tractorLease).toFixed(2)}</p>
             }
           </div>
           <div className="costsItem">
             <p className="costsLabel">Tailer Lease:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setTrailerValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.trailerLease).toFixed(2)} type="number" className="costsInput" onChange={(e) => setTrailerValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.trailerLease).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">G&A:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setGAndAValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.gAndA).toFixed(2)} type="number" className="costsInput" onChange={(e) => setGAndAValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.gAndA).toFixed(2)}</p>}
+          </div>
         </div>
         <div className="costsHeaderContainer">
           <h1>Fixed Costs</h1>
@@ -127,58 +129,65 @@ export default function CostsPage({ user, costs, setCosts, loggedIn }) {
             <p className="costsLabel">Labor Rate:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setLaborValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.laborRate).toFixed(2)} type="number" className="costsInput" onChange={(e) => setLaborValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.laborRate).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">Payroll Tax:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setPayrollValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.payrollTax).toFixed(2)} type="number" className="costsInput" onChange={(e) => setPayrollValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.payrollTax).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">Dispatch:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput" onChange={(e) => setDispatchValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.dispatch).toFixed(2)} type="number" className="costsInput" onChange={(e) => setDispatchValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.dispatch).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">MPG:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput"  onChange={(e) => setMpgValue(e.target.value)}></input>
+                <input defaultValue={(costs?.mpg)} type="number" className="costsInput" onChange={(e) => setMpgValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'> {(costs?.mpg)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">Factor:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput"  onChange={(e) => setFactorValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.factor).toFixed(2)} type="number" className="costsInput" onChange={(e) => setFactorValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.factor).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">ODC:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput"  onChange={(e) => setOdcValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={(costs?.odc).toFixed(2)} type="number" className="costsInput" onChange={(e) => setOdcValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {(costs?.odc).toFixed(2)}</p>}
+          </div>
           <div className="costsItem">
             <p className="costsLabel">Loan:</p>
             {edit ?
               <div className="costsInputContainer">
-                <p>$</p><input type="number" className="costsInput"  onChange={(e) => setLoanValue(e.target.value)}></input>
+                <p>$</p><input defaultValue={costs?.loan.toFixed(2)} type="number" className="costsInput" onChange={(e) => setLoanValue(e.target.value)}></input>
               </div>
               :
-              <p className='costsNum'>$ {costs?.insurance}</p>}          </div>
+              <p className='costsNum'>$ {costs?.loan.toFixed(2)}</p>}
+          </div>
         </div>
       </div>
       <div className="btnContainer">

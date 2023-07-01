@@ -111,7 +111,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         checkRes.trailerLease +
         checkRes.gAndA);
     const netProfitCosts =
-      parseFloat(checkRes.depreciation +
+      parseFloat(
         checkRes.repairs +
         checkRes.loan);
     const totalCost = (operationProfitCosts) + (grossProfitCosts) + (netProfitCosts);
@@ -133,23 +133,22 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
       date: date,
       user_id: user,
       gasCost: checkRes.gasCost,
-      depreciation: parseFloat((checkRes.depreciation).toFixed(2)),
-      factor: parseFloat((checkRes.factor * pay).toFixed(2)),
-      gAndA: parseFloat(checkRes.gAndA.toFixed(2)),
-      loan: parseFloat(checkRes.loan.toFixed(2)),
-      odc: parseFloat((checkRes.odc * pay).toFixed(2)),
-      repairs: parseFloat(checkRes.repairs.toFixed(2)),
-      ratePerMile: parseFloat((pay / checkRes.distance).toFixed(2)),
-      labor: parseFloat((checkRes.laborRate * pay).toFixed(2)),
-      payrollTax: parseFloat((checkRes.payrollTax * (checkRes.laborRate * pay)).toFixed(2)),
-      netProfit: parseFloat((pay - totalCost).toFixed(2)),
-      grossProfit: parseFloat((pay - grossProfitCosts).toFixed(2)),
-      operatingProfit: parseFloat((pay - (operationProfitCosts + grossProfitCosts)).toFixed(2)),
-      insurance: parseFloat((checkRes.insurance).toFixed(2)),
-      dispatch: parseFloat((pay * checkRes.dispatch).toFixed(2)),
+      factor: parseFloat((checkRes.factor * pay)),
+      gAndA: parseFloat(checkRes.gAndA),
+      loan: parseFloat(checkRes.loan),
+      odc: parseFloat((checkRes.odc * pay)),
+      repairs: parseFloat(checkRes.repairs),
+      ratePerMile: parseFloat((pay / checkRes.distance)),
+      labor: parseFloat((checkRes.laborRate * pay)),
+      payrollTax: parseFloat((checkRes.payrollTax * (checkRes.laborRate * pay))),
+      netProfit: parseFloat((pay - totalCost)),
+      grossProfit: parseFloat((pay - grossProfitCosts)),
+      operatingProfit: parseFloat((pay - (operationProfitCosts + grossProfitCosts))),
+      insurance: parseFloat((checkRes.insurance)),
+      dispatch: parseFloat((pay * checkRes.dispatch)),
       laborRatePercent: checkRes.laborRate * 100 + "%",
-      trailer: parseFloat((checkRes.trailerLease).toFixed(2)),
-      tractor: parseFloat((checkRes.tractorLease).toFixed(2)),
+      trailer: parseFloat((checkRes.trailerLease)),
+      tractor: parseFloat((checkRes.tractorLease)),
       totalFixedCost: parseFloat((
         checkRes.tractorLease +
         checkRes.trailerLease +
@@ -222,15 +221,15 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         </div>
         <div className="formItem">
           <p >Revenue</p>
-          <div className="inputContainer" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <p style={{ fontSize: 20 }}>$</p>
-            <input className="textInput" style={{ width: 150, marginLeft: 0 }} type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
+          <div className="inputContainer" >
+            <p>$</p>
+            <input className="textInput"  type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
           </div>
         </div>
         <div className="formItem">
           <p >Date</p>
           <div className="inputContainer">
-            <input className="textInput" style={{ width: 120 }} type='date' name="date" id='date' />
+            <input className="textInput"  type='date' name="date" id='date' />
           </div>
         </div>
         <div className="formItem">
@@ -249,20 +248,20 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
           <button className="checkJobBtn" onClick={checkJob} >Check Job</button>
         </div>
       </form>
-      <div className="modal" id="modal" style={{ display: 'none' }}>
+      <div className="modal" id="modal">
         <div className="jobModalContent" id="modal-content">
           <span className="close" id="close-modal" onClick={() => {
             const modal = document.getElementById('modal')
             modal.style.display = 'none';
           }}>&times;</span>
 
-          {showLoading ? <CircularProgress sx={{ color: 'blue', position: 'relative', top: '45%', left: '45%' }}></CircularProgress> : null}
+          {showLoading ? <CircularProgress className="loadingCircle"></CircularProgress> : null}
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div >
             {showResults ?
               <>
-                <div className="headerContainer" style={{ backgroundColor: 'white', marginBottom: 0 }}>
-                  {profitable ? <h2 style={{ color: 'green', marginBottom: 10 }}>Job is Profitable</h2> : <h2 style={{ color: 'red', marginBottom: 10 }}>Job is NOT Profitable</h2>}
+                <div className="headerContainer" >
+                  {profitable ? <h2 >Job is Profitable</h2> : <h2>Job is NOT Profitable</h2>}
                 </div>
                 <div className="checkJobDisplay" >
                   <div id="profit-label" className="jobDisplayItem" style={{ justifyContent: 'center', left: 20 }}>
@@ -345,7 +344,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                   </div>
                 </div>
                 <div className="btnContainer">
-                  <button onClick={addJob} className="btn1">Add Job</button>
+                  <button onClick={addJob} className="addJobBtn">Add Job</button>
                   <button onClick={() => {
                     document.getElementById('modal').style.display = 'none';
                     document.getElementById("start").value = ''

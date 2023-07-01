@@ -39,10 +39,10 @@
  }
 
  .logInLabelContainer {
-   width: 50%;
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
  }
 
  .logInBtn {
@@ -130,7 +130,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 3em;
  }
 
  .verticalFormContainer {
@@ -156,42 +156,44 @@
  }
 
  .costsContainer {
-   display: grid;
-   grid-template-columns: 500px 400px;
-   grid-template-rows: 300px 300px;
+    display: grid;
+    grid-template-columns: 500px 400px;
+    grid-template-rows: 300px 300px;
  }
 
  .operatingCostsContainer {
-
+    margin: auto;
+    width: 100%;
  }
 
  .fixedCostsContainer {
-
+    margin: auto;
+    width: 100%;
  }
 
  .costsHeaderContainer {
-   margin: auto;
-   width: 50%;
-   height: 60%;
+    margin: auto;
+    width: 50%;
  }
+
 
  .costsItem {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   margin-bottom: .6em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .6em;
  }
 
- .costsItem p{
-   margin-right: .5em;
-   color: rgb(236, 223, 213);
-   font-size: 1.5em;
+ .costsItem p {
+    margin-right: .5em;
+    color: rgb(236, 223, 213);
+    font-size: 1.5em;
  }
 
  .costsNum {
-   color: rgb(236, 223, 213);
-   font-size: 1.5em;
+    color: rgb(236, 223, 213);
+    font-size: 1.5em;
  }
 
  .btnContainerSignUp {
@@ -267,10 +269,20 @@
  }
 
  /* Buttons */
+
+.addJobBtn {
+   position: relative;
+    color: rgb(205, 239, 207);
+    background-color: rgb(30, 97, 17);
+    width: 160px;
+    height: 30px;
+    margin: 1em;
+}
+
  .btn2 {
     position: relative;
-    color: rgb(97, 17, 17);
-    background-color: #e5d5d5;
+    color: rgb(227, 210, 210);
+    background-color: #aa2d2d;
     width: 160px;
     height: 30px;
     margin: 1em;
@@ -402,7 +414,7 @@
  }
 
  .slider {
-    height: 600px;
+    margin-top: 5%;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -452,7 +464,7 @@
  .checkJobDisplay {
     display: grid;
     grid-template-columns: 200px 200px;
-    background-color: white;
+    background-color: rgb(100, 100, 100);
     margin-bottom: 1em
  }
 
@@ -477,7 +489,7 @@
  }
 
  .modalContent {
-    background-color: #fefefe;
+    background-color: rgb(100, 100, 100);
     margin: 8% auto;
     padding: 20px;
     border: 2px solid #888;
@@ -487,13 +499,11 @@
  }
 
  .jobModalContent {
-    background-color: #fefefe;
+    background-color: rgb(100, 100, 100);
     margin: 8% auto;
     padding: 20px;
-    border: 2px solid #888;
     width: 500px;
-    height: 700px;
-    border-radius: 8px;
+    height: 750px;
  }
 
  .jobModalContent p {
@@ -559,16 +569,24 @@
     accent-color: orange;
  }
 
- .costsInputContainer {
+ .addDriversContainer {
    display: flex;
-   flex-direction: row;
-   justify-content: flex-end;
+   flex-direction: column;
    align-items: center;
+   justify-content: center;
+ }
+
+ .costsInputContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
  }
 
  .costsInput {
-   width: 33%;
-   background-color: rgb(236, 223, 213)
+    width: 33%;
+    font-size: 1em;
+    background-color: rgb(236, 223, 213)
  }
 
  .dollarInput {
@@ -596,14 +614,14 @@
  }
 
  .accountTypeMenu {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
  }
 
- .accountTypeMenu p{
-   margin-left: 1.5em;
-   margin-right: .2em;
+ .accountTypeMenu p {
+    margin-left: 1.5em;
+    margin-right: .2em;
  }
 
  #menu-icon {
@@ -694,6 +712,4 @@
        align-items: center;
        justify-content: space-evenly;
     }
-
-
  }
