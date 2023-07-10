@@ -49,15 +49,16 @@ router.get('/check', async (req, res) => {
 //Query costs associated with a user
 //TODO: make it check the id of the costs obj and bring back the one associated to who signs in
 router.get('/', async (req, res) => {
-
-  const costsData = await Costs.findAll({
-    where: {
-      user_id: req.query.id
-    }
-  }).catch((err) => {
-    res.json(err)
-  })
-  res.json(costsData)
+  try {
+    const costsData = await Costs.findAll({
+      where: {
+        user_id: req.query.id
+      }
+    })
+    res.status(200).json(costsData)
+  } catch (error) {
+    res.status(404).json(error)
+  }
 })
 
 //////POST Routes
@@ -80,10 +81,6 @@ router.put('/', async (req, res) => {
         user_id: req.query.id,
       },
     })
-    if (!costsData[0]) {
-      res.status(404).json({ message: 'No costs associated with this profile' })
-      return
-    }
     res.status(200).json(costsData)
   } catch (err) {
     res.status(500).json(err)

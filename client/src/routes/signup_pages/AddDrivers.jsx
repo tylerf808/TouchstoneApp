@@ -5,10 +5,6 @@ export default function FifthPage(props) {
 
     const [drivers, setDrivers] = useState([])
 
-    const createManager = () => {
-
-    }
-
     return (
         <div className="pageContainer">
             <div className="slider">

@@ -7,7 +7,7 @@ export default function FirstPage(props) {
 
         props.setShowAlert(false)
 
-        if (props.email === '' || props.password === '' || props.passwordConf === '' || props.accountType === '') {
+        if (props.email === '' || props.password === '' || props.passwordConf === '') {
             props.setAlertMsg('Missing an Entry')
             props.setShowAlert(true)
             return
@@ -23,8 +23,6 @@ export default function FirstPage(props) {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         }).then((res) => res.json()).catch((err) => console.log(err))
-
-        console.log(response)
 
         if (response === null) {
             props.setCurrentSlide(props.currentSlide + 1)
@@ -68,17 +66,6 @@ export default function FirstPage(props) {
                                 <p className="slideLabel">Confirm Password</p>
                             </div>
                             <input className="passwordInputSignUp" onChange={(e) => props.setPasswordConf(e.target.value)} type="password" />
-                        </div>
-                        <div className="slideItem">
-                            <div className="slideLabelContainerCreateAcct">
-                                <p className="slideLabel">Driver or Manager</p>
-                            </div>
-                            <div className="accountTypeMenu">
-                                <p className="accountTypeMenuLabel">Driver</p>
-                                <input className="radioInput" type="radio" name="accountType" value='driver' onChange={(e) => props.setAccountType(e.target.value)}></input>
-                                <p className="accountTypeMenuLabel">Manager</p>
-                                <input className="radioInput" type="radio" name="accountType" value='manager' onChange={(e) => props.setAccountType(e.target.value)}></input>
-                            </div>
                         </div>
                     </div>
                 </div>
