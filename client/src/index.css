@@ -58,7 +58,7 @@
     cursor: pointer;
  }
 
- /*** 
+ /****/
 
  /**/
 
@@ -271,14 +271,14 @@
 
  /* Buttons */
 
-.addJobBtn {
-   position: relative;
+ .addJobBtn {
+    position: relative;
     color: rgb(205, 239, 207);
     background-color: rgb(30, 97, 17);
     width: 160px;
     height: 30px;
     margin: 1em;
-}
+ }
 
  .btn2 {
     position: relative;
@@ -287,6 +287,15 @@
     width: 160px;
     height: 30px;
     margin: 1em;
+ }
+
+ .btnAddDriver {
+    margin: 1em;
+    width: 6em;
+    height: 2em;
+    border: .05em solid black;
+    border-radius: 5%;
+    background-color: rgb(233, 220, 208);
  }
 
  .btnSignUp {
@@ -571,10 +580,32 @@
  }
 
  .addDriversContainer {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+   position: relative;
+    height: 500px;
+    width: 400px;
+    margin: auto;
+    overflow-y: auto;
+ }
+
+ .addDriverBtnContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+ }
+
+ .driverInputs {
+    border: .1em solid #cecece;
+    background-color: #797979;
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 25%;
+    margin-top: 1em;
+    width: 200px;
+    padding: 1em
  }
 
  .costsInputContainer {

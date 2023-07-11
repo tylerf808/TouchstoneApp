@@ -1,11 +1,11 @@
 import { useState } from "react"
 
-export default function AddDriver({ numDrivers, setNumDrivers }) {
+export default function DriverInput({ numDrivers, setNumDrivers }) {
 
     const [finalDriver, setFinalDriver] = useState(false)
 
     return (
-        <div className="addDriversContainer">
+        <div className="driverInputs">
             <div className="addDriversItem">
                 <p>Drivers Email</p>
                 <input type="email"></input>

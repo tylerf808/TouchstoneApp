@@ -2,6 +2,11 @@ const Costs = require('./Costs')
 const Job = require('./Job')
 const Manager = require('./Manager')
 const Driver = require('./Driver')
+const Dispatcher = require('./Dispatcher')
+
+Dispatcher.hasOne(Manager, {
+    foreignKey: 'user_id'
+})
 
 Manager.hasMany(Job, {
     foreignKey: 'job_id'

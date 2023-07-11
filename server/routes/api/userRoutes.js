@@ -4,6 +4,7 @@ const Manager = require('../../models/Manager')
 const Driver = require('../../models/Driver')
 const Costs = require('../../models/Costs')
 const { Op } = require('sequelize')
+const Dispatcher = require('../../models/Dispatcher')
 
 //Check if driver with an email already exists during sign up.
 router.get('/check', async (req, res) => {
@@ -60,7 +61,7 @@ router.post('/driver', async (req, res) => {
   }
 })
 
-//Create a Dispatcher
+//Create a Manager
 router.post('/manager', async (req, res) => {
   try {
     const userData = await Manager.create({ email: req.body.email, username: req.body.username, password: req.body.password })
@@ -87,6 +88,15 @@ router.post('/manager', async (req, res) => {
   }
 })
 
+//Create Dispatcher
+router.post('/dispatcher', async (req, res) => {
+  try {
+    const userData = await Dispatcher.create({ email: req.body.email, username: req.body.username, password: req.body.password })
+    res.status(200).json(userData)
+  } catch (err) {
+    res.status(400).json(err)
+  }
+})
 
 //Login
 router.post('/login', async (req, res) => {

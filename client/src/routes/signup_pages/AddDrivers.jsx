@@ -1,9 +1,10 @@
 import { useState } from "react"
-import AddDriver from "../../components/AddDrivers"
+import DriverInput from "../../components/DriverInput"
 
 export default function FifthPage(props) {
 
     const [drivers, setDrivers] = useState([])
+    const [inputList, setInputList] = useState([<DriverInput />])
 
     return (
         <div className="pageContainer">
@@ -12,11 +13,11 @@ export default function FifthPage(props) {
                     <div className="slideTitle">
                         <h1>Drivers</h1>
                     </div>
-                    <div className="slideItem">
-                        <AddDriver />
+                    <div className="addDriversContainer">
+                        {inputList}
+                        <div className="addDriverBtnContainer">
+                        <button className="btnAddDriver" onClick={() => setInputList(inputList.concat(<DriverInput />))}>Add Driver</button>
                     </div>
-                    <div className="slideItem">
-                        <button >Add Driver</button>
                     </div>
                 </div>
             </div>
