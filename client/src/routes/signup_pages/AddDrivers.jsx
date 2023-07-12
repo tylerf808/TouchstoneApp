@@ -1,10 +1,20 @@
 import { useState } from "react"
 import DriverInput from "../../components/DriverInput"
 
-export default function FifthPage(props) {
+export default function AddDrivers(props) {
 
-    const [drivers, setDrivers] = useState([])
-    const [inputList, setInputList] = useState([<DriverInput />])
+    const [inputList, setInputList] = useState([<DriverInput key={0} num={0} setDrivers={props.setDrivers} drivers={props.drivers} />])
+
+    const togglePassword = () => {
+        const passwords = Array.from(document.getElementsByClassName('addDriversPassword'))
+        passwords.forEach((el) => {
+            if (el.type === 'password') {
+                el.type = 'text'
+            } else {
+                el.type = 'password'
+            }
+        })
+    }
 
     return (
         <div className="pageContainer">
@@ -15,9 +25,17 @@ export default function FifthPage(props) {
                     </div>
                     <div className="addDriversContainer">
                         {inputList}
+                        <div className="showPasswordContainerDrivers">
+                            <p className="showPasswordLabel">Show Passwords</p>
+                            <input className='showPasswordInput' onClick={togglePassword} type='checkbox'></input>
+                        </div>
                         <div className="addDriverBtnContainer">
-                        <button className="btnAddDriver" onClick={() => setInputList(inputList.concat(<DriverInput />))}>Add Driver</button>
-                    </div>
+                            <button className="btnAddDriver" onClick={() => {
+                                setInputList(inputList.concat(<DriverInput key={inputList.length} num={inputList.length}
+                                    setDrivers={props.setDrivers} drivers={props.drivers} />))
+                                console.log(props.drivers)
+                            }}>+ Driver</button>
+                        </div>
                     </div>
                 </div>
             </div>

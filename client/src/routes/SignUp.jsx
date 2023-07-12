@@ -30,6 +30,8 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   const [payrollAmount, setPayrollAmount] = useState(0)
   const [gandaAmount, setGandaAmount] = useState(0)
   const [parkingAmount, setParkingAmount] = useState(0)
+  const [managers, setManagers] = useState([])
+  const [drivers, setDrivers] = useState([{email: '', username: '', name: '', password: '', num: 0}])
 
   const navigate = useNavigate();
 
@@ -166,12 +168,12 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
     case 5:
       return (
         <AddDrivers currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}
-          createAccount={createAccount} />
+          createAccount={createAccount} drivers={drivers} setDrivers={setDrivers}/>
       )
       case 6:
       return (
         <SelectManager currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}
-          createAccount={createAccount} />
+          createAccount={createAccount} managers={managers} setManagers={setManagers}/>
       )
   }
 }

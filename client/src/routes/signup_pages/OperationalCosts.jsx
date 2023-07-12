@@ -19,7 +19,7 @@ export default function FourthPage(props) {
                     </div>
                     <div className="slideInputs">
                         <div className="slideItem">
-                            <div className="slideLabelContainer">
+                            <div className="slideLabelContainerCreateAcct">
                                 <p className="slideLabel">Select your Insurance payment frequency</p>
                             </div>
                             <div className="radioMenu">

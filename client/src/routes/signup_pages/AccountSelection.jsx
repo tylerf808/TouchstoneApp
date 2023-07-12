@@ -45,7 +45,7 @@ export default function AccountSelection({ accountType, setAccountType, setShowA
                                 setCurrentSlide(currentSlide + 1)
                                 break;
                             case 'dispatcher':
-                                setCurrentSlide()
+                                setCurrentSlide(currentSlide + 4)
                                 break;
                             case 'manager':
                                 setCurrentSlide(currentSlide + 1)
