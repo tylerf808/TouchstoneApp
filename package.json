@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/tylerf808/TouchstoneApp/issues"
   },
-  "homepage": "https://github.com/tylerf808/TouchstoneApp#readme"
+  "homepage": "https://github.com/tylerf808/TouchstoneApp#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
