@@ -10,6 +10,17 @@ export default function FourthPage(props) {
         }
     }, [])
 
+    const checkForm = () => {
+        if (props.insuranceType === '' || props.insuranceAmount === '' ||
+            props.trailerAmount === '' || props.setTractorAmount === '' ||
+            props.parkingAmount === '' || props.gandaAmount === '') {
+            return false
+        } else {
+            return true
+        }
+    }
+
+
     return (
         <div className="pageContainer">
             <div className="slider">
@@ -47,19 +58,19 @@ export default function FourthPage(props) {
                         </div>
                         <div className="slideItem">
                             <div className="slideLabelContainer">
-                                <p className="slideLabel">Enter your Insurance payment amount</p>
+                                <p className="slideLabel">Enter your Insurance payment</p>
                             </div>
                             <input className="newCostInput" type="number" onChange={(e) => props.setInsuranceAmount(e.target.value)} />
                         </div>
                         <div className="slideItem">
                             <div className="slideLabelContainer">
-                                <p className="slideLabel">Enter your trailer lease monthly payment</p>
+                                <p className="slideLabel">Enter your monthly trailer lease payment</p>
                             </div>
                             <input className="newCostInput" type="number" onChange={(e) => props.setTrailerAmount(e.target.value)} />
                         </div>
                         <div className="slideItem">
                             <div className="slideLabelContainer">
-                                <p className="slideLabel">Enter your tractor lease monthly payment</p>
+                                <p className="slideLabel">Enter your monthly tractor lease payment</p>
                             </div>
                             <input className="newCostInput" type="number" onChange={(e) => props.setTractorAmount(e.target.value)} />
                         </div>
@@ -85,10 +96,12 @@ export default function FourthPage(props) {
                 }}>Back</button>
                 {isManager ?
                     <button className="btnSignUp" onClick={() => {
+                        checkForm()
                         props.setCurrentSlide(props.currentSlide + 1)
                     }}>Next</button>
                     :
                     <button className="btnSignUp" onClick={() => {
+                        checkForm()
                         props.createAccount(props.accountType)
                     }}>Submit</button>
                 }

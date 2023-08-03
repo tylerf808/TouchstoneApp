@@ -13,7 +13,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
   const [showJobBtn, setShowJobBtn] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
-
+  const [drivers, setDrivers] = useState([])
   const [profitable, setProfitable] = useState(false);
   const [job, setJob] = useState({});
   const statesArray = [];
@@ -24,6 +24,15 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     if (!loggedIn) {
       navigate('/')
     }
+    async function getDrivers() {
+      const response = await fetch('http://localhost:3001/api/user/getDrivers', {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ manager: user })
+      }).then((res) => res.json())
+      setDrivers(response)
+  }
+  getDrivers()
   }, [])
 
   const { isLoaded } = useJsApiLoader({
@@ -115,8 +124,6 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         checkRes.repairs +
         checkRes.loan);
     const totalCost = (operationProfitCosts) + (grossProfitCosts) + (netProfitCosts);
-
-    console.log(grossProfitCosts, operationProfitCosts, netProfitCosts, pay)
 
     setShowLoading(false);
 
@@ -222,14 +229,14 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         <div className="formItem">
           <p >Revenue</p>
           <div className="inputContainer" >
-            <p>$</p>
-            <input className="textInput"  type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
+            <p style={{top: 0}}>$</p>
+            <input style={{width: 100}} className="textInput" type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
           </div>
         </div>
         <div className="formItem">
           <p >Date</p>
           <div className="inputContainer">
-            <input className="textInput"  type='date' name="date" id='date' />
+            <input className="textInput" type='date' name="date" id='date' />
           </div>
         </div>
         <div className="formItem">
@@ -241,11 +248,17 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         <div className="formItem">
           <p >Driver</p>
           <div className="inputContainer">
-            <input className="textInput" id="driver" name="driver" placeholder='Enter Drivers Name' ></input>
+            <select className="textInput" id="driver" name="driver" >
+              {drivers.map((el, i) => {
+                return (
+                  <option key={i} value={el.username}>{el.username}</option>
+                )
+              })}
+            </select>
           </div>
         </div>
         <div className="btnContainer">
-          <button className="checkJobBtn" onClick={checkJob} >Check Job</button>
+          <button className="checkJobBtn" onClick={checkJob}>Check Job</button>
         </div>
       </form>
       <div className="modal" id="modal">
@@ -255,11 +268,11 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
             modal.style.display = 'none';
           }}>&times;</span>
 
-          {showLoading ? <CircularProgress className="loadingCircle"></CircularProgress> : null}
+          {showLoading ? <CircularProgress sx={{color: 'orange', position: 'relative', left: '44%', top: '43%'}}></CircularProgress> : null}
 
           <div >
             {showResults ?
-              <>
+              <div className="jobModalContainer">
                 <div className="headerContainer" >
                   {profitable ? <h2 >Job is Profitable</h2> : <h2>Job is NOT Profitable</h2>}
                 </div>
@@ -334,7 +347,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p>Repairs and Dep.</p>
                   </div>
                   <div className="jobDisplayItem">
-                    <p>[${(job?.repairs) + (job?.depreciation)}]</p>
+                    <p>[${job?.repairs}]</p>
                   </div>
                   <div id="net-profit-label" className="jobDisplayItem">
                     <p style={{ fontWeight: 'bold' }}>Net Profit</p>
@@ -343,7 +356,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p style={{ fontWeight: 'bold' }}>${job?.netProfit}</p>
                   </div>
                 </div>
-                <div className="btnContainer">
+                <div className="btnContainer" style={{marginTop: 50}}>
                   <button onClick={addJob} className="addJobBtn">Add Job</button>
                   <button onClick={() => {
                     document.getElementById('modal').style.display = 'none';
@@ -356,7 +369,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     document.getElementById("driver").value = ''
                   }} className="btn2">Clear</button>
                 </div>
-              </> : null}
+              </div> : null}
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import LogIn from "./routes/LogIn";
 import CostsPage from "./routes/CostsPage";
 import SignUp from "./routes/SignUp";
 import ViewJobs from './routes/ViewJobs'
+import Drivers from './routes/Drivers'
 
 const library = ["places"];
 
@@ -75,7 +76,9 @@ export default function App() {
           gAndAValue={gAndAValue} setGAndAValue={setGAndAValue} loanValue={loanValue} setLoanValue={setLoanValue}
           repairsValue={repairsValue} setRepairsValue={setRepairsValue}
           loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
+          <Route path="drivers" element={<Drivers user={user}/>} />
         </Routes>
+        
       </Router>
   );
 }

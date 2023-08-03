@@ -10,7 +10,7 @@ class Driver extends Model {
 
 Driver.init(
     {
-        user_id: {
+        driver_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -39,7 +39,7 @@ Driver.init(
             type: DataTypes.INTEGER,
             references: {
                 model: 'manager',
-                key: 'user_id'
+                key: 'manager_id'
             }
         }
     },

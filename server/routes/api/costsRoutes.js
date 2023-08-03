@@ -13,7 +13,7 @@ router.get('/check', async (req, res) => {
   const totalDistance = (directionsRes.routes[0].distanceMeters) / 1609.34
   const costs = await Costs.findOne({
     where: {
-      user_id: req.query.id
+      manager_id: req.query.id
     }
   })
   
@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
   try {
     const costsData = await Costs.findAll({
       where: {
-        user_id: req.query.id
+        manager_id: req.query.id
       }
     })
     res.status(200).json(costsData)
@@ -78,7 +78,7 @@ router.put('/', async (req, res) => {
   try {
     const costsData = await Costs.update(req.body, {
       where: {
-        user_id: req.query.id,
+        manager_id: req.query.id,
       },
     })
     res.status(200).json(costsData)

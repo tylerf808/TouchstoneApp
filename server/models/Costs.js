@@ -49,11 +49,11 @@ Costs.init(
         parking: {
             type: DataTypes.DOUBLE
         },
-        user_id: {
+        manager_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'driver',
-                key: 'user_id'
+                model: 'manager',
+                key: 'manager_id'
             }
         }
     },

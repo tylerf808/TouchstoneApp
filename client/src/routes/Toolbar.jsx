@@ -29,6 +29,7 @@ export default function Toolbar({ loggedIn, user, setLoggedIn, setUser, setCosts
         <div className='sideNavLink' onClick={closeNav}><Link to='/addjob'>Add Job</Link></div>
         <div className='sideNavLink' onClick={closeNav}><Link to='/costs'>Costs</Link></div>
         <div className='sideNavLink' onClick={closeNav}><Link to='/jobs'>Previous Jobs</Link></div>
+        <div className='sideNavLink' onClick={closeNav}><Link to='/drivers'>Drivers</Link></div>
         <div className='sideNavLink' onClick={handleLogOut}><Link to='/'>Log Out</Link></div>
       </div>
       <h1 className='toolbarHeader' id='toolbar-header'>TOUCHSTONE LOGISTICS</h1>

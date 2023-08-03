@@ -5,7 +5,7 @@ const Driver = require('./Driver')
 const Dispatcher = require('./Dispatcher')
 
 Dispatcher.hasOne(Manager, {
-    foreignKey: 'user_id'
+    foreignKey: 'manager_id'
 })
 
 Manager.hasMany(Job, {
@@ -17,11 +17,11 @@ Manager.hasOne(Costs, {
 })
 
 Manager.hasMany(Driver, {
-    foreignKey: 'user_id'
+    foreignKey: 'driver_id'
 })
 
 Driver.belongsTo(Manager, {
-    foreignKey: 'user_id'
+    foreignKey: 'manager_id'
 })
 
 Driver.hasOne(Costs, {
@@ -33,11 +33,11 @@ Driver.hasMany(Job, {
 })
 
 Job.belongsTo(Manager, {
-    foreignKey: 'user_id'
+    foreignKey: 'manager_id'
 })
 
 Job.belongsTo(Driver, {
-    foreignKey: 'user_id'
+    foreignKey: 'driver_id'
 })
 
 Job.hasOne(Costs, {
@@ -45,11 +45,11 @@ Job.hasOne(Costs, {
 })
 
 Costs.belongsTo(Driver, {
-    foreignKey: 'user_id'
+    foreignKey: 'driver_id'
 })
 
 Costs.belongsTo(Manager, {
-    foreignKey: 'user_id'
+    foreignKey: 'manager_id'
 })
 
 Costs.belongsTo(Job, {

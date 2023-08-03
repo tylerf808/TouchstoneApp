@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useNavigate, Link, redirect } from 'react-router-dom';
-import { Button, Container, TextField, Typography, InputAdornment, FormControl, InputLabel, OutlinedInput, IconButton } from '@mui/material'
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, setShowAlert, setAlertMsg }) {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [logInType, setLogInType] = useState('username')
 
     const navigate = useNavigate();
 
@@ -20,35 +18,40 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, set
     }
 
     const logIn = async () => {
-        const email = document.getElementById("email-login").value;
+        const emailOrUsername = document.getElementById("email-login").value;
         const password = document.getElementById("password-login").value;
 
-        if (email === '' || password === '') {
+        if (emailOrUsername === '' || password === '') {
             setAlertMsg('missing and entry')
             setShowAlert(true)
             return
         }
 
-        const response = await fetch("http://localhost:3001/api/user/login", {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: { "Content-Type": "application/json" },
-        }).then((res) => res.json())
-        if (response.message) {
-            setAlertMsg('no user with that email')
-            setShowAlert(true)
-            return
-        }
-        setShowAlert(false)
-        setUser(response.user_id);
-        setLoggedIn(true);
+        if (emailOrUsername.includes('@')) {
+            setLogInType('email')
+        } 
 
-        await fetch("http://localhost:3001/api/costs?id=" + response.user_id, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => setCosts(data[0]));
-        navigate('addjob')
+        const response = await fetch("http://localhost:3001/api/user/login", {
+                method: "POST",
+                body: JSON.stringify({ emailOrUsername: emailOrUsername, password: password, logInType: logInType }),
+                headers: { "Content-Type": "application/json" },
+            }).then((res) => res.json())
+            if (response.message) {
+                setAlertMsg('Wrong email/username or password')
+                setShowAlert(true)
+                return
+            }
+            const id = response.manager_id || response.driver_id || response.dispatcher_id
+            setShowAlert(false)
+            setUser(id);
+            setLoggedIn(true);
+
+            await fetch("http://localhost:3001/api/costs?id=" + id, {
+                method: "GET",
+            })
+                .then((res) => res.json())
+                .then((data) => setCosts(data[0]));
+            navigate('addjob')
     };
 
     return (
@@ -61,10 +64,10 @@ export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, set
                     <div className='logInLabelContainer'>
                         <p>Email or Username</p>
                     </div>
-                    <input className='textInput' type='email' id="email-login"></input>
+                    <input className='textInput' type='emailOrUsername' id="email-login"></input>
                 </div>
                 <div className="logInFormItem">
-                <div className='logInLabelContainer'>
+                    <div className='logInLabelContainer'>
                         <p>Password</p>
                     </div>
                     <input className='textInput' type='password' id="password-login"></input>

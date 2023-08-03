@@ -33,7 +33,6 @@ export default function AddDrivers(props) {
                             <button className="btnAddDriver" onClick={() => {
                                 setInputList(inputList.concat(<DriverInput key={inputList.length} num={inputList.length}
                                     setDrivers={props.setDrivers} drivers={props.drivers} />))
-                                console.log(props.drivers)
                             }}>+ Driver</button>
                         </div>
                     </div>
@@ -43,7 +42,7 @@ export default function AddDrivers(props) {
                 <button className="btnSignUp" onClick={() => {
                     props.setCurrentSlide(props.currentSlide - 1)
                 }}>Back</button>
-                <button className="btnSignUp">Submit</button>
+                <button className="btnSignUp" onClick={props.createAccount}>Submit</button>
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConf, setPasswordConf] = useState('')
-  const [insuranceType, setInsuranceType] = useState(0)
+  const [insuranceType, setInsuranceType] = useState()
   const [insuranceAmount, setInsuranceAmount] = useState(0)
   const [tractorAmount, setTractorAmount] = useState(0)
   const [trailerAmount, setTrailerAmount] = useState(0)
@@ -30,7 +30,6 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   const [payrollAmount, setPayrollAmount] = useState(0)
   const [gandaAmount, setGandaAmount] = useState(0)
   const [parkingAmount, setParkingAmount] = useState(0)
-  const [managers, setManagers] = useState([])
   const [drivers, setDrivers] = useState([{email: '', username: '', name: '', password: '', num: 0}])
 
   const navigate = useNavigate();
@@ -38,6 +37,10 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
   const createAccount = async (account) => {
 
     setShowAlert(false)
+
+    const newDrivers = drivers
+    newDrivers.pop()
+    setDrivers(newDrivers)
 
     if (password !== passwordConf) {
       setAlertMsg('Password do not match')
@@ -110,7 +113,8 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
             gAndA: (gandaAmount / 30).toFixed(2),
             loan: (loanAmount / 30).toFixed(2),
             repairs: (repairsAmount / 30).toFixed(2),
-            parking: (parkingAmount / 30).toFixed(2)
+            parking: (parkingAmount / 30).toFixed(2),
+            drivers: drivers
           }),
           headers: { "Content-Type": "application/json" },
         }).then((res) => res.json())
@@ -173,7 +177,7 @@ export default function SignUp({ showAlert, loggedIn, setLoggedIn, setUser, setC
       case 6:
       return (
         <SelectManager currentSlide={currentSlide} setCurrentSlide={setCurrentSlide}
-          createAccount={createAccount} managers={managers} setManagers={setManagers}/>
+          createAccount={createAccount}/>
       )
   }
 }

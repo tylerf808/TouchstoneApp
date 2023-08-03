@@ -2,14 +2,19 @@ import { useEffect, useState } from "react"
 
 export default function SelectManager(props) {
 
+    const [managers, setManagers] = useState([])
+
     useEffect(() => {
 
-        async function getManagers (){
-            await fetch("", {
-                
-            })
+        async function getManagers() {
+            const managers = await fetch("http://localhost:3001/api/user/getManagers", {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" }
+            }).then((res) => res.json())
+            setManagers(managers)
+            console.log(managers)
         }
-
+        getManagers()
     }, [])
 
     return (
@@ -22,9 +27,9 @@ export default function SelectManager(props) {
                     <div className="slideInputs">
                         <div className="slideItem">
                             <select name='manager'>
-                                {props.managers.map((el) => {
+                                {managers.map((el) => {
                                     return (
-                                        <option value={el}>{el}</option>
+                                        <option key={el.manager_id} value={el.username}>{el.username}</option>
                                     )
                                 })}
                             </select>
@@ -33,7 +38,7 @@ export default function SelectManager(props) {
                 </div>
                 <div className="btnContainerSignUp">
                     <button className="btnSignUp" onClick={() => {
-                        props.setCurrentSlide(props.currentSlide - 1)
+                        props.setCurrentSlide(props.currentSlide - 4)
                     }}>Back</button>
                     <button className="btnSignUp" onClick={() => {
                         props.createAccount()

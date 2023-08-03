@@ -17,17 +17,18 @@ export default function CostsPage(props) {
 
     const newCostsObj = {
       insurance: (props.insuranceValue / 30),
-      tractorLease: (props.tractorValue),
-      trailerLease: (props.trailerValue),
+      tractorLease: (props.tractorValue / 30),
+      trailerLease: (props.trailerValue / 30),
       dispatch: (props.dispatchValue / 100),
       mpg: (props.mpgValue),
       laborRate: (props.laborValue / 100),
       payrollTax: (props.payrollValue / 100),
       factor: (props.factorValue / 100),
       odc: (props.odcValue / 100),
-      gAndA: (props.gAndAValue),
-      loan: (props.loanValue / 100),
-      repairs: props.repairsValue,
+      gAndA: (props.gAndAValue / 30),
+      loan: (props.loanValue / 30),
+      repairs: props.repairsValue / 30,
+      parking: props.parkingValue / 30
     };
 
     await fetch("http://localhost:3001/api/costs?id=" + props.user, {

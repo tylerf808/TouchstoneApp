@@ -10,7 +10,7 @@ class Dispatcher extends Model {
 
 Dispatcher.init(
     {
-        user_id: {
+        dispatcher_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -39,7 +39,7 @@ Dispatcher.init(
             type: DataTypes.INTEGER,
             references: {
                 model: 'manager',
-                key: 'user_id'
+                key: 'manager_id'
             }
         }
     },

@@ -10,7 +10,7 @@ class Manager extends Model {
 
 Manager.init(
     {
-        user_id: {
+        manager_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

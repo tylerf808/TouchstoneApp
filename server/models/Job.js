@@ -110,7 +110,7 @@ Job.init(
       type: DataTypes.INTEGER,
       references: {
         model: "manager",
-        key: "user_id"
+        key: "manager_id"
       }
     },
   },
