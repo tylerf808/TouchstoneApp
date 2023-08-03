@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-export default function LogIn({ user, setUser, costs, setCosts, setLoggedIn, setShowAlert, setAlertMsg }) {
+export default function LogIn({ user, userType, setUserType, setUser, costs, setCosts, setLoggedIn, setShowAlert, setAlertMsg }) {
 
     const [showPassword, setShowPassword] = useState(false);
     const [logInType, setLogInType] = useState('username')

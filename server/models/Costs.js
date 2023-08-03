@@ -19,6 +19,9 @@ Costs.init(
         dispatch: {
             type: DataTypes.DOUBLE
         },
+        insuranceType: {
+            type: DataTypes.STRING
+        },
         insurance: {
             type: DataTypes.DOUBLE
         },

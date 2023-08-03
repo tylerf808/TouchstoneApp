@@ -127,6 +127,30 @@ router.post('/getDrivers', async (req, res) => {
   }
 })
 
+//Get drivers based on dispatcher
+router.post('getDispatchersDrivers', async (req, res) => {
+  try {
+    const dispatcher = await Dispatcher.findOne({
+      where: {
+        dispatcher_id: req.body.id
+      }
+    })
+    const manager = await Manager.findOne({
+      where: {
+        manager_id: dispatcher.manager
+      }
+    })
+    const drivers = await Drivers.findAll({
+      where: {
+        manager: manager.manager_id
+      }
+    })
+    res.status(200).json(drivers)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+ 
 //Get all managers
 router.get('/getManagers', async (req, res) => {
   try {

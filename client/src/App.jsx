@@ -19,10 +19,12 @@ const library = ["places"];
 export default function App() {
 
   const [user, setUser] = useState();
+  const [userType, setUserType] = useState()
   const [costs, setCosts] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
+  const [insuranceType, setInsuranceType] = useState()
   const [insuranceValue, setInsuranceValue] = useState()
   const [tractorValue, setTractorValue] = useState()
   const [trailerValue, setTrailerValue] = useState()
@@ -63,10 +65,10 @@ export default function App() {
         <div className="alertContainer"> {showAlert ? <Alert className="alertMsg" severity="error">{alertMsg}</Alert> : null} </div>
         <Routes>
           <Route path="addjob" element={<AddJob loggedIn={loggedIn} library={library} user={user} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} />} />
-          <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-          <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} />} />
-          <Route path="signup" user={user} element={<SignUp showAlert={showAlert} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
-          <Route path="costs" element={<CostsPage 
+          <Route path="/" element={<LogIn setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} user={user} setUser={setUser} userType={userType} setUserType={setUserType} costs={costs} setCosts={setCosts} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+          <Route path="jobs" element={<ViewJobs user={user} costs={costs} setCosts={setCosts} userType={userType}/>} />
+          <Route path="signup" setUserType={setUserType} userType={userType} user={user} element={<SignUp showAlert={showAlert} setAlertMsg={setAlertMsg} setShowAlert={setShowAlert} setCosts={setCosts} setUser={setUser} setLoggedIn={setLoggedIn} signUp={signUp} loggedIn={loggedIn} />} />
+          <Route path="costs" userType={userType} element={<CostsPage insuranceType={insuranceType} setInsuranceType={setInsuranceType}
           insuranceValue={insuranceValue} setInsuranceValue={setInsuranceValue}
           tractorValue={tractorValue} setTractorValue={setTractorValue} trailerValue={trailerValue}
           setTrailerValue={setTrailerValue} mpgValue={mpgValue} setMpgValue={setMpgValue}
@@ -76,7 +78,7 @@ export default function App() {
           gAndAValue={gAndAValue} setGAndAValue={setGAndAValue} loanValue={loanValue} setLoanValue={setLoanValue}
           repairsValue={repairsValue} setRepairsValue={setRepairsValue}
           loggedIn={loggedIn} user={user} costs={costs} setCosts={setCosts} />} />
-          <Route path="drivers" element={<Drivers user={user}/>} />
+          <Route path="drivers" element={<Drivers userType={userType} user={user}/>} />
         </Routes>
         
       </Router>

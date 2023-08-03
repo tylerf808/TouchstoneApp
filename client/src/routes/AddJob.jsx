@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, library }) {
+export default function AddJob({ userType, user, loggedIn, setShowAlert, setAlertMsg, library }) {
   const CurrencyFormat = require("react-currency-format");
 
   const [showJobBtn, setShowJobBtn] = useState(false);
@@ -26,13 +26,27 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
     }
     async function getDrivers() {
       const response = await fetch('http://localhost:3001/api/user/getDrivers', {
-          method: 'POST',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ manager: user })
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ manager: user })
       }).then((res) => res.json())
       setDrivers(response)
-  }
-  getDrivers()
+    }
+    async function getDispatchersDrivers() {
+      const response = await fetch('http://localhost:3001/api/user/getDispatchersDrivers', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: user })
+      }).then((res) => res.json())
+      setDrivers(response)
+    }
+    if (userType === "manager") {
+      getDrivers()
+    } else if (userType === "dispatcher") {
+      getDispatchersDrivers()
+    } else {
+      return
+    }
   }, [])
 
   const { isLoaded } = useJsApiLoader({
@@ -229,8 +243,8 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
         <div className="formItem">
           <p >Revenue</p>
           <div className="inputContainer" >
-            <p style={{top: 0}}>$</p>
-            <input style={{width: 100}} className="textInput" type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
+            <p style={{ top: 0 }}>$</p>
+            <input style={{ width: 100 }} className="textInput" type='number' placeholder="Enter Dollar Amount" name="revenue" id='revenue' />
           </div>
         </div>
         <div className="formItem">
@@ -268,7 +282,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
             modal.style.display = 'none';
           }}>&times;</span>
 
-          {showLoading ? <CircularProgress sx={{color: 'orange', position: 'relative', left: '44%', top: '43%'}}></CircularProgress> : null}
+          {showLoading ? <CircularProgress sx={{ color: 'orange', position: 'relative', left: '44%', top: '43%' }}></CircularProgress> : null}
 
           <div >
             {showResults ?
@@ -356,7 +370,7 @@ export default function AddJob({ user, loggedIn, setShowAlert, setAlertMsg, libr
                     <p style={{ fontWeight: 'bold' }}>${job?.netProfit}</p>
                   </div>
                 </div>
-                <div className="btnContainer" style={{marginTop: 50}}>
+                <div className="btnContainer" style={{ marginTop: 50 }}>
                   <button onClick={addJob} className="addJobBtn">Add Job</button>
                   <button onClick={() => {
                     document.getElementById('modal').style.display = 'none';

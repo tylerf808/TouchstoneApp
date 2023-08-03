@@ -8,7 +8,7 @@ export default function CostsPage(props) {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!props.loggedIn) {
+    if (!props.user) {
       navigate('/')
     }
   }, []);
@@ -16,6 +16,7 @@ export default function CostsPage(props) {
   const updateCosts = async () => {
 
     const newCostsObj = {
+      insuranceType: (props.insuranceType),
       insurance: (props.insuranceValue / 30),
       tractorLease: (props.tractorValue / 30),
       trailerLease: (props.trailerValue / 30),
@@ -48,7 +49,6 @@ export default function CostsPage(props) {
       }
     }).then((res) => res.json())
       .then((data) => {
-        console.log(data)
         props.setCosts(data[0])
       })
   };
@@ -64,8 +64,12 @@ export default function CostsPage(props) {
             <h1>Operating Costs</h1>
           </div>
           <div className="operatingCostsContainer">
+          <div className="costsItem">
+              <p className="costsLabel">Insurance Type:</p>
+              <input className="costsInput" onChange={(e) => props.setInsuranceType(e.target.value)}></input>
+            </div>
             <div className="costsItem">
-              <p className="costsLabel">Insurance:</p>
+              <p className="costsLabel">Insurance Amount:</p>
               <input className="costsInput" onChange={(e) => props.setInsuranceValue(e.target.value)}></input>
             </div>
             <div className="costsItem">
@@ -125,8 +129,12 @@ export default function CostsPage(props) {
             <h1>Operating Costs</h1>
           </div>
           <div className="operatingCostsContainer">
+          <div className="costsItem">
+              <p className="costsLabel">Insurance Type:</p>
+              <p className="costsNum">${props.costs.insuranceType}</p>
+            </div>
             <div className="costsItem">
-              <p className="costsLabel">Insurance:</p>
+              <p className="costsLabel">Insurance Amount:</p>
               <p className="costsNum">${props.costs.insurance}</p>
             </div>
             <div className="costsItem">
